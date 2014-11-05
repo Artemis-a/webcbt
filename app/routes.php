@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'CbtsController@getIndex');
+
+Route::controller('cbts', 'CbtsController');
+Route::controller('thoughts', 'ThoughtsController');
