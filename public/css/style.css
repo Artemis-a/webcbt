@@ -1,0 +1,41 @@
+body {
+        margin: 70px 30px 30px 30px;
+}
+
+.navbar .container {
+        width: auto;
+}
+
+.borderless {
+        margin-top: 20px;
+}
+
+.borderless thead > tr > th,
+.borderless tbody > tr > td {
+        border:none;
+        padding: 0px;
+}
+
+.borderless thead > tr > th {
+        padding-bottom: 5px;
+}
+
+.borderless thead > tr > th.intensity,
+.borderless tbody > tr > td.intensity {
+        width: 200px;
+        padding-left: 30px;
+        padding-right: 20px;
+}
+
+.slider-pad {
+        margin-top: 10px;
+}
+
+.col-width-1 {
+        width: 200px;
+}
+
+li.list-pad {
+        padding-top: 1px;
+        padding-bottom: 1px;
+}
