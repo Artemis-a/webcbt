@@ -29,6 +29,7 @@ $(document).ready(function() {
                         <th>Feelings</th>
                         <th>Sensations</th>
                         <th>Behaviours</th>
+                        <th></th>
                 </tr>
         </thead>
         <tbody>
@@ -89,6 +90,13 @@ $(document).ready(function() {
                                         @endif
                                 @endforeach
                                 </ul>
+                        </td>
+                        <td>
+                                {{ HTML::linkAction(
+                                        'CbtsController@getFinalize',
+                                        'finalize',
+                                        array($cbt['id']),
+                                        array('class' => 'btn btn-xs btn-primary')) }}
                         </td>
                 </tr>
                 @endforeach

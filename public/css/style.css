@@ -39,3 +39,11 @@ li.list-pad {
         padding-top: 1px;
         padding-bottom: 1px;
 }
+
+.dispute-title {
+        font-size: 120%;
+}
+
+.dispute-container {
+        margin-left: 2px;
+}

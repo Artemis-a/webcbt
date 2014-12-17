@@ -21,7 +21,7 @@ class CbtThoughtDistortion extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['thought_id', 'distortion_id'];
+	protected $fillable = ['cbt_thought_id', 'distortion_id'];
 
 	/**
 	 * The attributes that cannot be mass assigned
@@ -32,7 +32,7 @@ class CbtThoughtDistortion extends Eloquent {
 
 	public $timestamps = false;
 
-	public function cbt_thought()
+	public function cbtThought()
 	{
 		return $this->belongsTo('CbtThought');
 	}
