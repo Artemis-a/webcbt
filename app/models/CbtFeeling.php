@@ -1,13 +1,13 @@
 <?php
 
-class Behaviour extends Eloquent {
+class CbtFeeling extends Eloquent {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'behaviours';
+	protected $table = 'cbt_feelings';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -21,7 +21,7 @@ class Behaviour extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['behaviour', 'before_after'];
+	protected $fillable = ['feeling_id', 'percent', 'when'];
 
 	/**
 	 * The attributes that cannot be mass assigned
@@ -35,6 +35,11 @@ class Behaviour extends Eloquent {
 	public function cbt()
 	{
 		return $this->belongsTo('Cbt');
+	}
+
+	public function feeling()
+	{
+		return $this->belongsTo('Feeling');
 	}
 
 }
