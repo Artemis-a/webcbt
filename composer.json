@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"manavo/laravel-bootstrap-forms": "~0.0"
+		"manavo/laravel-bootstrap-forms": "~0.0",
+		"barryvdh/laravel-debugbar": "~1.8"
 	},
 	"autoload": {
 		"classmap": [
