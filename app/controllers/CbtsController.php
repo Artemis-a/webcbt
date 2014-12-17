@@ -18,11 +18,15 @@ class CbtsController extends BaseController {
 
         public function getCreate()
         {
-                $emotions_list = array(0 => 'Please select...') +
-                        Emotion::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $feelings_list = array(0 => 'Please select...') +
+                        Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
+                $sensations_list = array(0 => 'Please select...') +
+                        Sensation::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.create')
-                        ->with('emotions_list', $emotions_list);
+                        ->with('feelings_list', $feelings_list)
+                        ->with('sensations_list', $sensations_list);
         }
 
         public function postCreate()
@@ -42,6 +46,7 @@ class CbtsController extends BaseController {
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
                 } else {
+
                         /* Create a CBT entry */
                         $cbt_data = array(
                                 'date' => $input['date'],
@@ -55,29 +60,26 @@ class CbtsController extends BaseController {
 			}
 
                         /* Add thoughts */
-                        $thoughts_input = array();
+                        $thoughts = array();
                         foreach ($input['thoughts'] as $row)
                         {
                                 $row = trim($row);
                                 if (strlen($row) > 0)
                                 {
-                                        $thoughts_input[] = array(
+                                        $thoughts[] = array(
                                                 'thought' => $row,
-                                                'certian_before' => 0,
                                                 'is_challenged' => 0,
-                                                'evidence_for' => '',
-                                                'evidence_against' => '',
+                                                'dispute' => '',
                                                 'balanced_thoughts' => '',
-                                                'certian_after' => 0
                                         );
                                 }
                         }
 
-                        foreach ($thoughts_input as $thought_data)
+                        foreach ($thoughts as $data)
                         {
-                                $thought = new Thought($thought_data);
-                                $thought->cbt()->associate($cbt);
-                                if (!$thought->save())
+                                $cbtThought = new CbtThought($data);
+                                $cbtThought->cbt()->associate($cbt);
+                                if (!$cbtThought->save())
                                 {
 			                return Redirect::back()->withInput()
                                                 ->with('alert-danger', 'Failed to add thoughts.');
@@ -85,50 +87,76 @@ class CbtsController extends BaseController {
                         }
 
                         /* Add feelings */
-                        $feelings_input = array();
-                        $intensity = $input['intensity'];
+                        $feelings = array();
+                        $feelingsintensity = $input['feelingsintensity'];
                         foreach ($input['feelings'] as $row_id => $row)
                         {
                                 if (!empty($row))
                                 {
-                                        $feelings_input[] = array(
-                                                'emotion_id' => $row,
-                                                'percent' => $intensity[$row_id],
-                                                'before_after' => 0
+                                        $feelings[] = array(
+                                                'feeling_id' => $row,
+                                                'percent' => $feelingsintensity[$row_id],
+                                                'when' => 'B',
                                         );
                                 }
                         }
 
-                        foreach ($feelings_input as $feelings_data)
+                        foreach ($feelings as $data)
                         {
-                                $feeling = new Feeling($feelings_data);
-                                $feeling->cbt()->associate($cbt);
-                                if (!$feeling->save())
+                                $cbt_feeling = new CbtFeeling($data);
+                                $cbt_feeling->cbt()->associate($cbt);
+                                if (!$cbt_feeling->save())
                                 {
 			                return Redirect::back()->withInput()
                                                 ->with('alert-danger', 'Failed to add feelings.');
                                 }
                         }
 
+                        /* Add sensations */
+                        $sensations = array();
+                        $sensationsintensity = $input['sensationsintensity'];
+                        foreach ($input['feelings'] as $row_id => $row)
+                        {
+                                if (!empty($row))
+                                {
+                                        $sensations[] = array(
+                                                'sensation_id' => $row,
+                                                'percent' => $sensationsintensity[$row_id],
+                                                'when' => 'B',
+                                        );
+                                }
+                        }
+
+                        foreach ($sensations as $data)
+                        {
+                                $cbt_sensation = new CbtSensation($data);
+                                $cbt_sensation->cbt()->associate($cbt);
+                                if (!$cbt_sensation->save())
+                                {
+			                return Redirect::back()->withInput()
+                                                ->with('alert-danger', 'Failed to add sensations.');
+                                }
+                        }
+
                         /* Add behaviours */
-                        $behaviours_input = array();
+                        $behaviours = array();
                         foreach ($input['behaviours'] as $row)
                         {
                                 $row = trim($row);
                                 if (strlen($row) > 0)
                                 {
-                                        $behaviours_input[] = array(
+                                        $behaviours[] = array(
                                                 'behaviour' => $row,
-                                                'before_after' => 0
+                                                'when' => 'B',
                                         );
                                 }
                         }
 
-                        foreach ($behaviours_input as $behaviours_data)
+                        foreach ($behaviours as $data)
                         {
-                                $behaviour = new Behaviour($behaviours_data);
-                                $behaviour->cbt()->associate($cbt);
-                                if (!$behaviour->save())
+                                $cbt_behaviour = new CbtBehaviour($data);
+                                $cbt_behaviour->cbt()->associate($cbt);
+                                if (!$cbt_behaviour->save())
                                 {
 			                return Redirect::back()->withInput()
                                                 ->with('alert-danger', 'Failed to add behaviours.');
@@ -137,7 +165,7 @@ class CbtsController extends BaseController {
 
                         /* Everything ok */
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-success', 'CBT entry added.');
+                                ->with('alert-success', 'CBT exercise added successfully.');
                 }
         }
 }

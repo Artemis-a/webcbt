@@ -34,17 +34,22 @@ class Cbt extends Eloquent {
 
 	/* Model relationships */
 
-	public function cbt_thoughts()
+	public function cbtThoughts()
 	{
 		return $this->hasMany('CbtThought');
 	}
 
-	public function cbt_feelings()
+	public function cbtFeelings()
 	{
 		return $this->hasMany('CbtFeeling');
 	}
 
-	public function cbt_behaviours()
+	public function cbtSensations()
+	{
+		return $this->hasMany('CbtSensation');
+	}
+
+	public function cbtBehaviours()
 	{
 		return $this->hasMany('CbtBehaviour');
 	}

@@ -18,66 +18,98 @@ $(document).ready(function() {
 
         /************ Thoughts ************/
         @for ($i = 3; $i <= $maxRows; $i++)
-                $("#tr-thoughts-{{$i}}").hide();
+                $("#thoughts-{{$i}}").hide();
         @endfor
 
         var addThoughtsCounter = 3;
         $("#add-thoughts").click(function() {
-                for (var i = 0; i <= 3; i++) {
+                for (var i = 0; i <= 2; i++) {
                         if (addThoughtsCounter > {{ $maxRows }}) {
                                 $("#add-thoughts").hide();
                                 break;
                         }
-                        $("#tr-thoughts-" + addThoughtsCounter).show();
+                        $("#thoughts-" + addThoughtsCounter).show();
                         addThoughtsCounter++;
                 }
         });
 
         /************ Feelings ************/
         @for ($i = 0; $i <= $maxRows; $i++)
-                $("#slider-intensity-{{$i}}").slider({
+                $("#feelings-intensity-{{$i}}").slider({
                         range: "min",
                         value: 0,
                         min: 0,
                         max: 10,
                         slide: function(event, ui) {
-                                $("input[name='intensity[{{$i}}]']").val(ui.value);
-                                $("#slider-intensity-value-{{$i}}").text(ui.value);
+                                $("input[name='feelingsintensity[{{$i}}]']").val(ui.value);
+                                $("#feelings-intensity-value-{{$i}}").text(ui.value);
                         }
                 });
-                $("input[name='intensity[{{$i}}]']").val($("#slider-intensity-{{$i}}").slider("value"));
-                $("#slider-intensity-value-{{$i}}").text($("#slider-intensity-{{$i}}").slider("value"));
+                $("input[name='feelingsintensity[{{$i}}]']").val($("#feelings-intensity-{{$i}}").slider("value"));
+                $("#feelings-intensity-value-{{$i}}").text($("#feelings-intensity-{{$i}}").slider("value"));
         @endfor
 
         @for ($i = 3; $i <= $maxRows; $i++)
-                $("#tr-feelings-{{$i}}").hide();
+                $("#feelings-{{$i}}").hide();
         @endfor
 
         var addFeelingsCounter = 3;
         $("#add-feelings").click(function() {
-                for (var i = 0; i <= 3; i++) {
+                for (var i = 0; i <= 2; i++) {
                         if (addFeelingsCounter > {{ $maxRows }}) {
                                 $("#add-feelings").hide();
                                 break;
                         }
-                        $("#tr-feelings-" + addFeelingsCounter).show();
+                        $("#feelings-" + addFeelingsCounter).show();
                         addFeelingsCounter++;
+                }
+        });
+
+        /************ Sensations ************/
+        @for ($i = 0; $i <= $maxRows; $i++)
+                $("#sensations-intensity-{{$i}}").slider({
+                        range: "min",
+                        value: 0,
+                        min: 0,
+                        max: 10,
+                        slide: function(event, ui) {
+                                $("input[name='sensationsintensity[{{$i}}]']").val(ui.value);
+                                $("#sensations-intensity-value-{{$i}}").text(ui.value);
+                        }
+                });
+                $("input[name='sensationsintensity[{{$i}}]']").val($("#sensations-intensity-{{$i}}").slider("value"));
+                $("#sensations-intensity-value-{{$i}}").text($("#sensations-intensity-{{$i}}").slider("value"));
+        @endfor
+
+        @for ($i = 3; $i <= $maxRows; $i++)
+                $("#sensations-{{$i}}").hide();
+        @endfor
+
+        var addSensationsCounter = 3;
+        $("#add-sensations").click(function() {
+                for (var i = 0; i <= 2; i++) {
+                        if (addSensationsCounter > {{ $maxRows }}) {
+                                $("#add-sensations").hide();
+                                break;
+                        }
+                        $("#sensations-" + addSensationsCounter).show();
+                        addSensationsCounter++;
                 }
         });
 
         /************ Behaviours ************/
         @for ($i = 3; $i <= $maxRows; $i++)
-                $("#tr-behaviours-{{$i}}").hide();
+                $("#behaviours-{{$i}}").hide();
         @endfor
 
         var addBehavioursCounter = 3;
         $("#add-behaviours").click(function() {
-                for (var i = 0; i <= 3; i++) {
+                for (var i = 0; i <= 2; i++) {
                         if (addBehavioursCounter > {{ $maxRows }}) {
                                 $("#add-behaviours").hide();
                                 break;
                         }
-                        $("#tr-behaviours-" + addBehavioursCounter).show();
+                        $("#behaviours-" + addBehavioursCounter).show();
                         addBehavioursCounter++;
                 }
         });
@@ -87,7 +119,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Create a new CBT exercise entry')
+@section('page-title', 'Create CBT exercise')
 
 @section('content')
 
@@ -98,12 +130,13 @@ $(document).ready(function() {
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('situation', 'Situation') }}
-        {{ Form::textarea('situation') }}
+        {{ Form::textarea('situation', null, ['size' => '50x3']) }}
 {{ Form::closeGroup() }}
 
+<!-- Thoughts -->
 {{ Form::label('Thoughts') }}
 @for ($i = 0; $i <= $maxRows; $i++)
-<div id="tr-thoughts-{{$i}}">
+<div id="thoughts-{{$i}}">
                 {{ Form::openGroup('thoughts[' . $i . ']', '') }}
                         {{ Form::text('thoughts[' . $i . ']') }}
                 {{ Form::closeGroup() }}
@@ -122,21 +155,21 @@ $(document).ready(function() {
         </thead>
         <tbody>
                 @for ($i = 0; $i <= $maxRows; $i++)
-                <tr id="tr-feelings-{{$i}}">
+                <tr id="feelings-{{$i}}">
                         <td>
                                 {{ Form::openGroup('feelings[' . $i . ']', '') }}
-                                {{ Form::select('feelings[' . $i . ']', $emotions_list) }}
+                                {{ Form::select('feelings[' . $i . ']', $feelings_list) }}
                                 {{ Form::closeGroup() }}
                         </td>
                         <td class="intensity">
-                                <div id="slider-intensity-{{$i}}" class="slider-pad"></div>
+                                <div id="feelings-intensity-{{$i}}" class="slider-pad"></div>
                         </td>
                         <td width="20">
-                                <div id="slider-intensity-value-{{$i}}"></div>
+                                <div id="feelings-intensity-value-{{$i}}"></div>
                         </td>
                         <td width="1">
-                                {{ Form::openGroup('intensity[' . $i . ']', '') }}
-                                {{ Form::hidden('intensity[' . $i . ']') }}
+                                {{ Form::openGroup('feelingsintensity[' . $i . ']', '') }}
+                                {{ Form::hidden('feelingsintensity[' . $i . ']') }}
                                 {{ Form::closeGroup() }}
                         </td>
                 </tr>
@@ -147,9 +180,46 @@ $(document).ready(function() {
         </tbody>
 </table>
 
-{{ Form::label('Behaviour') }}
+<table class="table borderless compressed">
+        <thead>
+                <tr>
+                        <th>Sensations</th>
+                        <th class="intensity">Intensity</th>
+                        <th></th>
+                        <th></th>
+                </tr>
+        </thead>
+        <tbody>
+                @for ($i = 0; $i <= $maxRows; $i++)
+                <tr id="sensations-{{$i}}">
+                        <td>
+                                {{ Form::openGroup('sensations[' . $i . ']', '') }}
+                                {{ Form::select('sensations[' . $i . ']', $sensations_list) }}
+                                {{ Form::closeGroup() }}
+                        </td>
+                        <td class="intensity">
+                                <div id="sensations-intensity-{{$i}}" class="slider-pad"></div>
+                        </td>
+                        <td width="20">
+                                <div id="sensations-intensity-value-{{$i}}"></div>
+                        </td>
+                        <td width="1">
+                                {{ Form::openGroup('sensationsintensity[' . $i . ']', '') }}
+                                {{ Form::hidden('sensationsintensity[' . $i . ']') }}
+                                {{ Form::closeGroup() }}
+                        </td>
+                </tr>
+                @endfor
+                <tr>
+                        <td><button type="button" class="btn btn-default" id="add-sensations">add more</button></td>
+                </tr>
+        </tbody>
+</table>
+
+
+{{ Form::label('Behaviours') }}
 @for ($i = 0; $i <= $maxRows; $i++)
-<div id="tr-behaviours-{{$i}}">
+<div id="behaviours-{{$i}}">
         {{ Form::openGroup('behaviours[' . $i . ']', '') }}
                 {{ Form::text('behaviours[' . $i . ']') }}
         {{ Form::closeGroup() }}

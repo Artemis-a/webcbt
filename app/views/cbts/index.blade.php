@@ -27,7 +27,8 @@ $(document).ready(function() {
                         <th>Situation</th>
                         <th>Thoughts</th>
                         <th>Feelings</th>
-                        <th>Behaviour</th>
+                        <th>Sensations</th>
+                        <th>Behaviours</th>
                 </tr>
         </thead>
         <tbody>
@@ -37,7 +38,7 @@ $(document).ready(function() {
                         <td>{{ $cbt['situation'] }}</td>
                         <td>
                                 <ul class="list-unstyled">
-                                @foreach ($cbt->thoughts as $thought)
+                                @foreach ($cbt->cbtThoughts as $thought)
                                         <li class="list-pad">
                                                 @if ($thought['is_challenged'] == 0)
                                                         {{ HTML::linkAction(
@@ -58,10 +59,10 @@ $(document).ready(function() {
                         </td>
                         <td>
                                 <ul class="list-unstyled">
-                                @foreach ($cbt->feelings as $feeling)
-                                        @if ($feeling['before_after'] == 0)
+                                @foreach ($cbt->cbtFeelings as $feeling)
+                                        @if ($feeling['when'] == 'B')
                                                 <li>
-                                                        {{ $feeling->emotion['name'] }}
+                                                        {{ $feeling->feeling['name'] }}
                                                         <span class="badge">{{ $feeling['percent'] }}</span>
                                                 </li>
                                         @endif
@@ -70,8 +71,22 @@ $(document).ready(function() {
                         </td>
                         <td>
                                 <ul class="list-unstyled">
-                                @foreach ($cbt->behaviours as $behaviour)
-                                        <li>{{ $behaviour['behaviour'] }}</li>
+                                @foreach ($cbt->cbtSensations as $sensation)
+                                        @if ($sensation['when'] == 'B')
+                                                <li>
+                                                        {{ $sensation->sensation['name'] }}
+                                                        <span class="badge">{{ $sensation['percent'] }}</span>
+                                                </li>
+                                        @endif
+                                @endforeach
+                                </ul>
+                        </td>
+                        <td>
+                                <ul class="list-unstyled">
+                                @foreach ($cbt->cbtBehaviours as $behaviour)
+                                        @if ($behaviour['when'] == 'B')
+                                                <li>{{ $behaviour['behaviour'] }}</li>
+                                        @endif
                                 @endforeach
                                 </ul>
                         </td>
