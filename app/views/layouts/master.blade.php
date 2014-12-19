@@ -20,8 +20,11 @@
                 <!-- {{ HTML::style('css/bootstrap-theme.min.css') }} -->
                 {{ HTML::script('js/bootstrap.min.js') }}
 
+                <!-- WARNING ! This is a assignment statement ! -->
+                @if ($time = rand(0, 1000)) @endif
+
                 <!-- Custom CSS -->
-                {{ HTML::style('css/style.css?7') }}
+                {{ HTML::style('css/style.css?' . $time) }}
 
                 @yield('head')
         </head>

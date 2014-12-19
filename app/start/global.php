@@ -79,3 +79,14 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| WEBCBT NOTICE : Custom form macros
+|--------------------------------------------------------------------------
+*/
+
+Form::macro('rawLabel', function($name, $value = null, $options = array())
+{
+	return '<label>' . $name . '</label>';
+});
