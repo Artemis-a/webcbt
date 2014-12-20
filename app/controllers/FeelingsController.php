@@ -122,7 +122,7 @@ class FeelingsController extends BaseController {
                 if ($count > 0)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'Failed to delete feeling since it already in use at ' . $count . ' place(s).');
+                                ->with('alert-warning', 'Failed to delete feeling since it is already in use at ' . $count . ' place(s).');
                 }
 
                 /* Delete a feeling */

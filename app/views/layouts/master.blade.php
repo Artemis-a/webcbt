@@ -78,7 +78,11 @@
                                 'FeelingsController@getIndex',
                                 '<i class="fa fa-fw fa-child"></i> Feelings')) }}
 			</li>
-			<li><a href="#"><i class="fa fa-fw fa-eyedropper"></i> Sensations</a></li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'SensationsController@getIndex',
+                                '<i class="fa fa-fw fa-eyedropper"></i> Sensations')) }}
+			</li>
 			<li><a href="#"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Settings</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>

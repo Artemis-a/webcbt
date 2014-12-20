@@ -11,11 +11,11 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Feelings')
+@section('page-title', 'Sensations')
 
 @section('content')
 
-{{ HTML::linkAction('FeelingsController@getCreate', 'New Feeling', array(), array('class' => 'btn btn-primary')) }}
+{{ HTML::linkAction('SensationsController@getCreate', 'New Sensation', array(), array('class' => 'btn btn-primary')) }}
 
 <br />
 <br />
@@ -23,28 +23,28 @@ $(document).ready(function() {
 <table class="table table-hover">
         <thead>
                 <tr>
-                        <th>Feelings</th>
+                        <th>Sensations</th>
                         <th>Added On</th>
                         <th>Actions</th>
                 </tr>
         </thead>
         <tbody>
-                @foreach ($feelings as $feeling)
+                @foreach ($sensations as $sensation)
                 <tr>
-                        <td>{{ $feeling['name'] }}</td>
-                        <td>{{ $feeling['created_at'] }}</td>
+                        <td>{{ $sensation['name'] }}</td>
+                        <td>{{ $sensation['created_at'] }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
-                                        'FeelingsController@getEdit',
+                                        'SensationsController@getEdit',
                                         '<i class="fa fa-fw fa-edit"></i> Edit',
-                                        array($feeling['id']),
+                                        array($sensation['id']),
                                         array('class' => 'no-underline'))) }}
                                 <span class="link-pad"></span>
 
                                 {{ HTML::decode(HTML::linkAction(
-                                        'FeelingsController@getDelete',
+                                        'SensationsController@getDelete',
                                         '<i class="fa fa-fw fa-trash"></i> Delete',
-                                        array($feeling['id']),
+                                        array($sensation['id']),
                                         array('class' => 'no-underline'))) }}
                         </td>
                 </tr>
