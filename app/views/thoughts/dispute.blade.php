@@ -208,7 +208,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Dispute thoughts')
+@section('page-title', 'Dispute Thoughts')
 
 @section('content')
 

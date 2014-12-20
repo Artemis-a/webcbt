@@ -119,7 +119,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Create CBT exercise')
+@section('page-title', 'New CBT Exercise')
 
 @section('content')
 
