@@ -73,7 +73,11 @@
                                 '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
 			</li>
 			<li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
-			<li><a href="#"><i class="fa fa-fw fa-child"></i> Feelings</a></li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'FeelingsController@getIndex',
+                                '<i class="fa fa-fw fa-child"></i> Feelings')) }}
+			</li>
 			<li><a href="#"><i class="fa fa-fw fa-eyedropper"></i> Sensations</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Settings</a></li>

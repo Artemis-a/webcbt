@@ -102,6 +102,19 @@ a.link-edit:hover {
         height: 350px;
 }
 
+.link-pad {
+	padding-left: 15px;
+}
+
+a.no-underline {
+        text-decoration: none;
+}
+
+a.no-underline:hover {
+        text-decoration: none;
+}
+
+
 /********  bhoechie tab ********/
 
 .bhoechie-tab-element {
