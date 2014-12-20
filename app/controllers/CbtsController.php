@@ -169,7 +169,7 @@ class CbtsController extends BaseController {
                 }
         }
 
-        public function getFinalize($id)
+        public function getPostdispute($id)
         {
 		$cbt = Cbt::find($id);
                 if (!$cbt)
@@ -189,12 +189,12 @@ class CbtsController extends BaseController {
                 $sensations_list = array(0 => 'Please select...') +
                         Sensation::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
-                return View::make('cbts.finalize')
+                return View::make('cbts.postdispute')
                         ->with('feelings_list', $feelings_list)
                         ->with('sensations_list', $sensations_list);
         }
 
-        public function postFinalize($id)
+        public function postPostdispute($id)
         {
 		$cbt = Cbt::find($id);
                 if (!$cbt)
@@ -299,7 +299,7 @@ class CbtsController extends BaseController {
 
                         /* Everything ok */
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-success', 'CBT exercise finalized successfully.');
+                                ->with('alert-success', 'CBT exercise completed successfully.');
                 }
         }
 

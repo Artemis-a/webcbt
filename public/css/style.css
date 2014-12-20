@@ -1,5 +1,6 @@
 body {
         margin: 70px 30px 30px 30px;
+        font-size: 16px;
 }
 
 .navbar .container {
@@ -41,11 +42,64 @@ li.list-pad {
 }
 
 .dispute-title {
-        font-size: 120%;
+        font-size: 20px;
 }
 
 .dispute-container {
         margin-left: 2px;
+}
+
+a.link-pending {
+        color: red;
+        text-decoration:none;
+}
+
+a.link-completed {
+        color: green;
+        text-decoration:none;
+}
+
+a.link-edit {
+        text-decoration:none;
+}
+
+a.link-pending:hover {
+        color: red;
+        text-decoration:none;
+}
+
+a.link-completed:hover {
+        color: green;
+        text-decoration:none;
+}
+
+a.link-edit:hover {
+        text-decoration:none;
+}
+
+.navbar-custom {
+        background-color: #555; // #C0392B
+}
+
+.navbar-custom a {
+        color: #333;
+}
+
+.navbar-custom a:hover {
+        color: #FFF;
+}
+
+.navbar-custom .navbar-brand {
+        color: #EEEEEE;
+        font-size: 20px;
+}
+
+.page-header {
+        margin: 5px 0 15px 0;
+}
+
+.menu-pad {
+        height: 350px;
 }
 
 /********  bhoechie tab ********/
@@ -76,7 +130,7 @@ div.bhoechie-tab-menu{
         padding-left: 0;
         padding-bottom: 0;
         font-size: 16px;
-        min-width: 250px;
+        min-width: 190px;
 }
 div.bhoechie-tab-menu div.list-group{
         margin-bottom: 0;
@@ -129,7 +183,6 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 div.bhoechie-tab-menu div.list-group a.list-group-item {
         padding-top: 20px;
         padding-bottom: 20px;
-        font-weight: bold;
 }
 
 div.tab-content-title {

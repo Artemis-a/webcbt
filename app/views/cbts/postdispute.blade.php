@@ -96,7 +96,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Finalize CBT exercise')
+@section('page-title', 'Post-dispute CBT exercise')
 
 @section('content')
 

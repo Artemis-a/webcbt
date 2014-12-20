@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 @section('content')
 
-{{ HTML::linkAction('CbtsController@getCreate', 'ADD', array(), array('class' => 'btn btn-primary')) }}
+{{ HTML::linkAction('CbtsController@getCreate', 'New CBT Exercise', array(), array('class' => 'btn btn-primary')) }}
 
 <br />
 <br />
@@ -46,13 +46,13 @@ $(document).ready(function() {
                                                                 'ThoughtsController@getDispute',
                                                                 $thought['thought'],
                                                                 array($thought['id']),
-                                                                array('class' => 'btn btn-xs btn-warning')) }}
+                                                                array('class' => 'link-pending')) }}
                                                 @else
                                                         {{ HTML::linkAction(
                                                                 'ThoughtsController@getDispute',
                                                                 $thought['thought'],
                                                                 array($thought['id']),
-                                                                array('class' => 'btn btn-xs btn-success')) }}
+                                                                array('class' => 'link-completed')) }}
                                                 @endif
                                         </li>
                                 @endforeach
@@ -92,11 +92,28 @@ $(document).ready(function() {
                                 </ul>
                         </td>
                         <td>
-                                {{ HTML::linkAction(
-                                        'CbtsController@getFinalize',
-                                        'finalize',
-                                        array($cbt['id']),
-                                        array('class' => 'btn btn-xs btn-primary')) }}
+                                <!-- Split button -->
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-primary">Actions</button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                <li>
+                                        {{ HTML::linkAction(
+                                                'CbtsController@getPostdispute',
+                                                'Post-dispute',
+                                                array($cbt['id']),
+                                                array('class' => '')) }}
+                                </li>
+                                <li><a href="#">Show analysis</a></li>
+                                <li><a href="#">Mark as resolved</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Edit exercise</a></li>
+                                <li><a href="#">Delete exercise</a></li>
+                                </ul>
+                                </div>
                         </td>
                 </tr>
                 @endforeach

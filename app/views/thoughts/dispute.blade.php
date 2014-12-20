@@ -65,12 +65,9 @@ $(document).ready(function() {
 
 @section('content')
 
-<button type="button" class="btn btn-danger">
-        <span class="dispute-title">Irrational thought to dispute : &ldquo; {{ $thought['thought'] }} &rdquo;</span>
-</button>
-
-<br />
-<br />
+<div class="alert alert-danger" role="alert">
+        <span class="dispute-title">Irrational thought to dispute : &ldquo;{{ $thought['thought'] }}&rdquo;</span>
+</div>
 
 {{ Form::open() }}
 

@@ -1,71 +1,124 @@
 <!doctype html>
 <html lang="en">
-        <head>
-        	<meta charset="UTF-8">
-        	<title>Laravel PHP Framework</title>
 
-                <!-- jQuery & jQuery UI -->
-                {{ HTML::style('css/jquery-ui.min.css') }}
-                {{ HTML::style('css/jquery-ui.structure.min.css') }}
-                {{ HTML::style('css/jquery-ui.theme.min.css') }}
-                {{ HTML::script('js/jquery-1.11.1.min.js') }}
-                {{ HTML::script('js/jquery-ui.min.js') }}
+<head>
+	<meta charset="UTF-8">
+	<title>Laravel PHP Framework</title>
 
-                <!-- jQuery Plugins -->
-                {{ HTML::script('js/jquery-ui-timepicker-addon.js') }}
-                {{ HTML::style('css/jquery-ui-timepicker-addon.css') }}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-                <!-- Bootstrap -->
-                {{ HTML::style('css/bootstrap.min.css') }}
-                <!-- {{ HTML::style('css/bootstrap-theme.min.css') }} -->
-                {{ HTML::script('js/bootstrap.min.js') }}
+        <!-- jQuery & jQuery UI -->
+        {{ HTML::style('css/jquery-ui.min.css') }}
+        {{ HTML::style('css/jquery-ui.structure.min.css') }}
+        {{ HTML::style('css/jquery-ui.theme.min.css') }}
+        {{ HTML::script('js/jquery-1.11.1.min.js') }}
+        {{ HTML::script('js/jquery-ui.min.js') }}
 
-                <!-- WARNING ! This is a assignment statement ! -->
-                @if ($time = rand(0, 1000)) @endif
+        <!-- jQuery Plugins -->
+        {{ HTML::script('js/jquery-ui-timepicker-addon.js') }}
+        {{ HTML::style('css/jquery-ui-timepicker-addon.css') }}
 
-                <!-- Custom CSS -->
-                {{ HTML::style('css/style.css?' . $time) }}
+        <!-- Bootstrap -->
+        {{ HTML::style('css/bootstrap.min.css') }}
+        <!-- {{ HTML::style('css/bootstrap-theme.min.css') }} -->
+        {{ HTML::script('js/bootstrap.min.js') }}
 
-                @yield('head')
-        </head>
-        <body>
+        <!-- WARNING ! This is a assignment statement ! -->
+        @if ($time = rand(0, 1000)) @endif
 
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-                <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">WebCBT</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                        </ul>
-                </div><!--/.nav-collapse -->
-                </div>
-        </nav>
+        <!-- Custom CSS -->
+        {{ HTML::style('css/sb-admin.css?' . $time) }}
+        {{ HTML::style('css/style.css?' . $time) }}
 
-                <div class="page">
+        @yield('head')
+</head>
 
-                        <div class="page-title">
-                                <h3>@yield('page-title')</h3>
-                        </div>
+<body>
 
-                        <div class="flash-message">
-                                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                                        @if(Session::has('alert-' . $msg))
-                                                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
-                                        @endif
-                                @endforeach
-                        </div>
+<div id="wrapper">
 
-                        <div class="page-content">
-                                @yield('content')
-                        </div>
-                </div>
-        </body>
+<!-- Navigation -->
+<nav class="navbar navbar-fixed-top navbar-custom" role="navigation">
+
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="index.html">WebCBT</a>
+
+	</div>
+
+	<!-- Top Menu Items -->
+	<ul class="nav navbar-right top-nav">
+	</ul>
+
+	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<ul class="nav navbar-nav side-nav">
+			<li><a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-list"></i> CBT Exercises</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-child"></i> Feelings</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-eyedropper"></i> Sensations</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Settings</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
+			<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+			<li class="menu-pad"></li>
+		</ul>
+	</div>
+
+</nav>
+<!-- /.nav -->
+
+<div id="page-wrapper">
+<div class="container-fluid">
+
+	<!-- Page-title -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">@yield('page-title')</h1>
+		</div>
+	</div>
+        <!-- /.row -->
+
+	<!-- Alerts -->
+	<div class="row">
+		<div class="col-lg-12">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                	@if(Session::has('alert-' . $msg))
+				<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{{ Session::get('alert-' . $msg) }}
+				</div>
+			@endif
+		@endforeach
+		</div>
+	</div>
+        <!-- /.row -->
+
+
+	<!-- Content -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="page-content">
+				@yield('content')
+			</div>
+		</div>
+	</div>
+        <!-- /.row -->
+
+</div><!-- /.container-fluid -->
+</div><!-- /#page-wrapper -->
+
+</div><!-- /#wrapper -->
+
+</body>
 </html>
