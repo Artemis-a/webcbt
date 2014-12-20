@@ -62,8 +62,16 @@
 	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
-			<li><a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-			<li><a href="#"><i class="fa fa-fw fa-list"></i> CBT Exercises</a></li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'DashboardController@getIndex',
+                                '<i class="fa fa-fw fa-dashboard"></i> Dashboard')) }}
+			</li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'CbtsController@getIndex',
+                                '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
+			</li>
 			<li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-child"></i> Feelings</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-eyedropper"></i> Sensations</a></li>
@@ -84,7 +92,7 @@
 	<!-- Page-title -->
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">@yield('page-title')</h1>
+			<h3 class="page-header">@yield('page-title')</h3>
 		</div>
 	</div>
         <!-- /.row -->

@@ -4,8 +4,6 @@ class CbtsController extends BaseController {
 
         public function getIndex()
         {
-                Auth::loginUsingId(1);
-
 		$data = Cbt::curuser()->orderBy('date', 'DESC')->get();
 
 		if ($data)
@@ -178,7 +176,8 @@ class CbtsController extends BaseController {
                                 ->with('alert-warning', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id()) {
+                if ($cbt['user_id'] != Auth::id())
+                {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-warning', 'Invalid access.');
                 }
@@ -203,7 +202,8 @@ class CbtsController extends BaseController {
                                 ->with('alert-warning', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id()) {
+                if ($cbt['user_id'] != Auth::id())
+                {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-warning', 'Invalid access.');
                 }

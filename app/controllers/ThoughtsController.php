@@ -11,7 +11,8 @@ class ThoughtsController extends BaseController {
                                 ->with('alert-warning', 'Thought not found.');
                 }
 
-                if ($thought->cbt['user_id'] != Auth::id()) {
+                if ($thought->cbt['user_id'] != Auth::id())
+                {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-warning', 'Invalid access.');
                 }
@@ -34,7 +35,8 @@ class ThoughtsController extends BaseController {
                                 ->with('alert-warning', 'Thought not found.');
                 }
 
-                if ($thought->cbt['user_id'] != Auth::id()) {
+                if ($thought->cbt['user_id'] != Auth::id())
+                {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-warning', 'Invalid access.');
                 }

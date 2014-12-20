@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Dashboard')
+@section('page-title', 'CBT Exercises')
 
 @section('content')
 
