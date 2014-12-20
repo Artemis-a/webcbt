@@ -86,8 +86,120 @@ class ThoughtsController extends BaseController {
                                 }
                         }
 
+                        /********* Disputes *********/
+                        $disputes = array();
+                        foreach ($input['forevidence'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['forevidence'][] = $row;
+                                }
+                        }
+                        foreach ($input['againstevidence'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['againstevidence'][] = $row;
+                                }
+                        }
+                        foreach ($input['experiment'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['experiment'][] = $row;
+                                }
+                        }
+                        if (!empty($input['experimentresult']))
+                        {
+                                $disputes['experimentresult'] = trim($input['experimentresult']);
+                        }
+                        if (!empty($input['doublestandard']))
+                        {
+                                $disputes['doublestandard'] = trim($input['doublestandard']);
+                        }
+                        foreach ($input['survey'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['survey'][] = $row;
+                                }
+                        }
+                        if (!empty($input['surveyresult']))
+                        {
+                                $disputes['surveyresult'] = trim($input['surveyresult']);
+                        }
+                        foreach ($input['label'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['label'][] = $row;
+                                }
+                        }
+                        foreach ($input['meaning'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['meaning'][] = $row;
+                                }
+                        }
+                        foreach ($input['advantage'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['advantage'][] = $row;
+                                }
+                        }
+                        foreach ($input['disadvantage'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['disadvantage'][] = $row;
+                                }
+                        }
+                        foreach ($input['iftrue'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['iftrue'][] = $row;
+                                }
+                        }
+                        foreach ($input['reattribution'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['reattribution'][] = $row;
+                                }
+                        }
+                        foreach ($input['reframe'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['reframe'][] = $row;
+                                }
+                        }
+                        foreach ($input['rationalize'] as $row_id => $row)
+                        {
+                                $row = trim($row);
+                                if (!empty($row))
+                                {
+                                        $disputes['rationalize'][] = $row;
+                                }
+                        }
+
                         /* Update thought */
                         $thought->is_challenged = 1;
+                        $thought->dispute = serialize($disputes);
                         $thought->balanced_thoughts = serialize($balanced_thoughts);
 
                         if (!$thought->save())
