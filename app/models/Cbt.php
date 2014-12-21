@@ -44,9 +44,9 @@ class Cbt extends Eloquent {
 		return $this->hasMany('CbtFeeling');
 	}
 
-	public function cbtSensations()
+	public function cbtSymptoms()
 	{
-		return $this->hasMany('CbtSensation');
+		return $this->hasMany('CbtSymptom');
 	}
 
 	public function cbtBehaviours()

@@ -1,13 +1,13 @@
 <?php
 
-class Sensation extends Eloquent {
+class Symptom extends Eloquent {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'sensations';
+	protected $table = 'symptoms';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -42,7 +42,7 @@ class Sensation extends Eloquent {
 		parent::boot();
 
 		/* Hook into save event, setup event bindings */
-		Sensation::saving(function($content)
+		Symptom::saving(function($content)
 		{
 			/* Set user id on save */
 			$content->user_id = Auth::id();

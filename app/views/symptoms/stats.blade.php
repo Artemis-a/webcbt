@@ -15,16 +15,16 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Sensation')
+@section('page-title', 'Physical Symptom')
 
 @section('content')
 
-{{ HTML::linkAction('SensationsController@getIndex', 'Back', array(), array('class' => 'btn btn-primary')) }}
+{{ HTML::linkAction('SymptomsController@getIndex', 'Back', array(), array('class' => 'btn btn-primary')) }}
 
 <br />
 <br />
 
-<div class="secondary-title">{{ $sensation['name'] }} Stats</div>
+<div class="secondary-title">{{ $symptom['name'] }} Stats</div>
 
 <div>
 	<canvas id="canvas" height="" width="500"></canvas>
@@ -48,7 +48,7 @@ var barChartData = {
 	labels : labelset,
 	datasets : [
 		{
-			label: "{{ $sensation['name'] }}",
+			label: "{{ $symptom['name'] }}",
 			fillColor : "rgba(151,187,205,0.4)",
 			strokeColor : "rgba(151,187,205,1)",
 			pointColor : "rgba(151,187,205,1)",

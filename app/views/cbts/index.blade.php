@@ -27,7 +27,7 @@ $(document).ready(function() {
                         <th>Situation</th>
                         <th>Thoughts</th>
                         <th>Feelings</th>
-                        <th>Sensations</th>
+                        <th>Physical Symptoms</th>
                         <th>Behaviours</th>
                         <th></th>
                 </tr>
@@ -72,11 +72,11 @@ $(document).ready(function() {
                         </td>
                         <td>
                                 <ul class="list-unstyled">
-                                @foreach ($cbt->cbtSensations as $sensation)
-                                        @if ($sensation['when'] == 'B')
+                                @foreach ($cbt->cbtSymptoms as $symptom)
+                                        @if ($symptom['when'] == 'B')
                                                 <li>
-                                                        {{ $sensation->sensation['name'] }}
-                                                        <span class="badge">{{ $sensation['percent'] }}</span>
+                                                        {{ $symptom->symptom['name'] }}
+                                                        <span class="badge">{{ $symptom['percent'] }}</span>
                                                 </li>
                                         @endif
                                 @endforeach

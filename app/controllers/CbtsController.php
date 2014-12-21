@@ -19,12 +19,12 @@ class CbtsController extends BaseController {
                 $feelings_list = array(0 => 'Please select...') +
                         Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
-                $sensations_list = array(0 => 'Please select...') +
-                        Sensation::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $symptoms_list = array(0 => 'Please select...') +
+                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.create')
                         ->with('feelings_list', $feelings_list)
-                        ->with('sensations_list', $sensations_list);
+                        ->with('symptoms_list', $symptoms_list);
         }
 
         public function postCreate()
@@ -110,29 +110,29 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Add sensations */
-                        $sensations = array();
-                        $sensationsintensity = $input['sensationsintensity'];
-                        foreach ($input['feelings'] as $row_id => $row)
+                        /* Add symptom */
+                        $symptoms = array();
+                        $symptomsintensity = $input['symptomsintensity'];
+                        foreach ($input['symptoms'] as $row_id => $row)
                         {
                                 if (!empty($row))
                                 {
-                                        $sensations[] = array(
-                                                'sensation_id' => $row,
-                                                'percent' => $sensationsintensity[$row_id],
+                                        $symptoms[] = array(
+                                                'symptom_id' => $row,
+                                                'percent' => $symptomsintensity[$row_id],
                                                 'when' => 'B',
                                         );
                                 }
                         }
 
-                        foreach ($sensations as $data)
+                        foreach ($symptoms as $data)
                         {
-                                $cbt_sensation = new CbtSensation($data);
-                                $cbt_sensation->cbt()->associate($cbt);
-                                if (!$cbt_sensation->save())
+                                $cbt_symptom = new CbtSymptom($data);
+                                $cbt_symptom->cbt()->associate($cbt);
+                                if (!$cbt_symptom->save())
                                 {
 			                return Redirect::back()->withInput()
-                                                ->with('alert-danger', 'Failed to add sensations.');
+                                                ->with('alert-danger', 'Failed to add physical symptom.');
                                 }
                         }
 
@@ -185,12 +185,12 @@ class CbtsController extends BaseController {
                 $feelings_list = array(0 => 'Please select...') +
                         Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
-                $sensations_list = array(0 => 'Please select...') +
-                        Sensation::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $symptoms_list = array(0 => 'Please select...') +
+                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.postdispute')
                         ->with('feelings_list', $feelings_list)
-                        ->with('sensations_list', $sensations_list);
+                        ->with('symptoms_list', $symptoms_list);
         }
 
         public function postPostdispute($id)
@@ -246,29 +246,29 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Add sensations */
-                        $sensations = array();
-                        $sensationsintensity = $input['sensationsintensity'];
-                        foreach ($input['feelings'] as $row_id => $row)
+                        /* Add symptoms */
+                        $symptoms = array();
+                        $symptomsintensity = $input['symptomsintensity'];
+                        foreach ($input['symptoms'] as $row_id => $row)
                         {
                                 if (!empty($row))
                                 {
-                                        $sensations[] = array(
-                                                'sensation_id' => $row,
-                                                'percent' => $sensationsintensity[$row_id],
+                                        $symptoms[] = array(
+                                                'symptom_id' => $row,
+                                                'percent' => $symptomsintensity[$row_id],
                                                 'when' => 'A',
                                         );
                                 }
                         }
 
-                        foreach ($sensations as $data)
+                        foreach ($symptoms as $data)
                         {
-                                $cbt_sensation = new CbtSensation($data);
-                                $cbt_sensation->cbt()->associate($cbt);
-                                if (!$cbt_sensation->save())
+                                $cbt_symptom = new CbtSymptom($data);
+                                $cbt_symptom->cbt()->associate($cbt);
+                                if (!$cbt_symptom->save())
                                 {
 			                return Redirect::back()->withInput()
-                                                ->with('alert-danger', 'Failed to add sensations.');
+                                                ->with('alert-danger', 'Failed to add physical symptoms.');
                                 }
                         }
 

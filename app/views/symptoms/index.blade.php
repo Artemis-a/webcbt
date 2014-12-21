@@ -11,11 +11,11 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Sensations')
+@section('page-title', 'Physical Symptoms')
 
 @section('content')
 
-{{ HTML::linkAction('SensationsController@getCreate', 'New Sensation', array(), array('class' => 'btn btn-primary')) }}
+{{ HTML::linkAction('SymptomsController@getCreate', 'New Physical Symptom', array(), array('class' => 'btn btn-primary')) }}
 
 <br />
 <br />
@@ -23,37 +23,37 @@ $(document).ready(function() {
 <table class="table table-hover">
         <thead>
                 <tr>
-                        <th>Sensations</th>
+                        <th>Physical Symptom</th>
                         <th>Added On</th>
                         <th>Actions</th>
                 </tr>
         </thead>
         <tbody>
-                @foreach ($sensations as $sensation)
+                @foreach ($symptoms as $symptom)
                 <tr>
-                        <td>{{ $sensation['name'] }}</td>
-                        <td>{{ $sensation['created_at'] }}</td>
+                        <td>{{ $symptom['name'] }}</td>
+                        <td>{{ $symptom['created_at'] }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
-                                        'SensationsController@getStats',
+                                        'SymptomsController@getStats',
                                         '<i class="fa fa-fw fa-list"></i> Stats',
-                                        array($sensation['id']),
+                                        array($symptom['id']),
                                         array('class' => 'no-underline'))) }}
 
                                 <span class="link-pad"></span>
 
                                 {{ HTML::decode(HTML::linkAction(
-                                        'SensationsController@getEdit',
+                                        'SymptomsController@getEdit',
                                         '<i class="fa fa-fw fa-edit"></i> Edit',
-                                        array($sensation['id']),
+                                        array($symptom['id']),
                                         array('class' => 'no-underline'))) }}
 
                                 <span class="link-pad"></span>
 
                                 {{ HTML::decode(HTML::linkAction(
-                                        'SensationsController@getDelete',
+                                        'SymptomsController@getDelete',
                                         '<i class="fa fa-fw fa-trash"></i> Delete',
-                                        array($sensation['id']),
+                                        array($symptom['id']),
                                         array('class' => 'no-underline'))) }}
                         </td>
                 </tr>

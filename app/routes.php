@@ -17,4 +17,4 @@ Route::controller('dashboard', 'DashboardController');
 Route::controller('cbts', 'CbtsController');
 Route::controller('thoughts', 'ThoughtsController');
 Route::controller('feelings', 'FeelingsController');
-Route::controller('sensations', 'SensationsController');
+Route::controller('symptoms', 'SymptomsController');

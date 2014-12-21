@@ -15,18 +15,18 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Edit Sensation')
+@section('page-title', 'Edit Physical Symptom')
 
 @section('content')
 
-{{ Form::model($sensation) }}
+{{ Form::model($symptom) }}
 
 {{ Form::openGroup('name', 'Name') }}
         {{ Form::text('name') }}
 {{ Form::closeGroup() }}
 
 {{ Form::submit('Submit') }}
-{{ HTML::linkAction('SensationsController@getIndex', 'Cancel') }}
+{{ HTML::linkAction('SymptomsController@getIndex', 'Cancel') }}
 
 {{ Form::close() }}
 

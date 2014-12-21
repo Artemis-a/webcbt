@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'New Sensation')
+@section('page-title', 'New Physical Symptom')
 
 @section('content')
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
 {{ Form::closeGroup() }}
 
 {{ Form::submit('Submit') }}
-{{ HTML::linkAction('SensationsController@getIndex', 'Cancel') }}
+{{ HTML::linkAction('SymptomsController@getIndex', 'Cancel') }}
 
 {{ Form::close() }}
 

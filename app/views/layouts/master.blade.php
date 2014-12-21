@@ -83,8 +83,8 @@
 			</li>
                         <li>
 				{{ HTML::decode(HTML::linkAction(
-                                'SensationsController@getIndex',
-                                '<i class="fa fa-fw fa-eyedropper"></i> Sensations')) }}
+                                'SymptomsController@getIndex',
+                                '<i class="fa fa-fw fa-eyedropper"></i> Physical symptoms')) }}
 			</li>
 			<li><a href="#"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
 			<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Settings</a></li>
