@@ -136,4 +136,27 @@ class FeelingsController extends BaseController {
                 return Redirect::action('FeelingsController@getIndex')
                         ->with('alert-success', 'Feeling successfully deleted.');
         }
+
+        public function getStats($id)
+        {
+		$data = Feeling::curuser()->find($id);
+
+                if (!$data)
+                {
+                        return Redirect::action('FeelingsController@getIndex')
+                                ->with('alert-warning', 'Feeling not found.');
+                }
+
+                $rawdataset = CbtFeeling::where('feeling_id', '=', $id)->get();
+
+                if ($rawdataset->count() <= 0)
+                {
+                        return Redirect::action('FeelingsController@getIndex')
+                                ->with('alert-warning', 'No data.');
+                }
+
+                return View::make('feelings.stats')
+                        ->with('feeling', $data)
+                        ->with('rawdataset', $rawdataset);
+        }
 }

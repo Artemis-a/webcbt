@@ -136,4 +136,27 @@ class SensationsController extends BaseController {
                 return Redirect::action('SensationsController@getIndex')
                         ->with('alert-success', 'Sensation successfully deleted.');
         }
+
+        public function getStats($id)
+        {
+		$data = Sensation::curuser()->find($id);
+
+                if (!$data)
+                {
+                        return Redirect::action('SensationsController@getIndex')
+                                ->with('alert-warning', 'Sensation not found.');
+                }
+
+                $rawdataset = CbtSensation::where('sensation_id', '=', $id)->get();
+
+                if ($rawdataset->count() <= 0)
+                {
+                        return Redirect::action('SensationsController@getIndex')
+                                ->with('alert-warning', 'No data.');
+                }
+
+                return View::make('sensations.stats')
+                        ->with('sensation', $data)
+                        ->with('rawdataset', $rawdataset);
+        }
 }

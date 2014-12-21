@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Laravel PHP Framework</title>
+	<title>WebCBT</title>
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,9 @@
         {{ HTML::style('css/bootstrap.min.css') }}
         <!-- {{ HTML::style('css/bootstrap-theme.min.css') }} -->
         {{ HTML::script('js/bootstrap.min.js') }}
+
+	<!-- Chart.js -->
+        {{ HTML::script('js/Chart.min.js') }}
 
         <!-- WARNING ! This is a assignment statement ! -->
         @if ($time = rand(0, 1000)) @endif

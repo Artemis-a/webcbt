@@ -35,10 +35,19 @@ $(document).ready(function() {
                         <td>{{ $feeling['created_at'] }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
+                                        'FeelingsController@getStats',
+                                        '<i class="fa fa-fw fa-list"></i> Stats',
+                                        array($feeling['id']),
+                                        array('class' => 'no-underline'))) }}
+
+                                <span class="link-pad"></span>
+
+                                {{ HTML::decode(HTML::linkAction(
                                         'FeelingsController@getEdit',
                                         '<i class="fa fa-fw fa-edit"></i> Edit',
                                         array($feeling['id']),
                                         array('class' => 'no-underline'))) }}
+
                                 <span class="link-pad"></span>
 
                                 {{ HTML::decode(HTML::linkAction(
