@@ -86,7 +86,11 @@
                                 'SymptomsController@getIndex',
                                 '<i class="fa fa-fw fa-eyedropper"></i> Physical symptoms')) }}
 			</li>
-			<li><a href="#"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'HelpController@getIndex',
+                                '<i class="fa fa-fw fa-question-circle"></i> Help')) }}
+			</li>
                         <li>
 				{{ HTML::decode(HTML::linkAction(
                                 'UsersController@getProfile',

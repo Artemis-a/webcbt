@@ -18,4 +18,5 @@ Route::controller('cbts', 'CbtsController');
 Route::controller('thoughts', 'ThoughtsController');
 Route::controller('feelings', 'FeelingsController');
 Route::controller('symptoms', 'SymptomsController');
+Route::controller('help', 'HelpController');
 Route::controller('users', 'UsersController');
