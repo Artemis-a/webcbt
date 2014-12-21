@@ -57,54 +57,6 @@
 		<a class="navbar-brand" href="index.html">WebCBT</a>
 
 	</div>
-
-	<!-- Top Menu Items -->
-	<ul class="nav navbar-right top-nav">
-	</ul>
-
-	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav side-nav">
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'DashboardController@getIndex',
-                                '<i class="fa fa-fw fa-dashboard"></i> Dashboard')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'CbtsController@getIndex',
-                                '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
-			</li>
-			<li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'FeelingsController@getIndex',
-                                '<i class="fa fa-fw fa-child"></i> Feelings')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'SymptomsController@getIndex',
-                                '<i class="fa fa-fw fa-eyedropper"></i> Physical symptoms')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'HelpController@getIndex',
-                                '<i class="fa fa-fw fa-question-circle"></i> Help')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'UsersController@getProfile',
-                                '<i class="fa fa-fw fa-user"></i> Profile')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'UsersController@getLogout',
-                                '<i class="fa fa-fw fa-power-off"></i> Log Out')) }}
-			</li>
-			<li class="menu-pad"></li>
-		</ul>
-	</div>
-
 </nav>
 <!-- /.nav -->
 

@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@section('define')
-        {{ $maxRows = 20 }}
-@endsection
-
 @section('head')
 
 <script type="text/javascript">

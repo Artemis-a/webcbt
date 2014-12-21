@@ -4,17 +4,82 @@ class UsersController extends BaseController {
 
 	public function getLogin()
 	{
+		return View::make('users.login');
+	}
 
+	public function postLogin()
+	{
+		$input = Input::all();
+
+		$login_data = array(
+			'username' => $input['username'],
+			'password' => $input['password'],
+			'status' => 1
+		);
+
+		if (Auth::attempt($login_data))
+		{
+			return Redirect::intended('dashboard');
+		}
+
+		return Redirect::action('UsersController@getLogin')
+			->with('alert-warning', 'Login failed.');
 	}
 
 	public function getLogout()
 	{
+		Auth::logout();
+		Session::flush();
 
+		return Redirect::action('UsersController@getLogin')
+                        ->with('alert-warning', 'User logged out.');
 	}
 
 	public function getRegister()
 	{
+		return View::make('users.register');
+	}
 
+	public function postRegister()
+	{
+                $input = Input::all();
+
+                $rules = array(
+                        'username' => 'required|unique:users,username',
+			'email' => 'required|email|unique:users,email',
+			'password' => 'required|min:3',
+                );
+
+                $validator = Validator::make($input, $rules);
+
+                if ($validator->fails())
+                {
+                        return Redirect::back()->withInput()->withErrors($validator);
+                } else {
+
+                        /* Create a symptom */
+                        $user_data = array(
+                                'username' => $input['username'],
+				'password' => Hash::make($input['password']),
+				'email' => $input['email'],
+				'status' => 1,
+				'verification_key' =>
+					substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 20),
+				'email_verified' => 1,
+				'admin_verified' => 1,
+				'retry_count' => 0,
+                        );
+                        $user = User::create($user_data);
+			if (!$user)
+			{
+			        return Redirect::back()->withInput()
+                                        ->with('alert-danger', 'Failed to create user.');
+			}
+
+                        /* Everything ok */
+                        return Redirect::action('UsersController@getLogin')
+                                ->with('alert-success', 'User created. Please login below.');
+                }
 	}
 
 	public function getForgot()
@@ -90,11 +155,6 @@ class UsersController extends BaseController {
                                 ->with('alert-success', 'Profile updated.');
 
 		}
-	}
-
-	public function getSettings()
-	{
-		return View::make('users.settings');
 	}
 
 }

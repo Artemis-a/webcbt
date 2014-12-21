@@ -28,6 +28,9 @@ $(document).ready(function() {
         <td width="120px">Fullname</td><td width="1px">:</td><td>{{ $user->fullname }}</td>
 </tr>
 <tr>
+        <td>Username</td><td>:</td><td>{{ $user->username }}</td>
+</tr>
+<tr>
         <td>Email</td><td>:</td><td>{{ $user->email }}</td>
 </tr>
 <tr>
