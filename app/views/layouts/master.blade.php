@@ -87,8 +87,11 @@
                                 '<i class="fa fa-fw fa-eyedropper"></i> Physical symptoms')) }}
 			</li>
 			<li><a href="#"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
-			<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Settings</a></li>
-			<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'UsersController@getProfile',
+                                '<i class="fa fa-fw fa-user"></i> Profile')) }}
+			</li>
 			<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
 			<li class="menu-pad"></li>
 		</ul>
