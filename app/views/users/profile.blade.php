@@ -72,4 +72,6 @@ $(document).ready(function() {
 </tr>
 </table>
 
+{{ HTML::linkAction('UsersController@getChangepass', 'Change Password', array()) }}
+
 @stop

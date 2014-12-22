@@ -12,23 +12,19 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Login')
+@section('page-title', 'Forgot Password')
 
 @section('content')
 
 {{ Form::open() }}
 
-{{ Form::openGroup('username', 'Username') }}
-        {{ Form::text('username') }}
-{{ Form::closeGroup() }}
-
-{{ Form::openGroup('password', 'Password') }}
-        {{ Form::password('password') }}
+{{ Form::openGroup('userinput', 'Username / Email') }}
+        {{ Form::text('userinput') }}
 {{ Form::closeGroup() }}
 
 {{ Form::submit('Submit') }}
+{{ HTML::linkAction('UsersController@getLogin', 'Login') }}
 {{ HTML::linkAction('UsersController@getRegister', 'Register') }}
-{{ HTML::linkAction('UsersController@getForgot', 'Forgot password ?') }}
 
 {{ Form::close() }}
 

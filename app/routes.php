@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', 'DashboardController@getIndex');
+Route::group(array('before' => 'auth'), function() {
+        Route::get('/', 'DashboardController@getIndex');
+        Route::controller('dashboard', 'DashboardController');
+        Route::controller('cbts', 'CbtsController');
+        Route::controller('thoughts', 'ThoughtsController');
+        Route::controller('feelings', 'FeelingsController');
+        Route::controller('symptoms', 'SymptomsController');
+        Route::controller('help', 'HelpController');
+});
 
-Route::controller('dashboard', 'DashboardController');
-Route::controller('cbts', 'CbtsController');
-Route::controller('thoughts', 'ThoughtsController');
-Route::controller('feelings', 'FeelingsController');
-Route::controller('symptoms', 'SymptomsController');
-Route::controller('help', 'HelpController');
 Route::controller('users', 'UsersController');
