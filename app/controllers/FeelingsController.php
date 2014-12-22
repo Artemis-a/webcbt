@@ -9,7 +9,7 @@ class FeelingsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('DashboardController@getIndex')
-                                ->with('alert-warning', 'Feelings not found.');
+                                ->with('alert-danger', 'Feelings not found.');
                 }
 
                 /* Everything ok */
@@ -62,7 +62,7 @@ class FeelingsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'Feeling not found.');
+                                ->with('alert-danger', 'Feeling not found.');
                 }
 
                 return View::make('feelings.edit')->with('feeling', $data);
@@ -75,7 +75,7 @@ class FeelingsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'Feeling not found.');
+                                ->with('alert-danger', 'Feeling not found.');
                 }
 
                 $input = Input::all();
@@ -114,7 +114,7 @@ class FeelingsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'Feeling not found.');
+                                ->with('alert-danger', 'Feeling not found.');
                 }
 
                 /* Check if feeling is already in use */
@@ -122,7 +122,7 @@ class FeelingsController extends BaseController {
                 if ($count > 0)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'Failed to delete feeling since it is already in use at ' . $count . ' place(s).');
+                                ->with('alert-danger', 'Failed to delete feeling since it is already in use at ' . $count . ' place(s).');
                 }
 
                 /* Delete a feeling */
@@ -144,7 +144,7 @@ class FeelingsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'Feeling not found.');
+                                ->with('alert-danger', 'Feeling not found.');
                 }
 
                 $rawdataset = CbtFeeling::where('feeling_id', '=', $id)->get();
@@ -152,7 +152,7 @@ class FeelingsController extends BaseController {
                 if ($rawdataset->count() <= 0)
                 {
                         return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-warning', 'No data.');
+                                ->with('alert-danger', 'No data.');
                 }
 
                 return View::make('feelings.stats')

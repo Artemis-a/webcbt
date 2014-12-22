@@ -11,7 +11,8 @@ class CbtsController extends BaseController {
                         return View::make('cbts.index')->with('cbts', $data);
 		}
 
-        	App::abort(401, 'Failed to fetch data.');
+		return Redirect::action('DashboardController@getIndex')
+			->with('alert-danger', 'No data.');
         }
 
         public function getCreate()
@@ -173,13 +174,13 @@ class CbtsController extends BaseController {
                 if (!$cbt)
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Cbt exercise not found.');
+                                ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
                 if ($cbt['user_id'] != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Invalid access.');
+                                ->with('alert-danger', 'Invalid access.');
                 }
 
                 $feelings_list = array(0 => 'Please select...') +
@@ -199,13 +200,13 @@ class CbtsController extends BaseController {
                 if (!$cbt)
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Cbt exercise not found.');
+                                ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
                 if ($cbt['user_id'] != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Invalid access.');
+                                ->with('alert-danger', 'Invalid access.');
                 }
 
                 $input = Input::all();

@@ -23,7 +23,7 @@ class UsersController extends BaseController {
 		}
 
 		return Redirect::action('UsersController@getLogin')
-			->with('alert-warning', 'Login failed.');
+			->with('alert-danger', 'Login failed.');
 	}
 
 	public function getLogout()
@@ -32,7 +32,7 @@ class UsersController extends BaseController {
 		Session::flush();
 
 		return Redirect::action('UsersController@getLogin')
-                        ->with('alert-warning', 'User logged out.');
+                        ->with('alert-success', 'User logged out.');
 	}
 
 	public function getRegister()
@@ -134,7 +134,7 @@ class UsersController extends BaseController {
 			if ($user->save())
 			{
 				return Redirect::to('users/login')
-					->with('alert-danger', 'User verification successful. Please login below.');
+					->with('alert-success', 'User verification successful. Please login below.');
 			} else {
 				return Redirect::to('users/login')
 					->with('alert-danger', 'User verification failed.');
@@ -225,7 +225,7 @@ class UsersController extends BaseController {
 		if (!$user)
 		{
                         return Redirect::action('UsersController@getProfile')
-                                ->with('alert-success', 'Invalid user.');
+                                ->with('alert-danger', 'Invalid user.');
 		}
 
 		if (!Hash::check($input['oldpassword'], $user->password))

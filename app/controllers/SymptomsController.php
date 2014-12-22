@@ -9,7 +9,7 @@ class SymptomsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('DashboardController@getIndex')
-                                ->with('alert-warning', 'Physical symptoms not found.');
+                                ->with('alert-danger', 'Physical symptoms not found.');
                 }
 
                 /* Everything ok */
@@ -62,7 +62,7 @@ class SymptomsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-warning', 'Physical symptom not found.');
+                                ->with('alert-danger', 'Physical symptom not found.');
                 }
 
                 return View::make('symptoms.edit')->with('symptom', $data);
@@ -75,7 +75,7 @@ class SymptomsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-warning', 'Physical symptom not found.');
+                                ->with('alert-danger', 'Physical symptom not found.');
                 }
 
                 $input = Input::all();
@@ -114,7 +114,7 @@ class SymptomsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-warning', 'Physical symptom not found.');
+                                ->with('alert-danger', 'Physical symptom not found.');
                 }
 
                 /* Check if symptom is already in use */
@@ -122,7 +122,7 @@ class SymptomsController extends BaseController {
                 if ($count > 0)
                 {
                         return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-warning', 'Failed to delete physical symptom since it is already in use at ' . $count . ' place(s).');
+                                ->with('alert-danger', 'Failed to delete physical symptom since it is already in use at ' . $count . ' place(s).');
                 }
 
                 /* Delete a symptom */
@@ -144,7 +144,7 @@ class SymptomsController extends BaseController {
                 if (!$data)
                 {
                         return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-warning', 'Physical symptom not found.');
+                                ->with('alert-danger', 'Physical symptom not found.');
                 }
 
                 $rawdataset = CbtSymptom::where('symptom_id', '=', $id)->get();
@@ -152,7 +152,7 @@ class SymptomsController extends BaseController {
                 if ($rawdataset->count() <= 0)
                 {
                         return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-warning', 'No data.');
+                                ->with('alert-danger', 'No data.');
                 }
 
                 return View::make('symptoms.stats')

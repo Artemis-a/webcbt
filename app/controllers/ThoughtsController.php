@@ -8,13 +8,13 @@ class ThoughtsController extends BaseController {
                 if (!$thought)
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Thought not found.');
+                                ->with('alert-danger', 'Thought not found.');
                 }
 
                 if ($thought->cbt['user_id'] != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Invalid access.');
+                                ->with('alert-danger', 'Invalid access.');
                 }
 
                 $distortions_list = array(0 => 'Please select...') +
@@ -32,13 +32,13 @@ class ThoughtsController extends BaseController {
                 if (!$thought)
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Thought not found.');
+                                ->with('alert-danger', 'Thought not found.');
                 }
 
                 if ($thought->cbt['user_id'] != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-warning', 'Invalid access.');
+                                ->with('alert-danger', 'Invalid access.');
                 }
 
                 $input = Input::all();

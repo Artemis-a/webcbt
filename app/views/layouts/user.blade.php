@@ -74,14 +74,18 @@
 	<!-- Alerts -->
 	<div class="row">
 		<div class="col-lg-12">
-                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                	@if(Session::has('alert-' . $msg))
-				<div class="alert alert-info alert-dismissable">
+                	@if (Session::has('alert-success'))
+				<div class="alert alert-success alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				{{ Session::get('alert-' . $msg) }}
+				{{ Session::get('alert-success') }}
 				</div>
 			@endif
-		@endforeach
+                	@if (Session::has('alert-danger'))
+				<div class="alert alert-danger alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{{ Session::get('alert-danger') }}
+				</div>
+			@endif
 		</div>
 	</div>
         <!-- /.row -->
