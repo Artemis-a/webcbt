@@ -2,13 +2,21 @@
 
 class CbtsController extends BaseController {
 
+        public function __construct()
+        {
+                $user = User::find(Auth::id());
+                $this->dateformat = $user->dateformat;
+        }
+
         public function getIndex()
         {
 		$data = Cbt::curuser()->orderBy('date', 'DESC')->get();
 
 		if ($data)
 		{
-                        return View::make('cbts.index')->with('cbts', $data);
+                        return View::make('cbts.index')
+                                ->with('dateformat', $this->dateformat)
+                                ->with('cbts', $data);
 		}
 
 		return Redirect::action('DashboardController@getIndex')
@@ -24,6 +32,7 @@ class CbtsController extends BaseController {
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.create')
+                        ->with('dateformat', $this->dateformat)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list);
         }
@@ -31,8 +40,12 @@ class CbtsController extends BaseController {
         public function postCreate()
         {
                 $input = Input::all();
-                $temp1 = date_create_from_format('d M Y H:i A', $input['date']);
-                $input['date'] = date_format($temp1, 'Y-m-d H:i:s');
+
+                $temp = date_create_from_format(
+                        explode('|', $this->dateformat)[0] . ' H:i A',
+                        $input['date']
+                );
+                $date = date_format($temp, 'Y-m-d H:i:s');
 
                 $rules = array(
                         'date' => 'required|date',
@@ -48,7 +61,7 @@ class CbtsController extends BaseController {
 
                         /* Create a CBT entry */
                         $cbt_data = array(
-                                'date' => $input['date'],
+                                'date' => $date,
                                 'situation' => $input['situation']
                         );
                         $cbt = Cbt::create($cbt_data);

@@ -35,7 +35,11 @@ $(document).ready(function() {
         <tbody>
                 @foreach ($cbts as $cbt)
                 <tr>
-                        <td>{{ $cbt['date'] }}</td>
+                        <td>
+                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), explode('|', $dateformat)[0]) }}
+                                <br />
+                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), 'H:i A') }}
+                        </td>
                         <td>{{ $cbt['situation'] }}</td>
                         <td>
                                 <ul class="list-unstyled">
