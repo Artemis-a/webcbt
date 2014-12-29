@@ -150,14 +150,62 @@ class UsersController extends BaseController {
 	{
 		$user = Auth::user();
 
-		return View::make('users.profile')->with('user', $user);
+		$timezone_options = timezone_list();
+
+		$dob = '';
+                $temp = date_create_from_format(
+			'Y-m-d', $user->dob
+		);
+		if ($temp)
+		{
+			$dob = date_format(
+				$temp, explode('|', $user->dateformat)[0]
+			);
+		}
+
+		return View::make('users.profile')
+			->with('dob', $dob)
+			->with('timezone_options', $timezone_options)
+			->with('user', $user);
 	}
 
 	public function getEditprofile()
 	{
 		$user = Auth::user();
 
-		return View::make('users.editprofile')->with('user', $user);
+		$timezone_options = array('' => 'Please select...') + timezone_list();
+
+		$gender_options = array(
+			'' => 'Please select...',
+			'M' => 'Male',
+			'F' => 'Female',
+			'U' => 'Undisclosed',
+		);
+
+		$dateformat_options = array(
+	                '' => 'Please select...',
+	                'd-M-Y|dd-M-yy' => 'Day-Month-Year',
+	                'M-d-Y|M-dd-yy' => 'Month-Day-Year',
+	                'Y-M-d|yy-M-dd' => 'Year-Month-Day',
+		);
+
+		$dob = '';
+                $temp = date_create_from_format(
+			'Y-m-d', $user->dob
+		);
+		if ($temp)
+		{
+			$dob = date_format(
+				$temp, explode('|', $user->dateformat)[0]
+			);
+		}
+
+		return View::make('users.editprofile')
+			->with('dob', $dob)
+			->with('timezone_options', $timezone_options)
+			->with('gender_options', $gender_options)
+			->with('dateformat_options', $dateformat_options)
+			->with('user', $user);
 	}
 
 	public function postEditprofile()
@@ -166,13 +214,13 @@ class UsersController extends BaseController {
 
                 $input = Input::all();
 
-                $temp1 = date_create_from_format('Y-m-d', $input['dob']);
-		if (!$temp1)
+		$php_dateformat = explode('|', $input['dateformat'])[0];
+                $temp = date_create_from_format($php_dateformat, $input['dob']);
+		if (!$temp)
 		{
 	                return Redirect::back()->withInput()
                                 ->with('alert-danger', 'Invalid date of birth.');
 		}
-                $input['dob'] = date_format($temp1, 'Y-m-d');
 
                 $rules = array(
 			'fullname' => 'required',
@@ -193,7 +241,7 @@ class UsersController extends BaseController {
                         /* Update user */
                         $user->fullname = $input['fullname'];
                         $user->email = $input['email'];
-			$user->dob = $input['dob'];
+			$user->dob = date_format($temp, 'Y-m-d');
                         $user->gender = $input['gender'];
 			$user->dateformat = $input['dateformat'];
 			$user->timezone = $input['timezone'];

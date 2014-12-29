@@ -7,13 +7,24 @@
 $(document).ready(function() {
         /* Date and time picker */
         $('#dob').datepicker({
-                dateFormat: "yy-mm-dd",
+                dateFormat: $("#dateformat").val().split('|')[1],
                 changeMonth: true,
                 changeYear: true,
                 minDate: new Date(1900, 1 - 1, 1),
                 maxDate: "-1D",
         });
 
+	$("#dateformat").change(function() {
+                /* On change update the date format in the datepicker */
+		$("#dob").datepicker("option", {
+                        dateFormat: $("#dateformat").val().split('|')[1],
+                        changeMonth: true,
+                        changeYear: true,
+                        minDate: new Date(1900, 1 - 1, 1),
+                        maxDate: "-1D",
+                });
+
+	});
 });
 
 </script>
@@ -35,23 +46,19 @@ $(document).ready(function() {
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('gender', 'Gender') }}
-        {{ Form::select('gender', array('' => 'Please select...', 'M' => 'Male', 'F' => 'Female', 'U' => 'Undisclosed')) }}
-{{ Form::closeGroup() }}
-
-{{ Form::openGroup('dob', 'Date of birth') }}
-        {{ Form::text('dob') }}
+        {{ Form::select('gender', $gender_options) }}
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('dateformat', 'Date format') }}
-        {{ Form::select('dateformat', array(
-                '' => 'Please select...',
-                'd-M-Y|dd-M-yy' => 'Day-Month-Year',
-                'M-d-Y|M-dd-yy' => 'Month-Day-Year',
-                'Y-M-d|yy-M-dd' => 'Year-Month-Day')) }}
+        {{ Form::select('dateformat', $dateformat_options) }}
+{{ Form::closeGroup() }}
+
+{{ Form::openGroup('dob', 'Date of birth') }}
+        {{ Form::text('dob', $dob) }}
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('timezone', 'Timezone') }}
-        {{ Form::select('timezone', array('' => 'Please select...', 'India' => 'India')) }}
+        {{ Form::select('timezone', $timezone_options) }}
 {{ Form::closeGroup() }}
 
 {{ Form::submit('Submit') }}

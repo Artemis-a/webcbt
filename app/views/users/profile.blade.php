@@ -34,9 +34,6 @@ $(document).ready(function() {
         <td>Email</td><td>:</td><td>{{ $user->email }}</td>
 </tr>
 <tr>
-        <td>Date of birth</td><td>:</td><td>{{ $user->dob }}</td>
-</tr>
-<tr>
         <td>Gender</td><td>:</td>
         <td>
                 @if ($user->gender == 'M')
@@ -65,7 +62,10 @@ $(document).ready(function() {
         </td>
 </tr>
 <tr>
-        <td>Timezone</td><td>:</td><td>{{ $user->timezone }}</td>
+        <td>Date of birth</td><td>:</td><td>{{ $dob }}</td>
+</tr>
+<tr>
+        <td>Timezone</td><td>:</td><td>{{ $timezone_options[$user->timezone] }}</td>
 </tr>
 <tr>
         <td>Created</td><td>:</td><td>{{ $user->created_at }}</td>
