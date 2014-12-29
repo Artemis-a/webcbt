@@ -14,6 +14,7 @@
         {{ HTML::style('css/jquery-ui.min.css') }}
         {{ HTML::style('css/jquery-ui.structure.min.css') }}
         {{ HTML::style('css/jquery-ui.theme.min.css') }}
+	{{ HTML::style('css/jquery-ui-timepicker-addon.css') }}
         {{ HTML::script('js/jquery-1.11.1.min.js') }}
         {{ HTML::script('js/jquery-ui.min.js') }}
 
