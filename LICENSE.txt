@@ -1,5 +1,3 @@
-{{--
-
 The MIT License (MIT)
 
 WebCBT - Web based Cognitive Behavioral Therapy tool
@@ -25,39 +23,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
---}}
-
-@extends('layouts.master')
-
-@section('define')
-
-@endsection
-
-@section('head')
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-});
-
-</script>
-
-@stop
-
-@section('page-title', 'Edit Feeling')
-
-@section('content')
-
-{{ Form::model($feeling) }}
-
-{{ Form::openGroup('name', 'Name') }}
-        {{ Form::text('name') }}
-{{ Form::closeGroup() }}
-
-{{ Form::submit('Submit') }}
-{{ HTML::linkAction('FeelingsController@getIndex', 'Cancel') }}
-
-{{ Form::close() }}
-
-@stop
