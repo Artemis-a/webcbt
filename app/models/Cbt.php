@@ -57,7 +57,8 @@ class Cbt extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
+	protected $guarded = ['id', 'user_id', 'is_resolved',
+		'created_at', 'updated_at', 'deleted_at'];
 
 	/* Model relationships */
 

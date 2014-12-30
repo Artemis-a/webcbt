@@ -89,7 +89,8 @@ class CbtsController extends BaseController {
                         /* Create a CBT entry */
                         $cbt_data = array(
                                 'date' => $date,
-                                'situation' => $input['situation']
+                                'situation' => $input['situation'],
+                                'is_resolved' => 0,
                         );
                         $cbt = Cbt::create($cbt_data);
 			if (!$cbt)
@@ -344,4 +345,57 @@ class CbtsController extends BaseController {
                 }
         }
 
+        public function getResolved($id)
+        {
+		$cbt = Cbt::find($id);
+                if (!$cbt)
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Cbt exercise not found.');
+                }
+
+                if ($cbt['user_id'] != Auth::id())
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Invalid access.');
+                }
+
+                $cbt->is_resolved = 1;
+
+                if ($cbt->save())
+                {
+	                return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-success', 'CBT exercise marked as resolved.');
+                } else {
+	                return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Failed to mark CBT exercise as resolved.');
+                }
+        }
+
+        public function getUnresolved($id)
+        {
+		$cbt = Cbt::find($id);
+                if (!$cbt)
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Cbt exercise not found.');
+                }
+
+                if ($cbt['user_id'] != Auth::id())
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Invalid access.');
+                }
+
+                $cbt->is_resolved = 0;
+
+                if ($cbt->save())
+                {
+	                return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-success', 'CBT exercise marked as unresolved.');
+                } else {
+	                return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Failed to mark CBT exercise as unresolved.');
+                }
+        }
 }

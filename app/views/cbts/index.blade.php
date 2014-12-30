@@ -59,6 +59,7 @@ $(document).ready(function() {
                         <th>Feelings</th>
                         <th>Physical Symptoms</th>
                         <th>Behaviours</th>
+                        <th>Resolved</th>
                         <th></th>
                 </tr>
         </thead>
@@ -126,6 +127,13 @@ $(document).ready(function() {
                                 </ul>
                         </td>
                         <td>
+                                @if ($cbt['is_resolved'] == 1)
+                                        Yes
+                                @else
+                                        No
+                                @endif
+                        </td>
+                        <td>
                                 <!-- Split button -->
                                 <div class="btn-group">
                                 <button type="button" class="btn btn-primary">Actions</button>
@@ -142,7 +150,23 @@ $(document).ready(function() {
                                                 array('class' => '')) }}
                                 </li>
                                 <li><a href="#">Show analysis</a></li>
-                                <li><a href="#">Mark as resolved</a></li>
+                                @if ($cbt['is_resolved'] == 0)
+                                        <li>
+                                        {{ HTML::linkAction(
+                                                'CbtsController@getResolved',
+                                                'Mark as resolved',
+                                                array($cbt['id']),
+                                                array('class' => '')) }}
+                                        </li>
+                                @else
+                                        <li>
+                                        {{ HTML::linkAction(
+                                                'CbtsController@getUnresolved',
+                                                'Mark as unresolved',
+                                                array($cbt['id']),
+                                                array('class' => '')) }}
+                                        </li>
+                                @endif
                                 <li class="divider"></li>
                                 <li><a href="#">Edit exercise</a></li>
                                 <li><a href="#">Delete exercise</a></li>
