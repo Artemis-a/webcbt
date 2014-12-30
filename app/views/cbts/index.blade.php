@@ -153,23 +153,39 @@ $(document).ready(function() {
                                 @if ($cbt['is_resolved'] == 0)
                                         <li>
                                         {{ HTML::linkAction(
-                                                'CbtsController@getResolved',
+                                                'CbtsController@putResolved',
                                                 'Mark as resolved',
                                                 array($cbt['id']),
-                                                array('class' => '')) }}
+                                                array('class' => '', 'data-method' => 'PUT')) }}
                                         </li>
                                 @else
                                         <li>
                                         {{ HTML::linkAction(
-                                                'CbtsController@getUnresolved',
+                                                'CbtsController@putUnresolved',
                                                 'Mark as unresolved',
                                                 array($cbt['id']),
-                                                array('class' => '')) }}
+                                                array('class' => '', 'data-method' => 'PUT')) }}
                                         </li>
                                 @endif
                                 <li class="divider"></li>
-                                <li><a href="#">Edit exercise</a></li>
-                                <li><a href="#">Delete exercise</a></li>
+                                <li>
+                                        {{ HTML::linkAction(
+                                                'CbtsController@getEdit',
+                                                'Edit exercise',
+                                                array($cbt['id']),
+                                                array('class' => '')) }}
+                                </li>
+                                <li>
+                                        {{ HTML::linkAction(
+                                                'CbtsController@deleteDestroy',
+                                                'Delete exercise',
+                                                array($cbt['id']),
+                                                array(
+                                                        'class' => '',
+                                                        'data-method' => 'DELETE',
+                                                        'data-confirm' => 'Are you sure you want to delete the CBT exercise ?'
+                                                )) }}
+                                </li>
                                 </ul>
                                 </div>
                         </td>

@@ -60,6 +60,9 @@ THE SOFTWARE.
 	<!-- Chart.js -->
         {{ HTML::script('js/Chart.min.js') }}
 
+	<!-- jQuery scripting adapter for links -->
+        {{ HTML::script('js/rails.js') }}
+
         <!-- WARNING ! This is a assignment statement ! -->
         @if ($time = rand(0, 1000)) @endif
 

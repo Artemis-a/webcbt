@@ -345,7 +345,7 @@ class CbtsController extends BaseController {
                 }
         }
 
-        public function getResolved($id)
+        public function putResolved($id)
         {
 		$cbt = Cbt::find($id);
                 if (!$cbt)
@@ -372,7 +372,7 @@ class CbtsController extends BaseController {
                 }
         }
 
-        public function getUnresolved($id)
+        public function putUnresolved($id)
         {
 		$cbt = Cbt::find($id);
                 if (!$cbt)
@@ -396,6 +396,35 @@ class CbtsController extends BaseController {
                 } else {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to mark CBT exercise as unresolved.');
+                }
+        }
+
+        public function getEdit($id)
+        {
+        }
+
+        public function deleteDestroy($id)
+        {
+		$cbt = Cbt::find($id);
+                if (!$cbt)
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Cbt exercise not found.');
+                }
+
+                if ($cbt['user_id'] != Auth::id())
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Invalid access.');
+                }
+
+                if ($cbt->delete())
+                {
+	                return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-success', 'CBT exercise deleted successfully.');
+                } else {
+	                return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Failed to delete CBT exercise.');
                 }
         }
 }
