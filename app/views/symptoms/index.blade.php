@@ -81,10 +81,14 @@ $(document).ready(function() {
                                 <span class="link-pad"></span>
 
                                 {{ HTML::decode(HTML::linkAction(
-                                        'SymptomsController@getDelete',
+                                        'SymptomsController@deleteDestroy',
                                         '<i class="fa fa-fw fa-trash"></i> Delete',
                                         array($symptom['id']),
-                                        array('class' => 'no-underline'))) }}
+                                        array(
+                                                'class' => '',
+                                                'data-method' => 'DELETE',
+                                                'data-confirm' => 'Are you sure you want to delete the physical symptom ?'
+                                        ))) }}
                         </td>
                 </tr>
                 @endforeach

@@ -134,7 +134,7 @@ class SymptomsController extends BaseController {
                 }
         }
 
-        public function getDelete($id)
+        public function deleteDestroy($id)
         {
                 $data = Symptom::curuser()->find($id);
 
@@ -153,15 +153,14 @@ class SymptomsController extends BaseController {
                 }
 
                 /* Delete a symptom */
-		if (!$data->delete())
+		if ($data->delete())
 		{
-		        return Redirect::back()->withInput()
+                        return Redirect::action('SymptomsController@getIndex')
+                                ->with('alert-success', 'Physical symptom deleted successfully.');
+                } else {
+		        return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete physical symptom.');
 		}
-
-                /* Everything ok */
-                return Redirect::action('SymptomsController@getIndex')
-                        ->with('alert-success', 'Physical symptom successfully deleted.');
         }
 
         public function getStats($id)

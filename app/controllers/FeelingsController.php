@@ -134,7 +134,7 @@ class FeelingsController extends BaseController {
                 }
         }
 
-        public function getDelete($id)
+        public function deleteDestroy($id)
         {
                 $data = Feeling::curuser()->find($id);
 
@@ -153,15 +153,14 @@ class FeelingsController extends BaseController {
                 }
 
                 /* Delete a feeling */
-		if (!$data->delete())
-		{
-		        return Redirect::back()->withInput()
+		if ($data->delete())
+                {
+                        return Redirect::action('FeelingsController@getIndex')
+                                ->with('alert-success', 'Feeling deleted successfully.');
+                } else {
+		        return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete feeling.');
 		}
-
-                /* Everything ok */
-                return Redirect::action('FeelingsController@getIndex')
-                        ->with('alert-success', 'Feeling successfully deleted.');
         }
 
         public function getStats($id)
