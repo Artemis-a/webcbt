@@ -29,6 +29,8 @@
 
 class CbtThoughtDistortion extends Eloquent {
 
+	use SoftDeletingTrait;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -41,7 +43,7 @@ class CbtThoughtDistortion extends Eloquent {
 	 *
 	 * @var array
 	 */
-        protected $hidden = [];
+        protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
 	/**
 	 * The attributes that can be mass assigned
@@ -55,9 +57,7 @@ class CbtThoughtDistortion extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id'];
-
-	public $timestamps = false;
+	protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
 	public function cbtThought()
 	{

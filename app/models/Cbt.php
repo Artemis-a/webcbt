@@ -29,6 +29,8 @@
 
 class Cbt extends Eloquent {
 
+	use SoftDeletingTrait;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -56,8 +58,6 @@ class Cbt extends Eloquent {
 	 * @var array
 	 */
 	protected $guarded = ['id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
-
-	use SoftDeletingTrait;
 
 	/* Model relationships */
 

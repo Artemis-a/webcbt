@@ -29,6 +29,8 @@
 
 class Symptom extends Eloquent {
 
+	use SoftDeletingTrait;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -56,8 +58,6 @@ class Symptom extends Eloquent {
 	 * @var array
 	 */
 	protected $guarded = ['id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
-
-	use SoftDeletingTrait;
 
 	public function user()
 	{

@@ -29,6 +29,8 @@
 
 class Distortion extends Eloquent {
 
+	use SoftDeletingTrait;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -41,7 +43,7 @@ class Distortion extends Eloquent {
 	 *
 	 * @var array
 	 */
-        protected $hidden = [];
+        protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
 	/**
 	 * The attributes that can be mass assigned
@@ -55,6 +57,6 @@ class Distortion extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id'];
+	protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
 }
