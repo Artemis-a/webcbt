@@ -59,10 +59,9 @@ THE SOFTWARE.
 	<!-- Chart.js -->
         {{ HTML::script('js/Chart.min.js') }}
 
-        <!-- WARNING ! This is a assignment statement ! -->
-        @if ($time = rand(0, 1000)) @endif
-
         <!-- Custom CSS -->
+        @define $time = rand(0, 1000)
+
         {{ HTML::style('css/sb-admin.css?' . $time) }}
         {{ HTML::style('css/style.css?' . $time) }}
 

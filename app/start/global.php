@@ -82,13 +82,9 @@ require app_path().'/filters.php';
 
 /*
 |--------------------------------------------------------------------------
-| WEBCBT NOTICE : Custom form macros
+| WEBCBT NOTICE : Custom includes
 |--------------------------------------------------------------------------
 */
 
-Form::macro('rawLabel', function($name, $value = null, $options = array())
-{
-	return '<label>' . $name . '</label>';
-});
-
+require app_path().'/libraries/extensions.php';
 require app_path().'/libraries/timezone.php';
