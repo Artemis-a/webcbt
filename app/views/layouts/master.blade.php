@@ -117,7 +117,7 @@ THE SOFTWARE.
                         <li>
 				{{ HTML::decode(HTML::linkAction(
                                 'SymptomsController@getIndex',
-                                '<i class="fa fa-fw fa-eyedropper"></i> Physical symptoms')) }}
+                                '<i class="fa fa-fw fa-eyedropper"></i> Symptoms')) }}
 			</li>
                         <li>
 				{{ HTML::decode(HTML::linkAction(
