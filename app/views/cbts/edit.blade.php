@@ -160,7 +160,7 @@ $(document).ready(function() {
 {{ Form::model($cbt) }}
 
 {{ Form::openGroup('date', 'Date and Time') }}
-        {{ Form::text('date') }}
+        {{ Form::text('date', $date) }}
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('situation', 'Situation') }}

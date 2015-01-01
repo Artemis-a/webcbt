@@ -69,7 +69,7 @@ $(document).ready(function() {
                         <td>
                                 {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), explode('|', $dateformat)[0]) }}
                                 <br />
-                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), 'H:i A') }}
+                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), 'h:i A') }}
                         </td>
                         <td>{{ $cbt['situation'] }}</td>
                         <td>

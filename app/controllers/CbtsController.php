@@ -69,7 +69,7 @@ class CbtsController extends BaseController {
                 $input = Input::all();
 
                 $temp = date_create_from_format(
-                        explode('|', $this->dateformat)[0] . ' H:i A',
+                        explode('|', $this->dateformat)[0] . ' h:i A',
                         $input['date']
                 );
                 $date = date_format($temp, 'Y-m-d H:i:s');
@@ -414,6 +414,9 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Invalid access.');
                 }
 
+                $temp = date_create_from_format('Y-m-d H:i:s', $cbt->date);
+                $date = date_format($temp, explode('|', $this->dateformat)[0] . ' h:i A');
+
                 $feelings_list = array(0 => 'Please select...') +
                         Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
@@ -421,10 +424,215 @@ class CbtsController extends BaseController {
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.edit')
+                        ->with('date', $date)
                         ->with('dateformat', $this->dateformat)
                         ->with('cbt', $cbt)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list);
+        }
+
+        public function postEdit($id)
+        {
+		$cbt = Cbt::find($id);
+                if (!$cbt)
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Cbt exercise not found.');
+                }
+
+                if ($cbt['user_id'] != Auth::id())
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Invalid access.');
+                }
+
+                $input = Input::all();
+
+                $temp = date_create_from_format(
+                        explode('|', $this->dateformat)[0] . ' h:i A',
+                        $input['date']
+                );
+
+                $date = date_format($temp, 'Y-m-d H:i:s');
+
+                $rules = array(
+                        'date' => 'required|date',
+                        'situation' => 'required|min:3'
+                );
+
+                $validator = Validator::make($input, $rules);
+
+                if ($validator->fails())
+                {
+                        return Redirect::back()->withInput()->withErrors($validator);
+                } else {
+
+                        /* Update CBT exercise */
+                        $cbt->date = $date;
+                        $cbt->situation = $input['situation'];
+                        if (!$cbt->save())
+                        {
+                                return Redirect::back()->withInput()
+                                        ->with('alert-danger', 'Failed to update CBT exercise.');
+                        }
+
+                        /* Update old and add new thoughts */
+                        $new_thoughts = array();
+                        foreach ($input['thoughts'] as $index => $row)
+                        {
+                                if ($index < 100)
+                                {
+                                        /* If index < 100 then its a new thought */
+                                        $row = trim($row);
+                                        if (strlen($row) > 0)
+                                        {
+                                                $new_thoughts[] = array(
+                                                        'thought' => $row,
+                                                        'is_challenged' => 0,
+                                                        'dispute' => '',
+                                                        'balanced_thoughts' => '',
+                                                );
+                                        }
+                                } else {
+                                        /* if index >= 100 then its a old thought */
+                                        $thought = CbtThought::find($index);
+
+                                        /* Validate thought */
+                                        if (!$thought)
+                                        {
+                                                continue;
+                                        }
+                                        if ($thought->cbt_id != $id)
+                                        {
+                                                continue;
+                                        }
+
+                                        $row = trim($row);
+                                        if (strlen($row) <= 0)
+                                        {
+                                                /* If empty string, delete thought */
+                                                if (!$thought->delete())
+                                                {
+                                                        return Redirect::back()->withInput()
+                                                                ->with('alert-danger', 'Failed to delete old thoughts.');
+                                                }
+                                        } else {
+                                                /* If changed, update thought */
+                                                if ($thought->thought == $row)
+                                                {
+                                                        /* No changes in the thought */
+                                                        continue;
+                                                }
+                                                /* Update thought */
+                                                $thought->thought = $row;
+                                                if (!$thought->save())
+                                                {
+                                                        return Redirect::back()->withInput()
+                                                                ->with('alert-danger', 'Failed to update old thoughts.');
+                                                }
+                                        }
+                                }
+                        }
+
+                        foreach ($new_thoughts as $data)
+                        {
+                                $cbtThought = new CbtThought($data);
+                                $cbtThought->cbt()->associate($cbt);
+                                if (!$cbtThought->save())
+                                {
+			                return Redirect::back()->withInput()
+                                                ->with('alert-danger', 'Failed to add thoughts.');
+                                }
+                        }
+
+                        /* Delete old and then add feelings */
+                        CbtFeeling::where('cbt_id', '=', $id)->delete();
+
+                        $feelings = array();
+                        $feelingsintensity = $input['feelingsintensity'];
+                        foreach ($input['feelings'] as $row_id => $row)
+                        {
+                                if (!empty($row))
+                                {
+                                        $feelings[] = array(
+                                                'feeling_id' => $row,
+                                                'percent' => $feelingsintensity[$row_id],
+                                                'when' => 'B',
+                                        );
+                                }
+                        }
+
+                        foreach ($feelings as $data)
+                        {
+                                $cbt_feeling = new CbtFeeling($data);
+                                $cbt_feeling->cbt()->associate($cbt);
+                                if (!$cbt_feeling->save())
+                                {
+			                return Redirect::back()->withInput()
+                                                ->with('alert-danger', 'Failed to add feelings.');
+                                }
+                        }
+
+                        /* Delete old and then add symptom */
+                        CbtSymptom::where('cbt_id', '=', $id)->delete();
+
+                        $symptoms = array();
+                        $symptomsintensity = $input['symptomsintensity'];
+                        foreach ($input['symptoms'] as $row_id => $row)
+                        {
+                                if (!empty($row))
+                                {
+                                        $symptoms[] = array(
+                                                'symptom_id' => $row,
+                                                'percent' => $symptomsintensity[$row_id],
+                                                'when' => 'B',
+                                        );
+                                }
+                        }
+
+                        foreach ($symptoms as $data)
+                        {
+                                $cbt_symptom = new CbtSymptom($data);
+                                $cbt_symptom->cbt()->associate($cbt);
+                                if (!$cbt_symptom->save())
+                                {
+			                return Redirect::back()->withInput()
+                                                ->with('alert-danger', 'Failed to add physical symptom.');
+                                }
+                        }
+
+                        /* Delete old and then add behaviours */
+                        CbtBehaviour::where('cbt_id', '=', $id)->delete();
+
+                        $behaviours = array();
+                        foreach ($input['behaviours'] as $row)
+                        {
+                                $row = trim($row);
+                                if (strlen($row) > 0)
+                                {
+                                        $behaviours[] = array(
+                                                'behaviour' => $row,
+                                                'when' => 'B',
+                                        );
+                                }
+                        }
+
+                        foreach ($behaviours as $data)
+                        {
+                                $cbt_behaviour = new CbtBehaviour($data);
+                                $cbt_behaviour->cbt()->associate($cbt);
+                                if (!$cbt_behaviour->save())
+                                {
+			                return Redirect::back()->withInput()
+                                                ->with('alert-danger', 'Failed to add behaviours.');
+                                }
+                        }
+
+                        /* Everything ok */
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-success', 'CBT exercise updated successfully.');
+                }
+
         }
 
         public function deleteDestroy($id)
