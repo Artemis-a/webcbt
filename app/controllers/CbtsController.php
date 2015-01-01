@@ -89,7 +89,7 @@ class CbtsController extends BaseController {
                         /* Create a CBT entry */
                         $cbt_data = array(
                                 'date' => $date,
-                                'situation' => $input['situation'],
+                                'situation' => ucfirst($input['situation']),
                                 'is_resolved' => 0,
                         );
                         $cbt = Cbt::create($cbt_data);
@@ -107,7 +107,7 @@ class CbtsController extends BaseController {
                                 if (strlen($row) > 0)
                                 {
                                         $thoughts[] = array(
-                                                'thought' => $row,
+                                                'thought' => ucfirst($row),
                                                 'is_challenged' => 0,
                                                 'dispute' => '',
                                                 'balanced_thoughts' => '',
@@ -186,7 +186,7 @@ class CbtsController extends BaseController {
                                 if (strlen($row) > 0)
                                 {
                                         $behaviours[] = array(
-                                                'behaviour' => $row,
+                                                'behaviour' => ucfirst($row),
                                                 'when' => 'B',
                                         );
                                 }
@@ -322,7 +322,7 @@ class CbtsController extends BaseController {
                                 if (strlen($row) > 0)
                                 {
                                         $behaviours[] = array(
-                                                'behaviour' => $row,
+                                                'behaviour' => ucfirst($row),
                                                 'when' => 'A',
                                         );
                                 }
@@ -469,7 +469,7 @@ class CbtsController extends BaseController {
 
                         /* Update CBT exercise */
                         $cbt->date = $date;
-                        $cbt->situation = $input['situation'];
+                        $cbt->situation = ucfirst($input['situation']);
                         if (!$cbt->save())
                         {
                                 return Redirect::back()->withInput()
@@ -487,7 +487,7 @@ class CbtsController extends BaseController {
                                         if (strlen($row) > 0)
                                         {
                                                 $new_thoughts[] = array(
-                                                        'thought' => $row,
+                                                        'thought' => ucfirst($row),
                                                         'is_challenged' => 0,
                                                         'dispute' => '',
                                                         'balanced_thoughts' => '',
@@ -518,13 +518,13 @@ class CbtsController extends BaseController {
                                                 }
                                         } else {
                                                 /* If changed, update thought */
-                                                if ($thought->thought == $row)
+                                                if ($thought->thought == ucfirst($row))
                                                 {
                                                         /* No changes in the thought */
                                                         continue;
                                                 }
                                                 /* Update thought */
-                                                $thought->thought = $row;
+                                                $thought->thought = ucfirst($row);
                                                 if (!$thought->save())
                                                 {
                                                         return Redirect::back()->withInput()
@@ -611,7 +611,7 @@ class CbtsController extends BaseController {
                                 if (strlen($row) > 0)
                                 {
                                         $behaviours[] = array(
-                                                'behaviour' => $row,
+                                                'behaviour' => ucfirst($row),
                                                 'when' => 'B',
                                         );
                                 }
