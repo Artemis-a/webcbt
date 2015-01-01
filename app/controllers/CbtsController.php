@@ -401,6 +401,30 @@ class CbtsController extends BaseController {
 
         public function getEdit($id)
         {
+		$cbt = Cbt::find($id);
+                if (!$cbt)
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Cbt exercise not found.');
+                }
+
+                if ($cbt['user_id'] != Auth::id())
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Invalid access.');
+                }
+
+                $feelings_list = array(0 => 'Please select...') +
+                        Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
+                $symptoms_list = array(0 => 'Please select...') +
+                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
+                return View::make('cbts.edit')
+                        ->with('dateformat', $this->dateformat)
+                        ->with('cbt', $cbt)
+                        ->with('feelings_list', $feelings_list)
+                        ->with('symptoms_list', $symptoms_list);
         }
 
         public function deleteDestroy($id)
