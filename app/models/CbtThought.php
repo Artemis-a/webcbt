@@ -65,4 +65,8 @@ class CbtThought extends Eloquent {
 		return $this->belongsTo('Cbt');
 	}
 
+	public function cbtThoughtDistortions()
+	{
+		return $this->hasMany('CbtThoughtDistortion');
+	}
 }

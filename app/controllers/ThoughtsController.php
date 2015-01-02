@@ -45,7 +45,7 @@ class ThoughtsController extends BaseController {
                 }
 
                 $distortions_list = array(0 => 'Please select...') +
-                        Distortion::orderBy('name', 'ASC')->lists('name', 'id');
+                        Distortion::orderBy('id', 'ASC')->lists('name', 'id');
 
                 /* Everything ok */
                 return View::make('thoughts.dispute')
@@ -80,7 +80,9 @@ class ThoughtsController extends BaseController {
                         return Redirect::back()->withInput()->withErrors($validator);
                 } else {
 
-                        /* Add distortions */
+                        /* Delete old and then add distortions */
+                        CbtThoughtDistortion::where('cbt_thought_id', '=', $id)->delete();
+
                         $distortions = array();
                         foreach ($input['distortions'] as $row)
                         {
