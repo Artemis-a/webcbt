@@ -198,28 +198,35 @@ $(document).ready(function() {
                 </tr>
         </thead>
         <tbody>
-                @for ($i = 0; $i <= $maxRows; $i++)
+                @define $i = 0
+                @foreach ($cbt->cbtFeelings as $feeling)
+                        @if ($feeling->when == 'B')
+                        <tr id="feelings-{{$i}}">
+                                <td>
+                                        {{ Form::openGroup('feelings[' . $i . ']', '') }}
+                                                {{ Form::select('feelings[' . $i . ']', $feelings_list,
+                                                        $feeling->feeling_id) }}
+                                        {{ Form::closeGroup() }}
+                                </td>
+                                <td class="intensity">
+                                        <div id="feelings-intensity-{{$i}}" class="slider-pad"></div>
+                                </td>
+                                <td width="20">
+                                        <div id="feelings-intensity-value-{{$i}}"></div>
+                                </td>
+                                <td width="1">
+                                        {{ Form::openGroup('feelingsintensity[' . $i . ']', '') }}
+                                                {{ Form::hidden('feelingsintensity[' . $i . ']',
+                                                        $feeling->percent) }}
+                                        {{ Form::closeGroup() }}
+                                </td>
+                                @define $i = $i + 1
+                        </tr>
+                        @endif
+                @endforeach
+
+                @for (; $i <= $maxRows; $i++)
                 <tr id="feelings-{{$i}}">
-                @if (isset($cbt->cbtFeelings[$i]) && $cbt->cbtFeelings[$i]->when == 'B')
-                        <td>
-                                {{ Form::openGroup('feelings[' . $i . ']', '') }}
-                                        {{ Form::select('feelings[' . $i . ']', $feelings_list,
-                                                $cbt->cbtFeelings[$i]->feeling_id) }}
-                                {{ Form::closeGroup() }}
-                        </td>
-                        <td class="intensity">
-                                <div id="feelings-intensity-{{$i}}" class="slider-pad"></div>
-                        </td>
-                        <td width="20">
-                                <div id="feelings-intensity-value-{{$i}}"></div>
-                        </td>
-                        <td width="1">
-                                {{ Form::openGroup('feelingsintensity[' . $i . ']', '') }}
-                                        {{ Form::hidden('feelingsintensity[' . $i . ']',
-                                                $cbt->cbtFeelings[$i]->percent) }}
-                                {{ Form::closeGroup() }}
-                        </td>
-                @else
                         <td>
                                 {{ Form::openGroup('feelings[' . $i . ']', '') }}
                                         {{ Form::select('feelings[' . $i . ']', $feelings_list) }}
@@ -236,9 +243,9 @@ $(document).ready(function() {
                                         {{ Form::hidden('feelingsintensity[' . $i . ']') }}
                                 {{ Form::closeGroup() }}
                         </td>
-                @endif
                 </tr>
                 @endfor
+
                 <tr>
                         <td><button type="button" class="btn btn-default" id="add-feelings">add more</button></td>
                 </tr>
@@ -256,28 +263,35 @@ $(document).ready(function() {
                 </tr>
         </thead>
         <tbody>
-                @for ($i = 0; $i <= $maxRows; $i++)
+                @define $i = 0
+                @foreach ($cbt->cbtSymptoms as $symptom)
+                        @if ($symptom->when == 'B')
+                        <tr id="symptoms-{{$i}}">
+                                <td>
+                                        {{ Form::openGroup('symptoms[' . $i . ']', '') }}
+                                                {{ Form::select('symptoms[' . $i . ']', $symptoms_list,
+                                                        $symptom->symptom_id ) }}
+                                        {{ Form::closeGroup() }}
+                                </td>
+                                <td class="intensity">
+                                        <div id="symptoms-intensity-{{$i}}" class="slider-pad"></div>
+                                </td>
+                                <td width="20">
+                                        <div id="symptoms-intensity-value-{{$i}}"></div>
+                                </td>
+                                <td width="1">
+                                        {{ Form::openGroup('symptomsintensity[' . $i . ']', '') }}
+                                                {{ Form::hidden('symptomsintensity[' . $i . ']',
+                                                        $symptom->percent ) }}
+                                        {{ Form::closeGroup() }}
+                                </td>
+                                @define $i = $i + 1
+                        </tr>
+                        @endif
+                @endforeach
+
+                @for (; $i <= $maxRows; $i++)
                 <tr id="symptoms-{{$i}}">
-                @if (isset($cbt->cbtSymptoms[$i]) && $cbt->cbtSymptoms[$i]->when == 'B')
-                        <td>
-                                {{ Form::openGroup('symptoms[' . $i . ']', '') }}
-                                        {{ Form::select('symptoms[' . $i . ']', $symptoms_list,
-                                                $cbt->cbtSymptoms[$i]->symptom_id ) }}
-                                {{ Form::closeGroup() }}
-                        </td>
-                        <td class="intensity">
-                                <div id="symptoms-intensity-{{$i}}" class="slider-pad"></div>
-                        </td>
-                        <td width="20">
-                                <div id="symptoms-intensity-value-{{$i}}"></div>
-                        </td>
-                        <td width="1">
-                                {{ Form::openGroup('symptomsintensity[' . $i . ']', '') }}
-                                        {{ Form::hidden('symptomsintensity[' . $i . ']',
-                                                $cbt->cbtSymptoms[$i]->percent ) }}
-                                {{ Form::closeGroup() }}
-                        </td>
-                @else
                         <td>
                                 {{ Form::openGroup('symptoms[' . $i . ']', '') }}
                                         {{ Form::select('symptoms[' . $i . ']', $symptoms_list) }}
@@ -294,9 +308,9 @@ $(document).ready(function() {
                                         {{ Form::hidden('symptomsintensity[' . $i . ']') }}
                                 {{ Form::closeGroup() }}
                         </td>
-                @endif
                 </tr>
                 @endfor
+
                 <tr>
                         <td><button type="button" class="btn btn-default" id="add-symptoms">add more</button></td>
                 </tr>
@@ -305,17 +319,27 @@ $(document).ready(function() {
 
 <!-- Behaviours -->
 {{ Form::label('Behaviours') }}
-@for ($i = 0; $i <= $maxRows; $i++)
+
+@define $i = 0
+@foreach ($cbt->cbtBehaviours as $behaviour)
+        @if ($behaviour->when == 'B')
+        <div id="behaviours-{{$i}}">
+                {{ Form::openGroup('behaviours[' . $i . ']', '') }}
+                        {{ Form::text('behaviours[' . $i . ']', $behaviour->behaviour) }}
+                {{ Form::closeGroup() }}
+                @define $i = $i + 1
+        </div>
+        @endif
+@endforeach
+
+@for (; $i <= $maxRows; $i++)
 <div id="behaviours-{{$i}}">
         {{ Form::openGroup('behaviours[' . $i . ']', '') }}
-                @if (isset($cbt->cbtBehaviours[$i]) && $cbt->cbtBehaviours[$i]->when == 'B')
-                        {{ Form::text('behaviours[' . $i . ']', $cbt->cbtBehaviours[$i]->behaviour) }}
-                @else
-                        {{ Form::text('behaviours[' . $i . ']') }}
-                @endif
+                {{ Form::text('behaviours[' . $i . ']') }}
         {{ Form::closeGroup() }}
 </div>
 @endfor
+
 <div><button type="button" class="btn btn-default" id="add-behaviours">add more</button></div>
 
 <br />

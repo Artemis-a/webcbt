@@ -145,6 +145,7 @@ $(document).ready(function() {
 
 {{ Form::open() }}
 
+<!-- Feelings -->
 <table class="table borderless compressed">
         <thead>
                 <tr>
@@ -209,6 +210,7 @@ $(document).ready(function() {
         </tbody>
 </table>
 
+<!-- Symptoms -->
 <table class="table borderless compressed">
         <thead>
                 <tr>
@@ -273,7 +275,7 @@ $(document).ready(function() {
         </tbody>
 </table>
 
-
+<!-- Behaviours -->
 {{ Form::label('New Behaviours') }}
 
 @define $i = 0
