@@ -66,7 +66,7 @@ $(document).ready(function() {
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
                                         'SymptomsController@getStats',
-                                        '<i class="fa fa-fw fa-list"></i> Stats',
+                                        '<i class="fa fa-fw fa-bar-chart-o"></i> Stats',
                                         array($symptom['id']),
                                         array('class' => 'no-underline'))) }}
 
