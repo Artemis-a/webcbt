@@ -780,7 +780,7 @@ $(document).ready(function() {
 {{ Form::label('More balanced thoughts') }}
 @define $balanced_thoughts = unserialize($thought->balanced_thoughts)
 @define $i = 0
-@if (isset($balanced_thoughts))
+@if ($balanced_thoughts)
 @foreach ($balanced_thoughts as $balanced_thought)
 <div id="balancedthoughts-{{$i}}">
         {{ Form::openGroup('balancedthoughts[' . $i . ']', '') }}
