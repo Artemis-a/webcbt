@@ -43,15 +43,22 @@ THE SOFTWARE.
 $(document).ready(function() {
 
         /************ Hide extra rows ************/
+        var addFeelingsCounter = 0;
+        var addSymptomsCounter = 0;
+        var addBehavioursCounter = 0;
+
         for (var i = {{$hideStart}}; i <= {{$maxRows}}; i++) {
                 if ($("[name='feelings[" + i + "]']").val() == 0) {
                         $("#feelings-" + i).hide();
+                        addFeelingsCounter++;
                 }
                 if ($("[name='symptoms[" + i + "]']").val() == 0) {
                         $("#symptoms-" + i).hide();
+                        addSymptomsCounter++;
                 }
                 if ($("[name='behaviours[" + i + "]']").val() == "") {
                         $("#behaviours-" + i).hide();
+                        addBehavioursCounter++;
                 }
         }
 
@@ -72,7 +79,9 @@ $(document).ready(function() {
                 $("#feelings-intensity-value-" + i).text($("input[name='feelingsintensity[" + i + "]']").val());
         }
 
-        var addFeelingsCounter = {{$hideStart}};
+        if (addFeelingsCounter < {{$hideStart}}) {
+                addFeelingsCounter = {{$hideStart}};
+        }
         $("#add-feelings").click(function() {
                 for (var i = 0; i <= {{$showCount}}; i++) {
                         if (addFeelingsCounter > {{ $maxRows }}) {
@@ -101,7 +110,9 @@ $(document).ready(function() {
                 $("#symptoms-intensity-value-" + i).text($("input[name='symptomsintensity[" + i + "]']").val());
         }
 
-        var addSymptomsCounter = {{$hideStart}};
+        if (addSymptomsCounter < {{$hideStart}}) {
+                addSymptomsCounter = {{$hideStart}};
+        }
         $("#add-symptoms").click(function() {
                 for (var i = 0; i <= {{$showCount}}; i++) {
                         if (addSymptomsCounter > {{ $maxRows }}) {
@@ -114,7 +125,9 @@ $(document).ready(function() {
         });
 
         /************ Behaviours ************/
-        var addBehavioursCounter = {{$hideStart}};
+        if (addBehavioursCounter < {{$hideStart}}) {
+                addBehavioursCounter = {{$hideStart}};
+        }
         $("#add-behaviours").click(function() {
                 for (var i = 0; i <= {{$showCount}}; i++) {
                         if (addBehavioursCounter > {{ $maxRows }}) {
