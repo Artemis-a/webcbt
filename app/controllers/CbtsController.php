@@ -673,4 +673,36 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Failed to delete CBT exercise.');
                 }
         }
+
+        public function getAnalysis($id)
+        {
+		$cbt = Cbt::find($id);
+                if (!$cbt)
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Cbt exercise not found.');
+                }
+
+                if ($cbt['user_id'] != Auth::id())
+                {
+                        return Redirect::action('CbtsController@getIndex')
+                                ->with('alert-danger', 'Invalid access.');
+                }
+
+                $temp = date_create_from_format('Y-m-d H:i:s', $cbt->date);
+                $date = date_format($temp, explode('|', $this->dateformat)[0] . ' h:i A');
+
+                $feelings_list = array(0 => 'Please select...') +
+                        Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
+                $symptoms_list = array(0 => 'Please select...') +
+                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
+                return View::make('cbts.analysis')
+                        ->with('date', $date)
+                        ->with('dateformat', $this->dateformat)
+                        ->with('cbt', $cbt)
+                        ->with('feelings_list', $feelings_list)
+                        ->with('symptoms_list', $symptoms_list);
+        }
 }

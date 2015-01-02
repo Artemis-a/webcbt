@@ -149,7 +149,13 @@ $(document).ready(function() {
                                                 array($cbt['id']),
                                                 array('class' => '')) }}
                                 </li>
-                                <li><a href="#">Show analysis</a></li>
+                                <li>
+                                        {{ HTML::linkAction(
+                                                'CbtsController@getAnalysis',
+                                                'Show analysis',
+                                                array($cbt['id']),
+                                                array('class' => '')) }}
+                                </li>
                                 @if ($cbt['is_resolved'] == 0)
                                         <li>
                                         {{ HTML::linkAction(
