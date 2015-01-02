@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 @stop
 
-@section('page-title', 'Feelings')
+@section('page-title', 'Feelings Statistics')
 
 @section('content')
 
@@ -54,51 +54,95 @@ $(document).ready(function() {
 <br />
 <br />
 
-<div class="secondary-title">{{ $feeling['name'] }} Stats</div>
-
 <div>
-	<canvas id="canvas" height="" width="500"></canvas>
+        <div class="chart-title">Before Statistics - {{ $feeling->name }}</div>
+	<canvas id="beforeChart"></canvas>
+</div>
+<br /><br />
+<div>
+        <div class="chart-title">After Statistics - {{ $feeling->name }}</div>
+	<canvas id="afterChart"></canvas>
 </div>
 
 <script>
 
-var dataset = [
-@foreach ($rawdataset as $data)
-        "{{ $data['percent']}}",
+var before_dataset = [
+@foreach ($before_dataset as $data)
+        "{{ $data->percent }}",
 @endforeach
 ];
 
-var labelset = [
-@foreach ($rawdataset as $data)
-        "{{ $count++ }}",
+var before_labelset = [
+@foreach ($before_dataset as $data)
+        "{{ date_format(date_create_from_format('Y-m-d H:i:s', $data->date), explode('|', $dateformat)[0]) }}",
 @endforeach
 ];
 
-var barChartData = {
-	labels : labelset,
+var after_dataset = [
+@foreach ($after_dataset as $data)
+        "{{ $data->percent }}",
+@endforeach
+];
+
+var after_labelset = [
+@foreach ($after_dataset as $data)
+        "{{ date_format(date_create_from_format('Y-m-d H:i:s', $data->date), explode('|', $dateformat)[0]) }}",
+@endforeach
+];
+
+var beforeChartData = {
+	labels : before_labelset,
 	datasets : [
 		{
-			label: "{{ $feeling['name'] }}",
+			label: "{{ $feeling->name }}",
 			fillColor : "rgba(151,187,205,0.4)",
 			strokeColor : "rgba(151,187,205,1)",
 			pointColor : "rgba(151,187,205,1)",
 			pointStrokeColor : "#fff",
 			pointHighlightFill : "#fff",
 			pointHighlightStroke : "rgba(151,187,205,1)",
-			data : dataset
+			data : before_dataset
+		}
+	]
+
+}
+
+var afterChartData = {
+	labels : after_labelset,
+	datasets : [
+		{
+			label: "{{ $feeling->name }}",
+			fillColor : "rgba(151,187,205,0.4)",
+			strokeColor : "rgba(151,187,205,1)",
+			pointColor : "rgba(151,187,205,1)",
+			pointStrokeColor : "#fff",
+			pointHighlightFill : "#fff",
+			pointHighlightStroke : "rgba(151,187,205,1)",
+			data : after_dataset
 		}
 	]
 
 }
 
 window.onload = function(){
-	var ctx = document.getElementById("canvas").getContext("2d");
-	window.barChart = new Chart(ctx).Bar(barChartData, {
+	var beforeCtx = document.getElementById("beforeChart").getContext("2d");
+	window.beforeChart = new Chart(beforeCtx).Bar(beforeChartData, {
 		responsive: true,
                 scaleOverride : true,
                 scaleSteps : 10,
                 scaleStepWidth : 1,
-                scaleStartValue : 0
+                scaleStartValue : 0,
+                barValueSpacing: 5
+	});
+
+	var afterCtx = document.getElementById("afterChart").getContext("2d");
+	window.afterChart = new Chart(afterCtx).Bar(afterChartData, {
+		responsive: true,
+                scaleOverride : true,
+                scaleSteps : 10,
+                scaleStepWidth : 1,
+                scaleStartValue : 0,
+                barValueSpacing: 5
 	});
 }
 

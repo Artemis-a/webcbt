@@ -165,24 +165,40 @@ class FeelingsController extends BaseController {
 
         public function getStats($id)
         {
-		$data = Feeling::curuser()->find($id);
+		$feeling = Feeling::curuser()->find($id);
 
-                if (!$data)
+                if (!$feeling)
                 {
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Feeling not found.');
                 }
 
-                $rawdataset = CbtFeeling::where('feeling_id', '=', $id)->get();
+                $user = User::find(Auth::id());
 
-                if ($rawdataset->count() <= 0)
+                $before_dataset = CbtFeeling::where('feeling_id', '=', $id)
+                        ->where('when', '=', 'B')
+                        ->leftJoin('cbts', 'cbt_feelings.cbt_id', '=', 'cbts.id')
+                        ->orderBy('date', 'ASC')
+                        ->select('cbt_feelings.*', 'cbts.date as date')
+                        ->get();
+
+                $after_dataset = CbtFeeling::where('feeling_id', '=', $id)
+                        ->where('when', '=', 'A')
+                        ->leftJoin('cbts', 'cbt_feelings.cbt_id', '=', 'cbts.id')
+                        ->orderBy('date', 'ASC')
+                        ->select('cbt_feelings.*', 'cbts.date as date')
+                        ->get();
+
+                if ($before_dataset->count() <= 0 && $after_dataset->count() <= 0)
                 {
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'No data.');
                 }
 
                 return View::make('feelings.stats')
-                        ->with('feeling', $data)
-                        ->with('rawdataset', $rawdataset);
+                        ->with('dateformat', $user->dateformat)
+                        ->with('feeling', $feeling)
+                        ->with('before_dataset', $before_dataset)
+                        ->with('after_dataset', $after_dataset);
         }
 }

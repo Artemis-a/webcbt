@@ -165,24 +165,40 @@ class SymptomsController extends BaseController {
 
         public function getStats($id)
         {
-		$data = Symptom::curuser()->find($id);
+		$symptom = Symptom::curuser()->find($id);
 
-                if (!$data)
+                if (!$symptom)
                 {
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Physical symptom not found.');
                 }
 
-                $rawdataset = CbtSymptom::where('symptom_id', '=', $id)->get();
+                $user = User::find(Auth::id());
 
-                if ($rawdataset->count() <= 0)
+                $before_dataset = CbtSymptom::where('symptom_id', '=', $id)
+                        ->where('when', '=', 'B')
+                        ->leftJoin('cbts', 'cbt_symptoms.cbt_id', '=', 'cbts.id')
+                        ->orderBy('date', 'ASC')
+                        ->select('cbt_symptoms.*', 'cbts.date as date')
+                        ->get();
+
+                $after_dataset = CbtSymptom::where('symptom_id', '=', $id)
+                        ->where('when', '=', 'A')
+                        ->leftJoin('cbts', 'cbt_symptoms.cbt_id', '=', 'cbts.id')
+                        ->orderBy('date', 'ASC')
+                        ->select('cbt_symptoms.*', 'cbts.date as date')
+                        ->get();
+
+                if ($before_dataset->count() <= 0 && $after_dataset->count() <= 0)
                 {
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'No data.');
                 }
 
                 return View::make('symptoms.stats')
-                        ->with('symptom', $data)
-                        ->with('rawdataset', $rawdataset);
+                        ->with('dateformat', $user->dateformat)
+                        ->with('symptom', $symptom)
+                        ->with('before_dataset', $before_dataset)
+                        ->with('after_dataset', $after_dataset);
         }
 }

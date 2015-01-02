@@ -208,3 +208,8 @@ div.tab-content-title {
 }
 
 /******** END bhoechie tab ********/
+
+.chart-title {
+        text-align: center;
+        padding-bottom: 20px;
+}
