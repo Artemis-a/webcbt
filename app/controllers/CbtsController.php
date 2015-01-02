@@ -231,6 +231,8 @@ class CbtsController extends BaseController {
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.postdispute')
+                        ->with('cbt', $cbt)
+                        ->with('dateformat', $this->dateformat)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list);
         }
@@ -262,7 +264,10 @@ class CbtsController extends BaseController {
                         return Redirect::back()->withInput()->withErrors($validator);
                 } else {
 
-                        /* Add feelings */
+                        /* Delete old and then add feelings */
+                        CbtFeeling::where('cbt_id', '=', $id)
+                                ->where('when', '=', 'A')->delete();
+
                         $feelings = array();
                         $feelingsintensity = $input['feelingsintensity'];
                         foreach ($input['feelings'] as $row_id => $row)
@@ -288,7 +293,10 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Add symptoms */
+                        /* Delete old and then add symptoms */
+                        CbtSymptom::where('cbt_id', '=', $id)
+                                ->where('when', '=', 'A')->delete();
+
                         $symptoms = array();
                         $symptomsintensity = $input['symptomsintensity'];
                         foreach ($input['symptoms'] as $row_id => $row)
@@ -314,7 +322,10 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Add behaviours */
+                        /* Delete old and then add behaviours */
+                        CbtBehaviour::where('cbt_id', '=', $id)
+                                ->where('when', '=', 'A')->delete();
+
                         $behaviours = array();
                         foreach ($input['behaviours'] as $row)
                         {
