@@ -85,7 +85,7 @@ $(document).ready(function() {
                                         '<i class="fa fa-fw fa-trash"></i> Delete',
                                         array($symptom['id']),
                                         array(
-                                                'class' => '',
+                                                'class' => 'no-underline',
                                                 'data-method' => 'DELETE',
                                                 'data-confirm' => 'Are you sure you want to delete the physical symptom ?'
                                         ))) }}
