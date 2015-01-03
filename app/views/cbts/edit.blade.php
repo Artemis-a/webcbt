@@ -217,7 +217,7 @@ $(document).ready(function() {
         <tbody>
                 @define $i = 0
                 @foreach ($cbt->cbtFeelings as $feeling)
-                        @if ($feeling->when == 'B')
+                        @if ($feeling->status == 'B')
                         <tr id="feelings-{{$i}}">
                                 <td>
                                         {{ Form::openGroup('feelings[' . $i . ']', '') }}
@@ -282,7 +282,7 @@ $(document).ready(function() {
         <tbody>
                 @define $i = 0
                 @foreach ($cbt->cbtSymptoms as $symptom)
-                        @if ($symptom->when == 'B')
+                        @if ($symptom->status == 'B')
                         <tr id="symptoms-{{$i}}">
                                 <td>
                                         {{ Form::openGroup('symptoms[' . $i . ']', '') }}
@@ -339,7 +339,7 @@ $(document).ready(function() {
 
 @define $i = 0
 @foreach ($cbt->cbtBehaviours as $behaviour)
-        @if ($behaviour->when == 'B')
+        @if ($behaviour->status == 'B')
         <div id="behaviours-{{$i}}">
                 {{ Form::openGroup('behaviours[' . $i . ']', '') }}
                         {{ Form::text('behaviours[' . $i . ']', $behaviour->behaviour) }}

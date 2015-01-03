@@ -96,7 +96,7 @@ $(document).ready(function() {
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtFeelings as $feeling)
-                                        @if ($feeling->when == 'B')
+                                        @if ($feeling->status == 'B')
                                                 <li>
                                                         {{ $feeling->feeling->name }}
                                                         <span class="badge">{{ $feeling->intensity }}</span>
@@ -108,7 +108,7 @@ $(document).ready(function() {
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtSymptoms as $symptom)
-                                        @if ($symptom->when == 'B')
+                                        @if ($symptom->status == 'B')
                                                 <li>
                                                         {{ $symptom->symptom->name }}
                                                         <span class="badge">{{ $symptom->intensity }}</span>
@@ -120,7 +120,7 @@ $(document).ready(function() {
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtBehaviours as $behaviour)
-                                        @if ($behaviour->when == 'B')
+                                        @if ($behaviour->status == 'B')
                                                 <li>{{ $behaviour->behaviour }}</li>
                                         @endif
                                 @endforeach

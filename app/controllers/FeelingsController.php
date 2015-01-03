@@ -176,14 +176,14 @@ class FeelingsController extends BaseController {
                 $user = User::find(Auth::id());
 
                 $before_dataset = CbtFeeling::where('feeling_id', '=', $id)
-                        ->where('when', '=', 'B')
+                        ->where('status', '=', 'B')
                         ->leftJoin('cbts', 'cbt_feelings.cbt_id', '=', 'cbts.id')
                         ->orderBy('date', 'ASC')
                         ->select('cbt_feelings.*', 'cbts.date as date')
                         ->get();
 
                 $after_dataset = CbtFeeling::where('feeling_id', '=', $id)
-                        ->where('when', '=', 'A')
+                        ->where('status', '=', 'A')
                         ->leftJoin('cbts', 'cbt_feelings.cbt_id', '=', 'cbts.id')
                         ->orderBy('date', 'ASC')
                         ->select('cbt_feelings.*', 'cbts.date as date')

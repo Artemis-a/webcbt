@@ -121,7 +121,7 @@ $(document).ready(function() {
         <tr>
         <td>
                 @foreach ($cbt->cbtFeelings as $feeling)
-                        @if ($feeling->when == 'B')
+                        @if ($feeling->status == 'B')
                                 <div>
                                         {{ $feeling->feeling->name }}
                                         <span class="badge">{{ $feeling->intensity }}</span>
@@ -134,7 +134,7 @@ $(document).ready(function() {
         </td>
         <td>
                 @foreach ($cbt->cbtFeelings as $feeling)
-                        @if ($feeling->when == 'A')
+                        @if ($feeling->status == 'A')
                                 <div>
                                         {{ $feeling->feeling->name }}
                                         <span class="badge">{{ $feeling->intensity }}</span>
@@ -160,7 +160,7 @@ $(document).ready(function() {
         <tr>
         <td>
                 @foreach ($cbt->cbtSymptoms as $symptom)
-                        @if ($symptom->when == 'B')
+                        @if ($symptom->status == 'B')
                                 <div>
                                         {{ $symptom->symptom->name }}
                                         <span class="badge">{{ $symptom->intensity }}</span>
@@ -173,7 +173,7 @@ $(document).ready(function() {
         </td>
         <td>
                 @foreach ($cbt->cbtSymptoms as $symptom)
-                        @if ($symptom->when == 'A')
+                        @if ($symptom->status == 'A')
                                 <div>
                                         {{ $symptom->symptom->name }}
                                         <span class="badge">{{ $symptom->intensity }}</span>
@@ -199,7 +199,7 @@ $(document).ready(function() {
         <tr>
         <td>
                 @foreach ($cbt->cbtBehaviours as $behaviour)
-                        @if ($behaviour->when == 'B')
+                        @if ($behaviour->status == 'B')
                                 <div>{{ $behaviour->behaviour }}</div>
                         @endif
                 @endforeach
@@ -209,7 +209,7 @@ $(document).ready(function() {
         </td>
         <td>
                 @foreach ($cbt->cbtBehaviours as $behaviour)
-                        @if ($behaviour->when == 'A')
+                        @if ($behaviour->status == 'A')
                                 <div>{{ $behaviour->behaviour }}</div>
                         @endif
                 @endforeach

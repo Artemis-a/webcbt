@@ -176,14 +176,14 @@ class SymptomsController extends BaseController {
                 $user = User::find(Auth::id());
 
                 $before_dataset = CbtSymptom::where('symptom_id', '=', $id)
-                        ->where('when', '=', 'B')
+                        ->where('status', '=', 'B')
                         ->leftJoin('cbts', 'cbt_symptoms.cbt_id', '=', 'cbts.id')
                         ->orderBy('date', 'ASC')
                         ->select('cbt_symptoms.*', 'cbts.date as date')
                         ->get();
 
                 $after_dataset = CbtSymptom::where('symptom_id', '=', $id)
-                        ->where('when', '=', 'A')
+                        ->where('status', '=', 'A')
                         ->leftJoin('cbts', 'cbt_symptoms.cbt_id', '=', 'cbts.id')
                         ->orderBy('date', 'ASC')
                         ->select('cbt_symptoms.*', 'cbts.date as date')

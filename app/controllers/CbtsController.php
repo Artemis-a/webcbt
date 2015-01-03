@@ -136,7 +136,7 @@ class CbtsController extends BaseController {
                                         $feelings[] = array(
                                                 'feeling_id' => $row,
                                                 'intensity' => $feelingsintensity[$row_id],
-                                                'when' => 'B',
+                                                'status' => 'B',
                                         );
                                 }
                         }
@@ -162,7 +162,7 @@ class CbtsController extends BaseController {
                                         $symptoms[] = array(
                                                 'symptom_id' => $row,
                                                 'intensity' => $symptomsintensity[$row_id],
-                                                'when' => 'B',
+                                                'status' => 'B',
                                         );
                                 }
                         }
@@ -187,7 +187,7 @@ class CbtsController extends BaseController {
                                 {
                                         $behaviours[] = array(
                                                 'behaviour' => ucfirst($row),
-                                                'when' => 'B',
+                                                'status' => 'B',
                                         );
                                 }
                         }
@@ -266,7 +266,7 @@ class CbtsController extends BaseController {
 
                         /* Delete old and then add feelings */
                         CbtFeeling::where('cbt_id', '=', $id)
-                                ->where('when', '=', 'A')->delete();
+                                ->where('status', '=', 'A')->delete();
 
                         $feelings = array();
                         $feelingsintensity = $input['feelingsintensity'];
@@ -277,7 +277,7 @@ class CbtsController extends BaseController {
                                         $feelings[] = array(
                                                 'feeling_id' => $row,
                                                 'intensity' => $feelingsintensity[$row_id],
-                                                'when' => 'A',
+                                                'status' => 'A',
                                         );
                                 }
                         }
@@ -295,7 +295,7 @@ class CbtsController extends BaseController {
 
                         /* Delete old and then add symptoms */
                         CbtSymptom::where('cbt_id', '=', $id)
-                                ->where('when', '=', 'A')->delete();
+                                ->where('status', '=', 'A')->delete();
 
                         $symptoms = array();
                         $symptomsintensity = $input['symptomsintensity'];
@@ -306,7 +306,7 @@ class CbtsController extends BaseController {
                                         $symptoms[] = array(
                                                 'symptom_id' => $row,
                                                 'intensity' => $symptomsintensity[$row_id],
-                                                'when' => 'A',
+                                                'status' => 'A',
                                         );
                                 }
                         }
@@ -324,7 +324,7 @@ class CbtsController extends BaseController {
 
                         /* Delete old and then add behaviours */
                         CbtBehaviour::where('cbt_id', '=', $id)
-                                ->where('when', '=', 'A')->delete();
+                                ->where('status', '=', 'A')->delete();
 
                         $behaviours = array();
                         foreach ($input['behaviours'] as $row)
@@ -334,7 +334,7 @@ class CbtsController extends BaseController {
                                 {
                                         $behaviours[] = array(
                                                 'behaviour' => ucfirst($row),
-                                                'when' => 'A',
+                                                'status' => 'A',
                                         );
                                 }
                         }
@@ -558,7 +558,7 @@ class CbtsController extends BaseController {
 
                         /* Delete old and then add feelings */
                         CbtFeeling::where('cbt_id', '=', $id)
-                                ->where('when', '=', 'B')->delete();
+                                ->where('status', '=', 'B')->delete();
 
                         $feelings = array();
                         $feelingsintensity = $input['feelingsintensity'];
@@ -569,7 +569,7 @@ class CbtsController extends BaseController {
                                         $feelings[] = array(
                                                 'feeling_id' => $row,
                                                 'intensity' => $feelingsintensity[$row_id],
-                                                'when' => 'B',
+                                                'status' => 'B',
                                         );
                                 }
                         }
@@ -587,7 +587,7 @@ class CbtsController extends BaseController {
 
                         /* Delete old and then add symptom */
                         CbtSymptom::where('cbt_id', '=', $id)
-                                ->where('when', '=', 'B')->delete();
+                                ->where('status', '=', 'B')->delete();
 
                         $symptoms = array();
                         $symptomsintensity = $input['symptomsintensity'];
@@ -598,7 +598,7 @@ class CbtsController extends BaseController {
                                         $symptoms[] = array(
                                                 'symptom_id' => $row,
                                                 'intensity' => $symptomsintensity[$row_id],
-                                                'when' => 'B',
+                                                'status' => 'B',
                                         );
                                 }
                         }
@@ -616,7 +616,7 @@ class CbtsController extends BaseController {
 
                         /* Delete old and then add behaviours */
                         CbtBehaviour::where('cbt_id', '=', $id)
-                                ->where('when', '=', 'B')->delete();
+                                ->where('status', '=', 'B')->delete();
 
                         $behaviours = array();
                         foreach ($input['behaviours'] as $row)
@@ -626,7 +626,7 @@ class CbtsController extends BaseController {
                                 {
                                         $behaviours[] = array(
                                                 'behaviour' => ucfirst($row),
-                                                'when' => 'B',
+                                                'status' => 'B',
                                         );
                                 }
                         }
