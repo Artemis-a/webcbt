@@ -67,11 +67,11 @@ $(document).ready(function() {
                 @foreach ($cbts as $cbt)
                 <tr>
                         <td>
-                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), explode('|', $dateformat)[0]) }}
+                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), explode('|', $dateformat)[0]) }}
                                 <br />
-                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt['date']), 'h:i A') }}
+                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), 'h:i A') }}
                         </td>
-                        <td>{{ $cbt['situation'] }}</td>
+                        <td>{{ $cbt->situation }}</td>
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtThoughts as $thought)
@@ -79,14 +79,14 @@ $(document).ready(function() {
                                                 @if ($thought['is_challenged'] == 0)
                                                         {{ HTML::linkAction(
                                                                 'ThoughtsController@getDispute',
-                                                                $thought['thought'],
-                                                                array($thought['id']),
+                                                                $thought->thought,
+                                                                array($thought->id),
                                                                 array('class' => 'link-pending')) }}
                                                 @else
                                                         {{ HTML::linkAction(
                                                                 'ThoughtsController@getDispute',
-                                                                $thought['thought'],
-                                                                array($thought['id']),
+                                                                $thought->thought,
+                                                                array($thought->id),
                                                                 array('class' => 'link-completed')) }}
                                                 @endif
                                         </li>
@@ -96,10 +96,10 @@ $(document).ready(function() {
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtFeelings as $feeling)
-                                        @if ($feeling['when'] == 'B')
+                                        @if ($feeling->when == 'B')
                                                 <li>
-                                                        {{ $feeling->feeling['name'] }}
-                                                        <span class="badge">{{ $feeling['percent'] }}</span>
+                                                        {{ $feeling->feeling->name }}
+                                                        <span class="badge">{{ $feeling->percent }}</span>
                                                 </li>
                                         @endif
                                 @endforeach
@@ -108,10 +108,10 @@ $(document).ready(function() {
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtSymptoms as $symptom)
-                                        @if ($symptom['when'] == 'B')
+                                        @if ($symptom->when == 'B')
                                                 <li>
-                                                        {{ $symptom->symptom['name'] }}
-                                                        <span class="badge">{{ $symptom['percent'] }}</span>
+                                                        {{ $symptom->symptom->name }}
+                                                        <span class="badge">{{ $symptom->percent }}</span>
                                                 </li>
                                         @endif
                                 @endforeach
@@ -120,14 +120,14 @@ $(document).ready(function() {
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtBehaviours as $behaviour)
-                                        @if ($behaviour['when'] == 'B')
-                                                <li>{{ $behaviour['behaviour'] }}</li>
+                                        @if ($behaviour->when == 'B')
+                                                <li>{{ $behaviour->behaviour }}</li>
                                         @endif
                                 @endforeach
                                 </ul>
                         </td>
                         <td>
-                                @if ($cbt['is_resolved'] == 1)
+                                @if ($cbt->is_resolved == 1)
                                         Yes
                                 @else
                                         No
@@ -146,14 +146,14 @@ $(document).ready(function() {
                                         {{ HTML::linkAction(
                                                 'CbtsController@getPostdispute',
                                                 'Post-dispute',
-                                                array($cbt['id']),
+                                                array($cbt->id),
                                                 array('class' => '')) }}
                                 </li>
                                 <li>
                                         {{ HTML::linkAction(
                                                 'CbtsController@getAnalysis',
                                                 'Show analysis',
-                                                array($cbt['id']),
+                                                array($cbt->id),
                                                 array('class' => '')) }}
                                 </li>
                                 @if ($cbt['is_resolved'] == 0)
@@ -161,7 +161,7 @@ $(document).ready(function() {
                                         {{ HTML::linkAction(
                                                 'CbtsController@putResolved',
                                                 'Mark as resolved',
-                                                array($cbt['id']),
+                                                array($cbt->id),
                                                 array('class' => '', 'data-method' => 'PUT')) }}
                                         </li>
                                 @else
@@ -169,7 +169,7 @@ $(document).ready(function() {
                                         {{ HTML::linkAction(
                                                 'CbtsController@putUnresolved',
                                                 'Mark as unresolved',
-                                                array($cbt['id']),
+                                                array($cbt->id),
                                                 array('class' => '', 'data-method' => 'PUT')) }}
                                         </li>
                                 @endif
@@ -178,14 +178,14 @@ $(document).ready(function() {
                                         {{ HTML::linkAction(
                                                 'CbtsController@getEdit',
                                                 'Edit exercise',
-                                                array($cbt['id']),
+                                                array($cbt->id),
                                                 array('class' => '')) }}
                                 </li>
                                 <li>
                                         {{ HTML::linkAction(
                                                 'CbtsController@deleteDestroy',
                                                 'Delete exercise',
-                                                array($cbt['id']),
+                                                array($cbt->id),
                                                 array(
                                                         'class' => '',
                                                         'data-method' => 'DELETE',

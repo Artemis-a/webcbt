@@ -61,13 +61,13 @@ $(document).ready(function() {
         <tbody>
                 @foreach ($symptoms as $symptom)
                 <tr>
-                        <td>{{ $symptom['name'] }}</td>
-                        <td>{{ $symptom['created_at'] }}</td>
+                        <td>{{ $symptom->name }}</td>
+                        <td>{{ $symptom->created_at }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
                                         'SymptomsController@getStats',
                                         '<i class="fa fa-fw fa-bar-chart-o"></i> Stats',
-                                        array($symptom['id']),
+                                        array($symptom->id),
                                         array('class' => 'no-underline'))) }}
 
                                 <span class="link-pad"></span>
@@ -75,7 +75,7 @@ $(document).ready(function() {
                                 {{ HTML::decode(HTML::linkAction(
                                         'SymptomsController@getEdit',
                                         '<i class="fa fa-fw fa-edit"></i> Edit',
-                                        array($symptom['id']),
+                                        array($symptom->id),
                                         array('class' => 'no-underline'))) }}
 
                                 <span class="link-pad"></span>
@@ -83,7 +83,7 @@ $(document).ready(function() {
                                 {{ HTML::decode(HTML::linkAction(
                                         'SymptomsController@deleteDestroy',
                                         '<i class="fa fa-fw fa-trash"></i> Delete',
-                                        array($symptom['id']),
+                                        array($symptom->id),
                                         array(
                                                 'class' => 'no-underline',
                                                 'data-method' => 'DELETE',

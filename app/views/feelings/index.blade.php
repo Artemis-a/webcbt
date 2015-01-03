@@ -61,13 +61,13 @@ $(document).ready(function() {
         <tbody>
                 @foreach ($feelings as $feeling)
                 <tr>
-                        <td>{{ $feeling['name'] }}</td>
-                        <td>{{ $feeling['created_at'] }}</td>
+                        <td>{{ $feeling->name }}</td>
+                        <td>{{ $feeling->created_at }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
                                         'FeelingsController@getStats',
                                         '<i class="fa fa-fw fa-bar-chart-o"></i> Stats',
-                                        array($feeling['id']),
+                                        array($feeling->id),
                                         array('class' => 'no-underline'))) }}
 
                                 <span class="link-pad"></span>
@@ -75,7 +75,7 @@ $(document).ready(function() {
                                 {{ HTML::decode(HTML::linkAction(
                                         'FeelingsController@getEdit',
                                         '<i class="fa fa-fw fa-edit"></i> Edit',
-                                        array($feeling['id']),
+                                        array($feeling->id),
                                         array('class' => 'no-underline'))) }}
 
                                 <span class="link-pad"></span>
@@ -83,7 +83,7 @@ $(document).ready(function() {
                                 {{ HTML::decode(HTML::linkAction(
                                         'FeelingsController@deleteDestroy',
                                         '<i class="fa fa-fw fa-trash"></i> Delete',
-                                        array($feeling['id']),
+                                        array($feeling->id),
                                         array(
                                                 'class' => 'no-underline',
                                                 'data-method' => 'DELETE',
