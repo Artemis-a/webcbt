@@ -108,7 +108,11 @@ THE SOFTWARE.
                                 'CbtsController@getIndex',
                                 '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
 			</li>
-			<li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
+                        <li>
+				{{ HTML::decode(HTML::linkAction(
+                                'StatisticsController@getIndex',
+                                '<i class="fa fa-fw fa-bar-chart-o"></i> Statistics')) }}
+			</li>
                         <li>
 				{{ HTML::decode(HTML::linkAction(
                                 'FeelingsController@getIndex',

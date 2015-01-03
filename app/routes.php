@@ -43,6 +43,7 @@ Route::group(array('before' => 'auth'), function() {
         Route::controller('dashboard', 'DashboardController');
         Route::controller('cbts', 'CbtsController');
         Route::controller('thoughts', 'ThoughtsController');
+        Route::controller('statistics', 'StatisticsController');
         Route::controller('feelings', 'FeelingsController');
         Route::controller('symptoms', 'SymptomsController');
         Route::controller('help', 'HelpController');

@@ -29,5 +29,9 @@ notices and distributed according to the terms of their own licenses.
    HOMEPAGE: https://github.com/rails/jquery-ujs
    LICENSE: The MIT License
 
+6. Chart.js - Javascript charts library
+   HOMEPAGE: http://www.chartjs.org
+   LICENSE: The MIT License
+
 Whilst every effort has been made to ensure that information is correct, incase
 of any discrepancies please contact the author(s) of this software.
