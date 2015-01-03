@@ -135,7 +135,7 @@ class CbtsController extends BaseController {
                                 {
                                         $feelings[] = array(
                                                 'feeling_id' => $row,
-                                                'percent' => $feelingsintensity[$row_id],
+                                                'intensity' => $feelingsintensity[$row_id],
                                                 'when' => 'B',
                                         );
                                 }
@@ -161,7 +161,7 @@ class CbtsController extends BaseController {
                                 {
                                         $symptoms[] = array(
                                                 'symptom_id' => $row,
-                                                'percent' => $symptomsintensity[$row_id],
+                                                'intensity' => $symptomsintensity[$row_id],
                                                 'when' => 'B',
                                         );
                                 }
@@ -276,7 +276,7 @@ class CbtsController extends BaseController {
                                 {
                                         $feelings[] = array(
                                                 'feeling_id' => $row,
-                                                'percent' => $feelingsintensity[$row_id],
+                                                'intensity' => $feelingsintensity[$row_id],
                                                 'when' => 'A',
                                         );
                                 }
@@ -305,7 +305,7 @@ class CbtsController extends BaseController {
                                 {
                                         $symptoms[] = array(
                                                 'symptom_id' => $row,
-                                                'percent' => $symptomsintensity[$row_id],
+                                                'intensity' => $symptomsintensity[$row_id],
                                                 'when' => 'A',
                                         );
                                 }
@@ -568,7 +568,7 @@ class CbtsController extends BaseController {
                                 {
                                         $feelings[] = array(
                                                 'feeling_id' => $row,
-                                                'percent' => $feelingsintensity[$row_id],
+                                                'intensity' => $feelingsintensity[$row_id],
                                                 'when' => 'B',
                                         );
                                 }
@@ -597,7 +597,7 @@ class CbtsController extends BaseController {
                                 {
                                         $symptoms[] = array(
                                                 'symptom_id' => $row,
-                                                'percent' => $symptomsintensity[$row_id],
+                                                'intensity' => $symptomsintensity[$row_id],
                                                 'when' => 'B',
                                         );
                                 }

@@ -72,9 +72,9 @@ $(document).ready(function() {
         <tr>
         <td>
                 @if ($thought->is_challenged == 0)
-                        <div>{{$thought->thought}}</div>
+                        <div>{{ $thought->thought }}</div>
                 @else
-                        <div>{{$thought->thought}}</div>
+                        <div>{{ $thought->thought }}</div>
                 @endif
         </td>
         <td>
@@ -122,7 +122,10 @@ $(document).ready(function() {
         <td>
                 @foreach ($cbt->cbtFeelings as $feeling)
                         @if ($feeling->when == 'B')
-                                <div>{{$feeling->feeling->name}} <span class="badge">{{$feeling->percent}}</span></div>
+                                <div>
+                                        {{ $feeling->feeling->name }}
+                                        <span class="badge">{{ $feeling->intensity }}</span>
+                                </div>
                         @endif
                 @endforeach
         </td>
@@ -132,7 +135,10 @@ $(document).ready(function() {
         <td>
                 @foreach ($cbt->cbtFeelings as $feeling)
                         @if ($feeling->when == 'A')
-                                <div>{{$feeling->feeling->name}} <span class="badge">{{$feeling->percent}}</span></div>
+                                <div>
+                                        {{ $feeling->feeling->name }}
+                                        <span class="badge">{{ $feeling->intensity }}</span>
+                                </div>
                         @endif
                 @endforeach
         </td>
@@ -155,7 +161,10 @@ $(document).ready(function() {
         <td>
                 @foreach ($cbt->cbtSymptoms as $symptom)
                         @if ($symptom->when == 'B')
-                                <div>{{$symptom->symptom->name}} <span class="badge">{{$symptom->percent}}</span></div>
+                                <div>
+                                        {{ $symptom->symptom->name }}
+                                        <span class="badge">{{ $symptom->intensity }}</span>
+                                </div>
                         @endif
                 @endforeach
         </td>
@@ -165,7 +174,10 @@ $(document).ready(function() {
         <td>
                 @foreach ($cbt->cbtSymptoms as $symptom)
                         @if ($symptom->when == 'A')
-                                <div>{{$symptom->symptom->name}} <span class="badge">{{$symptom->percent}}</span></div>
+                                <div>
+                                        {{ $symptom->symptom->name }}
+                                        <span class="badge">{{ $symptom->intensity }}</span>
+                                </div>
                         @endif
                 @endforeach
         </td>
@@ -188,7 +200,7 @@ $(document).ready(function() {
         <td>
                 @foreach ($cbt->cbtBehaviours as $behaviour)
                         @if ($behaviour->when == 'B')
-                                <div>{{$behaviour->behaviour}}</div>
+                                <div>{{ $behaviour->behaviour }}</div>
                         @endif
                 @endforeach
         </td>
@@ -198,7 +210,7 @@ $(document).ready(function() {
         <td>
                 @foreach ($cbt->cbtBehaviours as $behaviour)
                         @if ($behaviour->when == 'A')
-                                <div>{{$behaviour->behaviour}}</div>
+                                <div>{{ $behaviour->behaviour }}</div>
                         @endif
                 @endforeach
         </td>

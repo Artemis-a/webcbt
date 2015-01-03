@@ -99,7 +99,7 @@ $(document).ready(function() {
                                         @if ($feeling->when == 'B')
                                                 <li>
                                                         {{ $feeling->feeling->name }}
-                                                        <span class="badge">{{ $feeling->percent }}</span>
+                                                        <span class="badge">{{ $feeling->intensity }}</span>
                                                 </li>
                                         @endif
                                 @endforeach
@@ -111,7 +111,7 @@ $(document).ready(function() {
                                         @if ($symptom->when == 'B')
                                                 <li>
                                                         {{ $symptom->symptom->name }}
-                                                        <span class="badge">{{ $symptom->percent }}</span>
+                                                        <span class="badge">{{ $symptom->intensity }}</span>
                                                 </li>
                                         @endif
                                 @endforeach

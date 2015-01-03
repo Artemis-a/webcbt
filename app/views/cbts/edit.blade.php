@@ -234,7 +234,7 @@ $(document).ready(function() {
                                 <td width="1">
                                         {{ Form::openGroup('feelingsintensity[' . $i . ']', '') }}
                                                 {{ Form::hidden('feelingsintensity[' . $i . ']',
-                                                        $feeling->percent) }}
+                                                        $feeling->intensity) }}
                                         {{ Form::closeGroup() }}
                                 </td>
                                 @define $i = $i + 1
@@ -299,7 +299,7 @@ $(document).ready(function() {
                                 <td width="1">
                                         {{ Form::openGroup('symptomsintensity[' . $i . ']', '') }}
                                                 {{ Form::hidden('symptomsintensity[' . $i . ']',
-                                                        $symptom->percent ) }}
+                                                        $symptom->intensity ) }}
                                         {{ Form::closeGroup() }}
                                 </td>
                                 @define $i = $i + 1

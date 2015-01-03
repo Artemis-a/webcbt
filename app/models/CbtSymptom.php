@@ -50,7 +50,7 @@ class CbtSymptom extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['symptom_id', 'percent', 'when'];
+	protected $fillable = ['symptom_id', 'intensity', 'when'];
 
 	/**
 	 * The attributes that cannot be mass assigned

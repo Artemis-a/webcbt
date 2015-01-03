@@ -68,7 +68,7 @@ $(document).ready(function() {
 
 var before_dataset = [
 @foreach ($before_dataset as $data)
-        "{{ $data->percent }}",
+        "{{ $data->intensity }}",
 @endforeach
 ];
 
@@ -80,7 +80,7 @@ var before_labelset = [
 
 var after_dataset = [
 @foreach ($after_dataset as $data)
-        "{{ $data->percent }}",
+        "{{ $data->intensity }}",
 @endforeach
 ];
 
