@@ -1,10 +1,10 @@
 WebCBT - Web based Cognitive Behavioral Therapy tool
 
-http://mindtools.github.io/webcbt/
+http://webcbt.github.io
 
-Copyright (c) 2014 Prashant Shah <pshah.mindtools@gmail.com>
+Copyright (c) 2014 Prashant Shah <pshah.webcbt@gmail.com>
 
-Source code : https://github.com/mindtools/webcbt
+Source code : https://github.com/webcbt/webcbt
 
 WebCBT includes the following open source software under other copyright
 notices and distributed according to the terms of their own licenses.

@@ -4,9 +4,9 @@ The MIT License (MIT)
 
 WebCBT - Web based Cognitive Behavioral Therapy tool
 
-http://mindtools.github.io/webcbt/
+http://webcbt.github.io
 
-Copyright (c) 2014 Prashant Shah <pshah.mindtools@gmail.com>
+Copyright (c) 2014 Prashant Shah <pshah.webcbt@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
