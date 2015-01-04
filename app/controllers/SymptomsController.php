@@ -192,15 +192,19 @@ class SymptomsController extends BaseController {
                  */
                 $symptoms_collection = array();
 
+                $before_count = 0;
+                $after_count = 0;
                 foreach ($all_symptoms as $data)
                 {
                         if ($data->status == 'B')
                         {
                                 $symptoms_collection[$data->cbts_date][$data->cbts_id]['B'] = $data->intensity;
+                                $before_count++;
                         }
                         else if ($data->status == 'A')
                         {
                                 $symptoms_collection[$data->cbts_date][$data->cbts_id]['A'] = $data->intensity;
+                                $after_count++;
                         }
                 }
 
@@ -240,9 +244,24 @@ class SymptomsController extends BaseController {
                 $after_dataset .= ']';
                 $labelset .= ']';
 
+                if ($before_count == 0 && $after_count == 0)
+                {
+		        return Redirect::action('SymptomsController@getIndex')
+                                ->with('alert-danger', 'No data to show.');
+                }
+                if ($before_count <= 1 && $after_count <= 1)
+                {
+                        $chart_type = 'bar';
+                }
+                else
+                {
+                        $chart_type = 'line';
+                }
+
                 return View::make('symptoms.stats')
                         ->with('dateformat', $user->dateformat)
                         ->with('symptom', $symptom)
+                        ->with('chart_type', $chart_type)
                         ->with('labelset', $labelset)
                         ->with('before_dataset', $before_dataset)
                         ->with('after_dataset', $after_dataset);

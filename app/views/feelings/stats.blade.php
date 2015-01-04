@@ -86,7 +86,13 @@ var feelingsChartData = {
 
 window.onload = function() {
 	var feelingsCtx = document.getElementById("feelingsChart").getContext("2d");
-	window.feelingsChart = new Chart(feelingsCtx).Line(feelingsChartData, {
+
+        @if ($chart_type == 'bar')
+        window.feelingsChart = new Chart(feelingsCtx).Bar(feelingsChartData, {
+        @else
+        window.feelingsChart = new Chart(feelingsCtx).Line(feelingsChartData, {
+        @endif
+
 		responsive: false,
                 scaleOverride : true,
                 scaleSteps : 10,

@@ -86,7 +86,13 @@ var symptomsChartData = {
 
 window.onload = function() {
 	var symptomsCtx = document.getElementById("symptomsChart").getContext("2d");
-	window.symptomsChart = new Chart(symptomsCtx).Line(symptomsChartData, {
+
+        @if ($chart_type == 'bar')
+	window.symptomsChart = new Chart(symptomsCtx).Bar(symptomsChartData, {
+        @else
+        window.symptomsChart = new Chart(symptomsCtx).Line(symptomsChartData, {
+        @endif
+
 		responsive: false,
                 scaleOverride : true,
                 scaleSteps : 10,
