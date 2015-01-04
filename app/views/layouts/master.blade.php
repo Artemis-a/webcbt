@@ -54,7 +54,7 @@ THE SOFTWARE.
 
         <!-- Bootstrap -->
         {{ HTML::style('css/bootstrap.min.css') }}
-        <!-- {{ HTML::style('css/bootstrap-theme.min.css') }} -->
+        {{ HTML::style('css/bootstrap-theme.min.css') }}
         {{ HTML::script('js/bootstrap.min.js') }}
 
 	<!-- Chart.js -->
@@ -66,7 +66,6 @@ THE SOFTWARE.
         <!-- Custom CSS -->
         @define $time = rand(0, 1000)
 
-        {{ HTML::style('css/sb-admin.css?' . $time) }}
         {{ HTML::style('css/style.css?' . $time) }}
 
         @yield('head')
@@ -77,76 +76,79 @@ THE SOFTWARE.
 <div id="wrapper">
 
 <!-- Navigation -->
-<nav class="navbar navbar-fixed-top navbar-custom" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top">
 
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="index.html">WebCBT</a>
+	<div class="container-fluid">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><i class="fa fa-random"></i>
+ WebCBT</a>
+		</div>
+
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'DashboardController@getIndex',
+		                        '<i class="fa fa-fw fa-dashboard"></i> Dashboard')) }}
+				</li>
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'CbtsController@getIndex',
+		                        '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
+				</li>
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'StatisticsController@getIndex',
+		                        '<i class="fa fa-fw fa-bar-chart-o"></i> Statistics')) }}
+				</li>
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'FeelingsController@getIndex',
+		                        '<i class="fa fa-fw fa-child"></i> Feelings')) }}
+				</li>
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'SymptomsController@getIndex',
+		                        '<i class="fa fa-fw fa-eyedropper"></i> Symptoms')) }}
+				</li>
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'HelpController@getIndex',
+		                        '<i class="fa fa-fw fa-question-circle"></i> Help')) }}
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'UsersController@getProfile',
+		                        '<i class="fa fa-fw fa-user"></i> Profile')) }}
+				</li>
+		                <li>
+					{{ HTML::decode(HTML::linkAction(
+		                        'UsersController@getLogout',
+		                        '<i class="fa fa-fw fa-power-off"></i> Log Out')) }}
+				</li>
+			</ul>
+		</div>
+		<!-- /navbar -->
 
 	</div>
-
-	<!-- Top Menu Items -->
-	<ul class="nav navbar-right top-nav">
-	</ul>
-
-	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav side-nav">
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'DashboardController@getIndex',
-                                '<i class="fa fa-fw fa-dashboard"></i> Dashboard')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'CbtsController@getIndex',
-                                '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'StatisticsController@getIndex',
-                                '<i class="fa fa-fw fa-bar-chart-o"></i> Statistics')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'FeelingsController@getIndex',
-                                '<i class="fa fa-fw fa-child"></i> Feelings')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'SymptomsController@getIndex',
-                                '<i class="fa fa-fw fa-eyedropper"></i> Symptoms')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'HelpController@getIndex',
-                                '<i class="fa fa-fw fa-question-circle"></i> Help')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'UsersController@getProfile',
-                                '<i class="fa fa-fw fa-user"></i> Profile')) }}
-			</li>
-                        <li>
-				{{ HTML::decode(HTML::linkAction(
-                                'UsersController@getLogout',
-                                '<i class="fa fa-fw fa-power-off"></i> Log Out')) }}
-			</li>
-			<li class="menu-pad"></li>
-		</ul>
-	</div>
+	<!-- /container -->
 
 </nav>
-<!-- /.nav -->
+<!-- /nav -->
+
+<div class="container-fluid">
 
 <div id="page-wrapper">
-<div class="container-fluid">
 
 	<!-- Page-title -->
 	<div class="row">
@@ -186,10 +188,12 @@ THE SOFTWARE.
 	</div>
         <!-- /.row -->
 
-</div><!-- /.container-fluid -->
-</div><!-- /#page-wrapper -->
+</div><!-- /page-wrapper -->
 
-</div><!-- /#wrapper -->
+</div><!-- /container-fluid -->
+
+</div><!-- /wrapper -->
 
 </body>
+
 </html>

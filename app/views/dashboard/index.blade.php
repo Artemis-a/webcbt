@@ -49,7 +49,7 @@ $(document).ready(function() {
 <div class="row">
 
         <div class="col-lg-3 col-md-6">
-        <div class="panel panel-primary">
+        <div class="panel panel-info">
                 <div class="panel-heading">
                         <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-list-alt fa-5x"></i></div>
@@ -70,7 +70,7 @@ $(document).ready(function() {
         </div>
 
         <div class="col-lg-3 col-md-6">
-        <div class="panel panel-green">
+        <div class="panel panel-info">
                 <div class="panel-heading">
                         <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-warning fa-5x"></i></div>
@@ -91,7 +91,7 @@ $(document).ready(function() {
         </div>
 
         <div class="col-lg-3 col-md-6">
-        <div class="panel panel-red">
+        <div class="panel panel-info">
                 <div class="panel-heading">
                         <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-wrench fa-5x"></i></div>
@@ -112,7 +112,7 @@ $(document).ready(function() {
         </div>
 
         <div class="col-lg-3 col-md-6">
-        <div class="panel panel-yellow">
+        <div class="panel panel-info">
                 <div class="panel-heading">
                         <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-calendar fa-5x"></i></div>

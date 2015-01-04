@@ -45,40 +45,58 @@ $(document).ready(function() {
 
 @section('content')
 
-<div>
-        <div class="chart-title">Distortions Statistics :</div>
-	<canvas id="distortionsCountChart" width="500px" height="700px"></canvas>
-</div>
-
-<div>
-        <div class="chart-title">Resolved Vs Unresolved CBT Exercises :</div>
-	<canvas id="resolvedChart" height="200px"></canvas>
-</div>
-
-<div>
-        <div class="chart-title">Disputed Vs Undisputed Thoughts :</div>
-	<canvas id="disputedChart" height="200px"></canvas>
-</div>
-
-<div>
-        <div class="chart-title">Feelings Count Statistics :</div>
-	<canvas id="feelingCountChart" width="500px" height="400px"></canvas>
-</div>
-
-<div>
-        <div class="chart-title">Feelings Average Statistics :</div>
-	<canvas id="feelingAverageChart" width="500px" height="400px"></canvas>
-</div>
-
-<div>
-        <div class="chart-title">Physical Symptoms Count Statistics :</div>
-	<canvas id="symptomCountChart" width="500px" height="400px"></canvas>
-</div>
-
-<div>
-        <div class="chart-title">Physical Symptoms Average Statistics :</div>
-	<canvas id="symptomAverageChart" width="500px" height="400px"></canvas>
-</div>
+<table class="table-centered text-center stats-table">
+        <tr>
+                <td colspan="2">
+                        <div class="text-center">
+                                <div class="chart-title">Distortions Statistics</div>
+                        	<canvas id="distortionsCountChart" width="800px" height="700px"></canvas>
+                        </div>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                        <div>
+                                <div class="chart-title">Resolved Vs Unresolved CBT Exercises</div>
+                        	<canvas id="resolvedChart" height="200px"></canvas>
+                        </div>
+                </td>
+                <td>
+                        <div>
+                                <div class="chart-title">Disputed Vs Undisputed Thoughts</div>
+                        	<canvas id="disputedChart" height="200px"></canvas>
+                        </div>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                        <div>
+                                <div class="chart-title">Feelings Count</div>
+                        	<canvas id="feelingCountChart" height="600px"></canvas>
+                        </div>
+                </td>
+                <td>
+                        <div>
+                                <div class="chart-title">Feelings Average</div>
+                        	<canvas id="feelingAverageChart" height="600px"></canvas>
+                        </div>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                        <div>
+                                <div class="chart-title">Physical Symptoms Count</div>
+                        	<canvas id="symptomCountChart" height="600px"></canvas>
+                        </div>
+                </td>
+                <td>
+                        <div>
+                                <div class="chart-title">Physical Symptoms Average</div>
+                        	<canvas id="symptomAverageChart" height="600px"></canvas>
+                        </div>
+                </td>
+        </tr>
+</table>
 
 <script type="text/javascript">
 
