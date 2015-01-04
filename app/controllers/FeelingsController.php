@@ -175,29 +175,75 @@ class FeelingsController extends BaseController {
 
                 $user = User::find(Auth::id());
 
-                $before_dataset = CbtFeeling::where('feeling_id', '=', $id)
-                        ->where('status', '=', 'B')
+                $all_feelings = CbtFeeling::where('feeling_id', '=', $id)
                         ->leftJoin('cbts', 'cbt_feelings.cbt_id', '=', 'cbts.id')
                         ->orderBy('date', 'ASC')
-                        ->select('cbt_feelings.*', 'cbts.date as date')
+                        ->select('cbt_feelings.*', 'cbts.date as cbts_date', 'cbts.id as cbts_id')
                         ->get();
 
-                $after_dataset = CbtFeeling::where('feeling_id', '=', $id)
-                        ->where('status', '=', 'A')
-                        ->leftJoin('cbts', 'cbt_feelings.cbt_id', '=', 'cbts.id')
-                        ->orderBy('date', 'ASC')
-                        ->select('cbt_feelings.*', 'cbts.date as date')
-                        ->get();
+                /**
+                 * Create a collection of the format
+                 * array('some-date' =>
+                 *      array(
+                 *           'id1' => array('B' => 7, 'A' => 3)
+                 *           'id2' => array('B' => 9, 'A' => 2)
+                 *      )
+                 * );
+                 */
+                $feelings_collection = array();
 
-                if ($before_dataset->count() <= 0 && $after_dataset->count() <= 0)
+                foreach ($all_feelings as $data)
                 {
-                        return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-danger', 'No data.');
+                        if ($data->status == 'B')
+                        {
+                                $feelings_collection[$data->cbts_date][$data->cbts_id]['B'] = $data->intensity;
+                        }
+                        else if ($data->status == 'A')
+                        {
+                                $feelings_collection[$data->cbts_date][$data->cbts_id]['A'] = $data->intensity;
+                        }
                 }
+
+                $before_dataset = '[';
+                $after_dataset = '[';
+                $labelset = '[';
+                foreach ($feelings_collection as $cbt_date => $feelings_data)
+                {
+                        foreach ($feelings_data as $cbt_data)
+                        {
+                                $labelset .= '"' .
+                                        date_format(
+                                                date_create_from_format('Y-m-d H:i:s', $cbt_date),
+                                                explode('|', $user->dateformat)[0]
+                                        ) .
+                                        '",';
+
+                                if (isset($cbt_data['B']))
+                                {
+                                        $before_dataset .= '"' . $cbt_data['B'] . '",';
+                                }
+                                else
+                                {
+                                        $before_dataset .= 'null,';
+                                }
+                                if (isset($cbt_data['A']))
+                                {
+                                        $after_dataset .= '"' . $cbt_data['A'] . '",';
+                                }
+                                else
+                                {
+                                        $after_dataset .= 'null,';
+                                }
+                        }
+                }
+                $before_dataset .= ']';
+                $after_dataset .= ']';
+                $labelset .= ']';
 
                 return View::make('feelings.stats')
                         ->with('dateformat', $user->dateformat)
                         ->with('feeling', $feeling)
+                        ->with('labelset', $labelset)
                         ->with('before_dataset', $before_dataset)
                         ->with('after_dataset', $after_dataset);
         }

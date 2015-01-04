@@ -30,10 +30,6 @@ THE SOFTWARE.
 
 @extends('layouts.master')
 
-@section('define')
-        {{ $count = 1 }}
-@endsection
-
 @section('head')
 
 <script type="text/javascript">
@@ -54,90 +50,44 @@ $(document).ready(function() {
 <br />
 <br />
 
-<div>
-        <div class="chart-title">Before Statistics - {{ $symptom->name }}</div>
-	<canvas id="beforeChart"></canvas>
-</div>
-<br /><br />
-<div>
-        <div class="chart-title">After Statistics - {{ $symptom->name }}</div>
-	<canvas id="afterChart"></canvas>
+<div class="text-center">
+        <div class="chart-title">{{ $symptom->name }}</div>
+	<canvas id="symptomsChart" height="500px"></canvas>
 </div>
 
-<script>
+<script type="text/javascript">
 
-var before_dataset = [
-@foreach ($before_dataset as $data)
-        "{{ $data->intensity }}",
-@endforeach
-];
-
-var before_labelset = [
-@foreach ($before_dataset as $data)
-        "{{ date_format(date_create_from_format('Y-m-d H:i:s', $data->date), explode('|', $dateformat)[0]) }}",
-@endforeach
-];
-
-var after_dataset = [
-@foreach ($after_dataset as $data)
-        "{{ $data->intensity }}",
-@endforeach
-];
-
-var after_labelset = [
-@foreach ($after_dataset as $data)
-        "{{ date_format(date_create_from_format('Y-m-d H:i:s', $data->date), explode('|', $dateformat)[0]) }}",
-@endforeach
-];
-
-var beforeChartData = {
-	labels : before_labelset,
+var symptomsChartData = {
+	labels : {{ $labelset }},
 	datasets : [
 		{
-			label: "{{ $symptom->name }}",
-			fillColor : "rgba(151,187,205,0.4)",
+			label: "Before",
+			fillColor : "rgba(151,187,205,0.2)",
 			strokeColor : "rgba(151,187,205,1)",
 			pointColor : "rgba(151,187,205,1)",
 			pointStrokeColor : "#fff",
 			pointHighlightFill : "#fff",
 			pointHighlightStroke : "rgba(151,187,205,1)",
-			data : before_dataset
-		}
-	]
-
-}
-
-var afterChartData = {
-	labels : after_labelset,
-	datasets : [
+			data : {{ $before_dataset }}
+		},
 		{
-			label: "{{ $symptom->name }}",
-			fillColor : "rgba(151,187,205,0.4)",
-			strokeColor : "rgba(151,187,205,1)",
-			pointColor : "rgba(151,187,205,1)",
+			label: "After",
+			fillColor : "rgba(0,187,205,0.2)",
+			strokeColor : "rgba(0,187,205,1)",
+			pointColor : "rgba(0,187,205,1)",
 			pointStrokeColor : "#fff",
 			pointHighlightFill : "#fff",
 			pointHighlightStroke : "rgba(151,187,205,1)",
-			data : after_dataset
+			data : {{ $after_dataset }}
 		}
 	]
 
 }
 
-window.onload = function(){
-	var beforeCtx = document.getElementById("beforeChart").getContext("2d");
-	window.beforeChart = new Chart(beforeCtx).Bar(beforeChartData, {
-		responsive: true,
-                scaleOverride : true,
-                scaleSteps : 10,
-                scaleStepWidth : 1,
-                scaleStartValue : 0,
-                barValueSpacing: 5
-	});
-
-	var afterCtx = document.getElementById("afterChart").getContext("2d");
-	window.afterChart = new Chart(afterCtx).Bar(afterChartData, {
-		responsive: true,
+window.onload = function() {
+	var symptomsCtx = document.getElementById("symptomsChart").getContext("2d");
+	window.symptomsChart = new Chart(symptomsCtx).Line(symptomsChartData, {
+		responsive: false,
                 scaleOverride : true,
                 scaleSteps : 10,
                 scaleStepWidth : 1,
@@ -145,7 +95,6 @@ window.onload = function(){
                 barValueSpacing: 5
 	});
 }
-
 
 </script>
 
