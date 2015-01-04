@@ -214,3 +214,8 @@ div.tab-content-title {
         padding-bottom: 30px;
         font-weight: bold;
 }
+
+.disclaimer {
+        font-size: 120%;
+        color: red;
+}
