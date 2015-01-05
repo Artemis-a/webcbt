@@ -31,7 +31,28 @@ class DashboardController extends BaseController {
 
         public function getIndex()
         {
-                return View::make('dashboard.index');
+                $exercise_count = Cbt::curuser()->count();
+
+                $unresolved_count = Cbt::curuser()
+                        ->where('is_resolved', 0)
+                        ->count();
+
+                $undisputed_count =
+                        CbtThought::where('cbt_thoughts.is_challenged', 0)
+                        ->where('cbts.user_id', '=', Auth::id())
+                        ->leftJoin('cbts', 'cbt_thoughts.cbt_id', '=', 'cbts.id')
+                        ->count();
+
+                $user_date = date_create_from_format('Y-m-d H:i:s', Auth::user()->created_at);
+                $todays_date = date_create('now');
+                $diff = date_diff($todays_date, $user_date);
+                $diff_days = $diff->format('%a');
+
+                return View::make('dashboard.index')
+                        ->with('exercise_count', $exercise_count)
+                        ->with('unresolved_count', $unresolved_count)
+                        ->with('undisputed_count', $undisputed_count)
+                        ->with('diff_days', $diff_days);
         }
 
 }

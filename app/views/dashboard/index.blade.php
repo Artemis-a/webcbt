@@ -52,41 +52,20 @@ $(document).ready(function() {
         <div class="panel panel-info">
                 <div class="panel-heading">
                         <div class="row">
-                                <div class="col-xs-3"><i class="fa fa-list-alt fa-5x"></i></div>
-                                <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>CBT Exercises</div>
-                                </div>
-                        </div>
-                </div>
-                <a href="#">
-                        <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                        </div>
-                </a>
-        </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-        <div class="panel panel-info">
-                <div class="panel-heading">
-                        <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-warning fa-5x"></i></div>
                                 <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
+                                        <div class="huge">{{ $unresolved_count }}</div>
                                         <div>Unresolved Situations</div>
                                 </div>
                         </div>
                 </div>
-                <a href="#">
+                {{ HTML::decode(HTML::linkAction('CbtsController@getIndex', '
                         <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                         </div>
-                </a>
+                ')) }}
         </div>
         </div>
 
@@ -96,18 +75,39 @@ $(document).ready(function() {
                         <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-wrench fa-5x"></i></div>
                                 <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
+                                        <div class="huge">{{ $undisputed_count }}</div>
                                         <div>Thoughts To Dispute</div>
                                 </div>
                         </div>
                 </div>
-                <a href="#">
+                {{ HTML::decode(HTML::linkAction('CbtsController@getIndex', '
                         <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                         </div>
-                </a>
+                ')) }}
+        </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+        <div class="panel panel-info">
+                <div class="panel-heading">
+                        <div class="row">
+                                <div class="col-xs-3"><i class="fa fa-list-alt fa-5x"></i></div>
+                                <div class="col-xs-9 text-right">
+                                        <div class="huge">{{ $exercise_count }}</div>
+                                        <div>CBT Exercises</div>
+                                </div>
+                        </div>
+                </div>
+                {{ HTML::decode(HTML::linkAction('CbtsController@getIndex', '
+                        <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                        </div>
+                ')) }}
         </div>
         </div>
 
@@ -117,18 +117,18 @@ $(document).ready(function() {
                         <div class="row">
                                 <div class="col-xs-3"><i class="fa fa-calendar fa-5x"></i></div>
                                 <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
+                                        <div class="huge">{{ $diff_days }}</div>
                                         <div>Active Days</div>
                                 </div>
                         </div>
                 </div>
-                <a href="#">
+                {{ HTML::decode(HTML::linkAction('UsersController@getProfile', '
                         <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                         </div>
-                </a>
+                ')) }}
         </div>
         </div>
 
