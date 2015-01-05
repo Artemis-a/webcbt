@@ -29,7 +29,7 @@
 
 class CbtThoughtDistortion extends Eloquent {
 
-	use SoftDeletingTrait;
+	/* use SoftDeletingTrait; */
 
 	/**
 	 * The database table used by the model.
