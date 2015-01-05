@@ -36,11 +36,23 @@ THE SOFTWARE.
 
 @section('head')
 
+{{ HTML::style('css/pick-a-color-1.2.3.min.css') }}
+{{ HTML::script('js/tinycolor-0.9.15.min.js') }}
+{{ HTML::script('js/pick-a-color-1.2.3.min.js') }}
+
+<style type="text/css">
+        #color {
+                width: 100px;
+        }
+        #background {
+                width: 100px;
+        }
+</style>
+
 <script type="text/javascript">
-
-$(document).ready(function() {
-});
-
+	$(document).ready(function () {
+		$(".pick-a-color").pickAColor();
+	});
 </script>
 
 @stop
@@ -56,11 +68,11 @@ $(document).ready(function() {
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('color', 'Font Color') }}
-        {{ Form::text('color') }}
+        {{ Form::text('color', null, array('class' => 'pick-a-color')) }}
 {{ Form::closeGroup() }}
 
 {{ Form::openGroup('background', 'Background Color') }}
-        {{ Form::text('background') }}
+        {{ Form::text('background', null, array('class' => 'pick-a-color')) }}
 {{ Form::closeGroup() }}
 
 {{ Form::submit('Submit') }}

@@ -54,6 +54,7 @@ $(document).ready(function() {
         <thead>
                 <tr>
                         <th>Tag</th>
+                        <th></th>
                         <th>Added On</th>
                         <th>Actions</th>
                 </tr>
@@ -62,6 +63,11 @@ $(document).ready(function() {
                 @foreach ($tags as $tag)
                 <tr>
                         <td>{{ $tag->name }}</td>
+                        <td>
+                                <span style="color:#{{ $tag->color }}; background:#{{ $tag->background }};" class="tag">
+                                        {{ $tag->name }}
+                                </span>
+                        </td>
                         <td>{{ $tag->created_at }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
