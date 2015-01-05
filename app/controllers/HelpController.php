@@ -34,4 +34,9 @@ class HelpController extends BaseController {
 		return View::make('help.index');
 	}
 
+	public function getDisclaimer()
+	{
+		return View::make('help.disclaimer');
+	}
+
 }
