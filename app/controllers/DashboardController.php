@@ -38,7 +38,7 @@ class DashboardController extends BaseController {
                         ->count();
 
                 $undisputed_count =
-                        CbtThought::where('cbt_thoughts.is_challenged', 0)
+                        CbtThought::where('cbt_thoughts.is_disputed', 0)
                         ->where('cbts.user_id', '=', Auth::id())
                         ->leftJoin('cbts', 'cbt_thoughts.cbt_id', '=', 'cbts.id')
                         ->count();

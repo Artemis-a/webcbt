@@ -50,7 +50,7 @@ class CbtThought extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['thought', 'is_challenged', 'dispute',
+	protected $fillable = ['thought', 'is_disputed', 'dispute',
 		'balanced_thoughts'];
 
 	/**

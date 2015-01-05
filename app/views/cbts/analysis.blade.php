@@ -71,7 +71,7 @@ $(document).ready(function() {
         @foreach ($cbt->cbtThoughts as $thought)
         <tr>
         <td>
-                @if ($thought->is_challenged == 0)
+                @if ($thought->is_disputed == 0)
                         <div>{{ $thought->thought }}</div>
                 @else
                         <div>{{ $thought->thought }}</div>
@@ -81,7 +81,7 @@ $(document).ready(function() {
                 <i class="fa fa-arrow-right fa-6"></i>
         </td>
         <td>
-                @if ($thought->is_challenged == 0)
+                @if ($thought->is_disputed == 0)
                         <div>(Not yet challenged)</div>
                 @else
                         @foreach ($thought->cbtThoughtDistortions as $thoughtDistortion)
@@ -93,7 +93,7 @@ $(document).ready(function() {
                 <i class="fa fa-arrow-right fa-6"></i>
         </td>
         <td>
-                @if ($thought->is_challenged == 0)
+                @if ($thought->is_disputed == 0)
                         <div>(Not yet challenged)</div>
                 @else
                         @define $new_thoughts = unserialize($thought->balanced_thoughts);

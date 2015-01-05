@@ -102,7 +102,7 @@ $(document).ready(function() {
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtThoughts as $thought)
                                         <li class="list-pad">
-                                                @if ($thought['is_challenged'] == 0)
+                                                @if ($thought['is_disputed'] == 0)
                                                         {{ HTML::linkAction(
                                                                 'ThoughtsController@getDispute',
                                                                 $thought->thought,

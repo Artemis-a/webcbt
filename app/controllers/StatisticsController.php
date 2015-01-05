@@ -69,13 +69,13 @@ class StatisticsController extends BaseController {
 
                 $disputed = Cbt::curuser()
                         ->join('cbt_thoughts', 'cbt_thoughts.cbt_id', '=', 'cbts.id')
-                        ->where('is_challenged', '=', 1)
+                        ->where('is_disputed', '=', 1)
                         ->get();
                 $disputed_count = $disputed->count();
 
                 $undisputed = Cbt::curuser()
                         ->join('cbt_thoughts', 'cbt_thoughts.cbt_id', '=', 'cbts.id')
-                        ->where('is_challenged', '=', 0)
+                        ->where('is_disputed', '=', 0)
                         ->get();
                 $undisputed_count = $undisputed->count();
 

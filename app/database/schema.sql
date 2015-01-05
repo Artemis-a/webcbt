@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `cbt_thoughts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cbt_id` int(11) NOT NULL,
   `thought` varchar(255) NOT NULL,
-  `is_challenged` int(1) NOT NULL,
+  `is_disputed` int(1) NOT NULL,
   `dispute` varchar(2000) NOT NULL,
   `balanced_thoughts` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

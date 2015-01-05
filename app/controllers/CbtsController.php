@@ -123,7 +123,7 @@ class CbtsController extends BaseController {
                                 {
                                         $thoughts[] = array(
                                                 'thought' => ucfirst($row),
-                                                'is_challenged' => 0,
+                                                'is_disputed' => 0,
                                                 'dispute' => '',
                                                 'balanced_thoughts' => '',
                                         );
@@ -526,7 +526,7 @@ class CbtsController extends BaseController {
                                         {
                                                 $new_thoughts[] = array(
                                                         'thought' => ucfirst($row),
-                                                        'is_challenged' => 0,
+                                                        'is_disputed' => 0,
                                                         'dispute' => '',
                                                         'balanced_thoughts' => '',
                                                 );

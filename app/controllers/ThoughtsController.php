@@ -229,7 +229,7 @@ class ThoughtsController extends BaseController {
                         }
 
                         /* Update thought */
-                        $thought->is_challenged = 1;
+                        $thought->is_disputed = 1;
                         $thought->dispute = serialize($disputes);
                         $thought->balanced_thoughts = serialize($balanced_thoughts);
 
