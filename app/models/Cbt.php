@@ -50,7 +50,7 @@ class Cbt extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['date', 'situation'];
+	protected $fillable = ['tag_id', 'date', 'situation'];
 
 	/**
 	 * The attributes that cannot be mass assigned
@@ -80,6 +80,11 @@ class Cbt extends Eloquent {
 	public function cbtBehaviours()
 	{
 		return $this->hasMany('CbtBehaviour');
+	}
+
+	public function tag()
+	{
+		return $this->belongsTo('Tag');
 	}
 
 	public static function boot()

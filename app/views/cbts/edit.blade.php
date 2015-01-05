@@ -361,6 +361,13 @@ $(document).ready(function() {
 
 <br />
 
+{{ Form::label('Tags') }}
+{{ Form::openGroup('tag', '') }}
+        {{ Form::select('tag', $tags_list, $cbt->tag_id) }}
+{{ Form::closeGroup() }}
+
+<br />
+
 {{ Form::submit('Submit') }}
 {{ HTML::linkAction('CbtsController@getIndex', 'Cancel') }}
 

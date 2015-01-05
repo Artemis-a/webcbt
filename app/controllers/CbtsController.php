@@ -58,15 +58,26 @@ class CbtsController extends BaseController {
                 $symptoms_list = array(0 => 'Please select...') +
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
+                $tags_list = array(0 => '(None)') +
+                        Tag::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
                 return View::make('cbts.create')
                         ->with('dateformat', $this->dateformat)
                         ->with('feelings_list', $feelings_list)
-                        ->with('symptoms_list', $symptoms_list);
+                        ->with('symptoms_list', $symptoms_list)
+                        ->with('tags_list', $tags_list);
         }
 
         public function postCreate()
         {
                 $input = Input::all();
+
+                if ($input['tag'] <= 0)
+                {
+                        $tag_id = null;
+                } else {
+                        $tag_id = $input['tag'];
+                }
 
                 $temp = date_create_from_format(
                         explode('|', $this->dateformat)[0] . ' h:i A',
@@ -88,6 +99,7 @@ class CbtsController extends BaseController {
 
                         /* Create a CBT entry */
                         $cbt_data = array(
+                                'tag_id' => $tag_id,
                                 'date' => $date,
                                 'situation' => ucfirst($input['situation']),
                                 'is_resolved' => 0,
@@ -434,12 +446,16 @@ class CbtsController extends BaseController {
                 $symptoms_list = array(0 => 'Please select...') +
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
+                $tags_list = array(0 => '(None)') +
+                        Tag::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+
                 return View::make('cbts.edit')
                         ->with('date', $date)
                         ->with('dateformat', $this->dateformat)
                         ->with('cbt', $cbt)
                         ->with('feelings_list', $feelings_list)
-                        ->with('symptoms_list', $symptoms_list);
+                        ->with('symptoms_list', $symptoms_list)
+                        ->with('tags_list', $tags_list);
         }
 
         public function postEdit($id)
@@ -458,6 +474,13 @@ class CbtsController extends BaseController {
                 }
 
                 $input = Input::all();
+
+                if ($input['tag'] <= 0)
+                {
+                        $tag_id = null;
+                } else {
+                        $tag_id = $input['tag'];
+                }
 
                 $temp = date_create_from_format(
                         explode('|', $this->dateformat)[0] . ' h:i A',
@@ -479,6 +502,7 @@ class CbtsController extends BaseController {
                 } else {
 
                         /* Update CBT exercise */
+                        $cbt->tag_id = $tag_id;
                         $cbt->date = $date;
                         $cbt->situation = ucfirst($input['situation']);
                         if (!$cbt->save())

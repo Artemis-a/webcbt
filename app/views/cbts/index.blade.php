@@ -55,6 +55,7 @@ $(document).ready(function() {
                 <tr>
                         <th class="col-width-1">Date</th>
                         <th>Situation</th>
+                        <th>Tags</th>
                         <th>Thoughts</th>
                         <th>Feelings</th>
                         <th>Physical Symptoms</th>
@@ -71,7 +72,17 @@ $(document).ready(function() {
                                 <br />
                                 {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), 'h:i A') }}
                         </td>
-                        <td>{{ $cbt->situation }}</td>
+                        <td>
+                                {{ $cbt->situation }}
+                        </td>
+                        <td>
+                                @define $tag = $cbt->tag
+                                @if (isset($tag))
+                                <span style="color:#{{ $tag['color'] }}; background:#{{ $tag['background'] }};" class="tag">
+                                        {{ $tag['name'] }}
+                                </span>
+                                @endif
+                        </td>
                         <td>
                                 <ul class="list-unstyled">
                                 @foreach ($cbt->cbtThoughts as $thought)
