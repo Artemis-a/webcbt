@@ -57,6 +57,10 @@ THE SOFTWARE.
         {{ HTML::style('css/bootstrap-theme.min.css') }}
         {{ HTML::script('js/bootstrap.min.js') }}
 
+        <!-- Bootstrap Select -->
+        {{ HTML::style('css/bootstrap-select.min.css') }}
+        {{ HTML::script('js/bootstrap-select.min.js') }}
+
 	<!-- Chart.js -->
         {{ HTML::script('js/Chart.min.js') }}
 

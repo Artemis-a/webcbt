@@ -41,5 +41,9 @@ notices and distributed according to the terms of their own licenses.
    HOMEPAGE: https://github.com/lauren/pick-a-color
    LICENSE: The MIT License
 
+9. Bootstrap-select - A custom select for bootstrap using button dropdown
+   HOMEPAGE: http://silviomoreto.github.io/bootstrap-select/
+   LICENSE: The MIT License
+
 Whilst every effort has been made to ensure that information is correct, incase
 of any discrepancies please contact the author(s) of this software.
