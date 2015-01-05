@@ -27,27 +27,56 @@
  * THE SOFTWARE.
  */
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+class Tag extends Eloquent {
 
-Route::group(array('before' => 'auth'), function() {
-        Route::get('/', 'DashboardController@getIndex');
-        Route::controller('dashboard', 'DashboardController');
-        Route::controller('cbts', 'CbtsController');
-        Route::controller('thoughts', 'ThoughtsController');
-        Route::controller('statistics', 'StatisticsController');
-        Route::controller('feelings', 'FeelingsController');
-        Route::controller('symptoms', 'SymptomsController');
-        Route::controller('tags', 'TagsController');
-        Route::controller('help', 'HelpController');
-});
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'tags';
 
-Route::controller('users', 'UsersController');
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+        protected $hidden = ['created_at', 'updated_at'];
+
+	/**
+	 * The attributes that can be mass assigned
+	 *
+	 * @var array
+	 */
+	protected $fillable = ['name', 'color', 'background'];
+
+	/**
+	 * The attributes that cannot be mass assigned
+	 *
+	 * @var array
+	 */
+	protected $guarded = ['id', 'user_id', 'created_at', 'updated_at'];
+
+	public function user()
+	{
+		return $this->belongsTo('User');
+	}
+
+	public static function boot()
+	{
+		parent::boot();
+
+		/* Hook into save event, setup event bindings */
+		Tag::saving(function($content)
+		{
+			/* Set user id on save */
+			$content->user_id = Auth::id();
+		});
+	}
+
+	public function scopeCurUser($query)
+	{
+		return $query->where('user_id', '=', Auth::id());
+	}
+
+}
