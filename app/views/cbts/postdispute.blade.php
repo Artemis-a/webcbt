@@ -47,7 +47,7 @@ $(document).ready(function() {
         var addSymptomsCounter = 0;
         var addBehavioursCounter = 0;
 
-        for (var i = {{$hideStart}}; i <= {{$maxRows}}; i++) {
+        for (var i = {{ $hideStart }}; i <= {{ $maxRows }}; i++) {
                 if ($("[name='feelings[" + i + "]']").val() == 0) {
                         $("#feelings-" + i).hide();
                         addFeelingsCounter++;
@@ -63,7 +63,7 @@ $(document).ready(function() {
         }
 
         /************ Feelings ************/
-        for (var i = 0; i <= {{$maxRows}}; i++) {
+        for (var i = 0; i <= {{ $maxRows }}; i++) {
                 $("#feelings-intensity-" + i).slider({
                         range: "min",
                         value: 0,
@@ -79,11 +79,11 @@ $(document).ready(function() {
                 $("#feelings-intensity-value-" + i).text($("input[name='feelingsintensity[" + i + "]']").val());
         }
 
-        if (addFeelingsCounter < {{$hideStart}}) {
-                addFeelingsCounter = {{$hideStart}};
+        if (addFeelingsCounter < {{ $hideStart }}) {
+                addFeelingsCounter = {{ $hideStart }};
         }
         $("#add-feelings").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addFeelingsCounter > {{ $maxRows }}) {
                                 $("#add-feelings").hide();
                                 break;
@@ -94,7 +94,7 @@ $(document).ready(function() {
         });
 
         /************ Symptoms ************/
-        for (var i = 0; i <= {{$maxRows}}; i++) {
+        for (var i = 0; i <= {{ $maxRows }}; i++) {
                 $("#symptoms-intensity-" + i).slider({
                         range: "min",
                         value: 0,
@@ -110,11 +110,11 @@ $(document).ready(function() {
                 $("#symptoms-intensity-value-" + i).text($("input[name='symptomsintensity[" + i + "]']").val());
         }
 
-        if (addSymptomsCounter < {{$hideStart}}) {
-                addSymptomsCounter = {{$hideStart}};
+        if (addSymptomsCounter < {{ $hideStart }}) {
+                addSymptomsCounter = {{ $hideStart }};
         }
         $("#add-symptoms").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addSymptomsCounter > {{ $maxRows }}) {
                                 $("#add-symptoms").hide();
                                 break;
@@ -125,11 +125,11 @@ $(document).ready(function() {
         });
 
         /************ Behaviours ************/
-        if (addBehavioursCounter < {{$hideStart}}) {
-                addBehavioursCounter = {{$hideStart}};
+        if (addBehavioursCounter < {{ $hideStart }}) {
+                addBehavioursCounter = {{ $hideStart }};
         }
         $("#add-behaviours").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addBehavioursCounter > {{ $maxRows }}) {
                                 $("#add-behaviours").hide();
                                 break;

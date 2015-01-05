@@ -65,7 +65,7 @@ $(document).ready(function() {
         var reframe = 0;
         var rationalize = 0;
 
-        for (var i = {{$hideStart}}; i <= {{$maxRows}}; i++) {
+        for (var i = {{ $hideStart }}; i <= {{ $maxRows }}; i++) {
                 if ($("[name='distortions[" + i + "]']").val() == 0) {
                         $("#distortions-" + i).hide();
                         addDistortions++;
@@ -107,12 +107,12 @@ $(document).ready(function() {
         }
 
         /************ Distortions ************/
-        if (addDistortions < {{$hideStart}}) {
-                addDistortions = {{$hideStart}};
+        if (addDistortions < {{ $hideStart }}) {
+                addDistortions = {{ $hideStart }};
         }
         $("#add-distortions").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
-                        if (addDistortions > {{$maxRows}}) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
+                        if (addDistortions > {{ $maxRows }}) {
                                 $("#add-distortions").hide();
                                 break;
                         }
@@ -122,12 +122,12 @@ $(document).ready(function() {
         });
 
         /************ Balanced thoughts ************/
-        if (addBalancedThoughts < {{$hideStart}}) {
-                addBalancedThoughts = {{$hideStart}};
+        if (addBalancedThoughts < {{ $hideStart }}) {
+                addBalancedThoughts = {{ $hideStart }};
         }
         $("#add-balancedthoughts").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
-                        if (addBalancedThoughts > {{$maxRows}}) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
+                        if (addBalancedThoughts > {{ $maxRows }}) {
                                 $("#add-balancedthoughts").hide();
                                 break;
                         }
@@ -139,11 +139,11 @@ $(document).ready(function() {
         /************** DISPUTE START **************/
 
         /************ forevidence ************/
-        if (forevidence < {{$hideStart}}) {
-                forevidence = {{$hideStart}};
+        if (forevidence < {{ $hideStart }}) {
+                forevidence = {{ $hideStart }};
         }
         $("#add-forevidence").click(function() {
-                if (forevidence > {{$maxRows}}) {
+                if (forevidence > {{ $maxRows }}) {
                         $("#add-forevidence").hide();
                         return;
                 }
@@ -151,11 +151,11 @@ $(document).ready(function() {
                 forevidence++;
         });
         /************ againstevidence ************/
-        if (againstevidence < {{$hideStart}}) {
-                againstevidence = {{$hideStart}};
+        if (againstevidence < {{ $hideStart }}) {
+                againstevidence = {{ $hideStart }};
         }
         $("#add-againstevidence").click(function() {
-                if (againstevidence > {{$maxRows}}) {
+                if (againstevidence > {{ $maxRows }}) {
                         $("#add-againstevidence").hide();
                         return;
                 }
@@ -163,11 +163,11 @@ $(document).ready(function() {
                 againstevidence++;
         });
         /************ experiment ************/
-        if (experiment < {{$hideStart}}) {
-                experiment = {{$hideStart}};
+        if (experiment < {{ $hideStart }}) {
+                experiment = {{ $hideStart }};
         }
         $("#add-experiment").click(function() {
-                if (experiment > {{$maxRows}}) {
+                if (experiment > {{ $maxRows }}) {
                         $("#add-experiment").hide();
                         return;
                 }
@@ -175,11 +175,11 @@ $(document).ready(function() {
                 experiment++;
         });
         /************ survey ************/
-        if (survey < {{$hideStart}}) {
-                survey = {{$hideStart}};
+        if (survey < {{ $hideStart }}) {
+                survey = {{ $hideStart }};
         }
         $("#add-survey").click(function() {
-                if (survey > {{$maxRows}}) {
+                if (survey > {{ $maxRows }}) {
                         $("#add-survey").hide();
                         return;
                 }
@@ -192,9 +192,9 @@ $(document).ready(function() {
                 $("#hypen-{{$i}}").hide();
                 $("#meaning-{{$i}}").hide();
         @endfor
-        var labelmeaning = {{$hideStart}};
+        var labelmeaning = {{ $hideStart }};
         $("#add-labelmeaning").click(function() {
-                if (labelmeaning > {{$maxRows}}) {
+                if (labelmeaning > {{ $maxRows }}) {
                         $("#add-labelmeaning").hide();
                         return;
                 }
@@ -204,11 +204,11 @@ $(document).ready(function() {
                 labelmeaning++;
         });
         /************ advantage ************/
-        if (advantage < {{$hideStart}}) {
-                advantage = {{$hideStart}};
+        if (advantage < {{ $hideStart }}) {
+                advantage = {{ $hideStart }};
         }
         $("#add-advantage").click(function() {
-                if (advantage > {{$maxRows}}) {
+                if (advantage > {{ $maxRows }}) {
                         $("#add-advantage").hide();
                         return;
                 }
@@ -216,11 +216,11 @@ $(document).ready(function() {
                 advantage++;
         });
         /************ disadvantage ************/
-        if (disadvantage < {{$hideStart}}) {
-                disadvantage = {{$hideStart}};
+        if (disadvantage < {{ $hideStart }}) {
+                disadvantage = {{ $hideStart }};
         }
         $("#add-disadvantage").click(function() {
-                if (disadvantage > {{$maxRows}}) {
+                if (disadvantage > {{ $maxRows }}) {
                         $("#add-disadvantage").hide();
                         return;
                 }
@@ -228,11 +228,11 @@ $(document).ready(function() {
                 disadvantage++;
         });
         /************ iftrue ************/
-        if (iftrue < {{$hideStart}}) {
-                iftrue = {{$hideStart}};
+        if (iftrue < {{ $hideStart }}) {
+                iftrue = {{ $hideStart }};
         }
         $("#add-iftrue").click(function() {
-                if (iftrue > {{$maxRows}}) {
+                if (iftrue > {{ $maxRows }}) {
                         $("#add-iftrue").hide();
                         return;
                 }
@@ -240,11 +240,11 @@ $(document).ready(function() {
                 iftrue++;
         });
         /************ reattribution ************/
-        if (reattribution < {{$hideStart}}) {
-                reattribution = {{$hideStart}};
+        if (reattribution < {{ $hideStart }}) {
+                reattribution = {{ $hideStart }};
         }
         $("#add-reattribution").click(function() {
-                if (reattribution > {{$maxRows}}) {
+                if (reattribution > {{ $maxRows }}) {
                         $("#add-reattribution").hide();
                         return;
                 }
@@ -252,11 +252,11 @@ $(document).ready(function() {
                 reattribution++;
         })
         /************ reframe ************/
-        if (reframe < {{$hideStart}}) {
-                reframe = {{$hideStart}};
+        if (reframe < {{ $hideStart }}) {
+                reframe = {{ $hideStart }};
         }
         $("#add-reframe").click(function() {
-                if (reframe > {{$maxRows}}) {
+                if (reframe > {{ $maxRows }}) {
                         $("#add-reframe").hide();
                         return;
                 }
@@ -264,11 +264,11 @@ $(document).ready(function() {
                 reframe++;
         })
         /************ rationalize ************/
-        if (rationalize < {{$hideStart}}) {
-                rationalize = {{$hideStart}};
+        if (rationalize < {{ $hideStart }}) {
+                rationalize = {{ $hideStart }};
         }
         $("#add-rationalize").click(function() {
-                if (rationalize > {{$maxRows}}) {
+                if (rationalize > {{ $maxRows }}) {
                         $("#add-rationalize").hide();
                         return;
                 }

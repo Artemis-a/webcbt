@@ -49,7 +49,7 @@ $(document).ready(function() {
         });
 
         /************ Hide extra rows ************/
-        for (var i = {{$hideStart}}; i <= {{$maxRows}}; i++) {
+        for (var i = {{ $hideStart }}; i <= {{ $maxRows }}; i++) {
                 $("#thoughts-" + i).hide();
                 $("#feelings-" + i).hide();
                 $("#symptoms-" + i).hide();
@@ -57,9 +57,9 @@ $(document).ready(function() {
         }
 
         /************ Thoughts ************/
-        var addThoughtsCounter = {{$hideStart}};
+        var addThoughtsCounter = {{ $hideStart }};
         $("#add-thoughts").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addThoughtsCounter > {{ $maxRows }}) {
                                 $("#add-thoughts").hide();
                                 break;
@@ -70,7 +70,7 @@ $(document).ready(function() {
         });
 
         /************ Feelings ************/
-        for (var i = 0; i <= {{$maxRows}}; i++) {
+        for (var i = 0; i <= {{ $maxRows }}; i++) {
                 $("#feelings-intensity-" + i).slider({
                         range: "min",
                         value: 0,
@@ -86,9 +86,9 @@ $(document).ready(function() {
                 $("#feelings-intensity-value-" + i).text($("#feelings-intensity-" + i).slider("value"));
         }
 
-        var addFeelingsCounter = {{$hideStart}};
+        var addFeelingsCounter = {{ $hideStart }};
         $("#add-feelings").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addFeelingsCounter > {{ $maxRows }}) {
                                 $("#add-feelings").hide();
                                 break;
@@ -99,7 +99,7 @@ $(document).ready(function() {
         });
 
         /************ Symptoms ************/
-        for (var i = 0; i <= {{$maxRows}}; i++) {
+        for (var i = 0; i <= {{ $maxRows }}; i++) {
                 $("#symptoms-intensity-" + i).slider({
                         range: "min",
                         value: 0,
@@ -115,9 +115,9 @@ $(document).ready(function() {
                 $("#symptoms-intensity-value-" + i).text($("#symptoms-intensity-" + i).slider("value"));
         }
 
-        var addSymptomsCounter = {{$hideStart}};
+        var addSymptomsCounter = {{ $hideStart }};
         $("#add-symptoms").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addSymptomsCounter > {{ $maxRows }}) {
                                 $("#add-symptoms").hide();
                                 break;
@@ -128,9 +128,9 @@ $(document).ready(function() {
         });
 
         /************ Behaviours ************/
-        var addBehavioursCounter = {{$hideStart}};
+        var addBehavioursCounter = {{ $hideStart }};
         $("#add-behaviours").click(function() {
-                for (var i = 0; i <= {{$showCount}}; i++) {
+                for (var i = 0; i <= {{ $showCount }}; i++) {
                         if (addBehavioursCounter > {{ $maxRows }}) {
                                 $("#add-behaviours").hide();
                                 break;
