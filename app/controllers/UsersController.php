@@ -46,7 +46,8 @@ class UsersController extends BaseController {
 
 		if (Auth::attempt($login_data))
 		{
-			return Redirect::intended('dashboard');
+			return Redirect::intended('dashboard')
+				->with('alert-success', 'Hi ' . Auth::user()->fullname . ', welcome back !');
 		}
 
 		return Redirect::action('UsersController@getLogin')
