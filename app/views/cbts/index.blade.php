@@ -47,6 +47,21 @@ $(document).ready(function() {
 
 {{ HTML::linkAction('CbtsController@getCreate', 'New CBT Exercise', array(), array('class' => 'btn btn-primary')) }}
 
+<span class="pull-right">
+        <select class="selectpicker" multiple>
+                <option>Resolved</option>
+                <option>Unresolved</option>
+                @if ($tags->count() > 0)
+                <optgroup label="Tags">
+                        @foreach ($tags as $tag)
+                                <option>{{ $tag->name }}</option>
+                        @endforeach
+                </optgroup>
+                @endif
+        </select>
+        <button type="button" class="btn btn-info">Filter</button>
+</span>
+
 <br />
 <br />
 

@@ -39,10 +39,13 @@ class CbtsController extends BaseController {
         {
 		$data = Cbt::curuser()->orderBy('date', 'DESC')->get();
 
+                $tags = Tag::curuser()->orderBy('name', 'ASC')->get();
+
 		if ($data)
 		{
                         return View::make('cbts.index')
                                 ->with('dateformat', $this->dateformat)
+                                ->with('tags', $tags)
                                 ->with('cbts', $data);
 		}
 
