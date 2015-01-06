@@ -46,6 +46,11 @@ class UsersController extends BaseController {
 
 		if (Auth::attempt($login_data))
 		{
+			/* Update last login datetime */
+			$user = User::find(Auth::id());
+			$user->last_login = date('Y-m-d H:i:s', time());
+			$user->save();
+
 			return Redirect::intended('dashboard')
 				->with('alert-success', 'Hi ' . Auth::user()->fullname . ', welcome back !');
 		}

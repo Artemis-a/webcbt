@@ -226,6 +226,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dob` date NOT NULL,
   `dateformat` varchar(255) NOT NULL,
   `timezone` varchar(255) NOT NULL,
+  `last_login` datetime NOT NULL,
+  `options` varchar(255) NOT NULL,
   `status` int(1) NOT NULL,
   `verification_key` varchar(255) NOT NULL,
   `email_verified` int(1) NOT NULL,

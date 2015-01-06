@@ -31,6 +31,8 @@ class DashboardController extends BaseController {
 
         public function getIndex()
         {
+                $user = User::find(Auth::id());
+
                 $exercise_count = Cbt::curuser()->count();
 
                 $unresolved_count = Cbt::curuser()
@@ -52,7 +54,8 @@ class DashboardController extends BaseController {
                         ->with('exercise_count', $exercise_count)
                         ->with('unresolved_count', $unresolved_count)
                         ->with('undisputed_count', $undisputed_count)
-                        ->with('diff_days', $diff_days);
+                        ->with('diff_days', $diff_days)
+                        ->with('dateformat', $user->dateformat);
         }
 
 }
