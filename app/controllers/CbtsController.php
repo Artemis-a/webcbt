@@ -37,16 +37,16 @@ class CbtsController extends BaseController {
 
         public function getIndex()
         {
-		$data = Cbt::curuser()->orderBy('date', 'DESC')->get();
+		$cbts = Cbt::curuser()->orderBy('date', 'DESC')->paginate(10);
 
                 $tags = Tag::curuser()->orderBy('name', 'ASC')->get();
 
-		if ($data)
+		if ($cbts)
 		{
                         return View::make('cbts.index')
                                 ->with('dateformat', $this->dateformat)
                                 ->with('tags', $tags)
-                                ->with('cbts', $data);
+                                ->with('cbts', $cbts);
 		}
 
 		return Redirect::action('DashboardController@getIndex')

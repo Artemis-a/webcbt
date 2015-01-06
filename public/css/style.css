@@ -239,3 +239,7 @@ div.tab-content-title {
         padding: 4px;
         text-decoration: none;
 }
+
+.paginator-padding {
+        margin-top: 100px;
+}

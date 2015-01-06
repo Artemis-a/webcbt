@@ -226,4 +226,8 @@ $(document).ready(function() {
         </tbody>
 </table>
 
+<div class="text-center paginator-padding">
+        {{ $cbts->links() }}
+</div>
+
 @stop
