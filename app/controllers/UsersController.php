@@ -123,11 +123,13 @@ class UsersController extends BaseController {
 					$message
 						->to(Input::get('email'), Input::get('username'))
 						->subject('Welcome to ' . Config::get('webcbt.site_name') .
-							'. Your account has been created.'
+							' - Your account has been created'
 						);
 				});
 			} catch (Exception $e) {
-				Log::warning('Failed to send email.');
+	                        return Redirect::action('UsersController@getLogin')
+					->with('alert-success', 'User created. Please login below.')
+					->with('alert-danger', 'Error sending email.');
 			}
 
                         return Redirect::action('UsersController@getLogin')
@@ -169,7 +171,28 @@ class UsersController extends BaseController {
 
 				if ($user->save())
 				{
-					/* TODO : send email */
+					/* Send email */
+					try
+					{
+						$param = array(
+							'key' => $user->reset_password_key,
+							'username' => $user->username,
+						);
+						Mail::send('emails.users.forgot', $param, function($message) use ($user) {
+							$message
+								->to($user->email, $user->username)
+								->subject('Reset password');
+						});
+					} catch (Exception $e) {
+						/* Reset everything */
+						$user->reset_password_key = NULL;
+						$user->reset_password_date = NULL;
+						$user->save();
+
+			                        return Redirect::back()->withInput()
+							->with('alert-danger', 'Error sending email.');
+					}
+
 					return Redirect::action('UsersController@getLogin')
 						->with('alert-success', 'Password resetted. Please check your email.');
 				}
