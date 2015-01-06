@@ -56,8 +56,13 @@ $(document).ready(function() {
         {{ Form::password('password') }}
 {{ Form::closeGroup() }}
 
-{{ Form::submit('Submit') }}
-{{ HTML::linkAction('UsersController@getRegister', 'Register') }}
+{{ Form::submit('Sign in') }}
+
+<br /><br />
+
+{{ HTML::linkAction('UsersController@getRegister', 'Create Account', array(), array('class' => 'btn btn-primary')) }}
+
+<span class="link-pad"></link>
 {{ HTML::linkAction('UsersController@getForgot', 'Forgot password ?') }}
 
 {{ Form::close() }}

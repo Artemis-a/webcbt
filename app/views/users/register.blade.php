@@ -60,8 +60,10 @@ $(document).ready(function() {
         {{ Form::text('email') }}
 {{ Form::closeGroup() }}
 
-{{ Form::submit('Submit') }}
-{{ HTML::linkAction('UsersController@getLogin', 'Login') }}
+{{ Form::submit('Submit') }}<br /><br />
+
+Already registered ?
+{{ HTML::linkAction('UsersController@getLogin', 'Login here') }}
 
 {{ Form::close() }}
 

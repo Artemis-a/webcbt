@@ -53,8 +53,7 @@ $(document).ready(function() {
 {{ Form::closeGroup() }}
 
 {{ Form::submit('Submit') }}
-{{ HTML::linkAction('UsersController@getLogin', 'Login') }}
-{{ HTML::linkAction('UsersController@getRegister', 'Register') }}
+{{ HTML::linkAction('UsersController@getLogin', 'Cancel') }}
 
 {{ Form::close() }}
 
