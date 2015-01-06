@@ -109,7 +109,20 @@ class UsersController extends BaseController {
                                         ->with('alert-danger', 'Failed to create user.');
 			}
 
-                        /* Everything ok */
+			/* Send email on successful registration */
+			try
+			{
+				Mail::send('emails.users.register', Input::all(), function($message) {
+					$message
+						->to(Input::get('email'), Input::get('username'))
+						->subject('Welcome to ' . Config::get('webcbt.site_name') .
+							'. Your account has been created.'
+						);
+				});
+			} catch (Exception $e) {
+				Log::warning('Failed to send email.');
+			}
+
                         return Redirect::action('UsersController@getLogin')
                                 ->with('alert-success', 'User created. Please login below.');
                 }
