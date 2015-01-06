@@ -233,6 +233,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email_verified` int(1) NOT NULL,
   `admin_verified` int(1) NOT NULL,
   `retry_count` int(1) NOT NULL,
+  `reset_password_key` varchar(255) DEFAULT NULL,
+  `reset_password_date` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `deleted_at` datetime DEFAULT NULL,
