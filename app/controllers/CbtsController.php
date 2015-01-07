@@ -37,7 +37,40 @@ class CbtsController extends BaseController {
 
         public function getIndex()
         {
-		$cbts = Cbt::curuser()->orderBy('date', 'DESC')->paginate(10);
+                $query = Cbt::curuser()->orderBy('date', 'DESC');
+
+                /* Filter CBT exercises */
+                $options = Input::get('options');
+                $options_selected = array();
+                if ($options)
+                {
+                        $types = NULL;
+                        $tags = NULL;
+
+                        foreach ($options as $option)
+                        {
+                                $options_selected[$option] = 1;
+                                if ($option == 'R')
+                                {
+                                        $types[] = '1';
+                                } else if ($option == 'U')
+                                {
+                                        $types[] = '0';
+                                } else {
+                                        $tags[] = $option;
+                                }
+                        }
+                        if ($types)
+                        {
+                                $query->whereIn('is_resolved', $types);
+                        }
+                        if ($tags)
+                        {
+                                $query->whereIn('tag_id', $tags);
+                        }
+                }
+
+		$cbts = $query->paginate(10);
 
                 $tags = Tag::curuser()->orderBy('name', 'ASC')->get();
 
@@ -46,7 +79,8 @@ class CbtsController extends BaseController {
                         return View::make('cbts.index')
                                 ->with('dateformat', $this->dateformat)
                                 ->with('tags', $tags)
-                                ->with('cbts', $cbts);
+                                ->with('cbts', $cbts)
+                                ->with('options_selected', $options_selected);
 		}
 
 		return Redirect::action('DashboardController@getIndex')

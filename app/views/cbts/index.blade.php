@@ -48,18 +48,22 @@ $(document).ready(function() {
 {{ HTML::linkAction('CbtsController@getCreate', 'New CBT Exercise', array(), array('class' => 'btn btn-primary')) }}
 
 <span class="pull-right">
-        <select class="selectpicker" multiple>
-                <option>Resolved</option>
-                <option>Unresolved</option>
+        <form name="filter" method="GET">
+        <select name="options[]" class="selectpicker" multiple title='All'>
+                <option value="R" {{ (isset($options_selected['R'])) ? "selected" : '' }}>Resolved</option>
+                <option value="U" {{ (isset($options_selected['U'])) ? "selected" : '' }}>Unresolved</option>
                 @if ($tags->count() > 0)
                 <optgroup label="Tags">
                         @foreach ($tags as $tag)
-                                <option>{{ $tag->name }}</option>
+                                <option value="{{ $tag->id }}" {{ (isset($options_selected[$tag->id])) ? "selected" : '' }}>
+                                        {{ $tag->name }}
+                                </option>
                         @endforeach
                 </optgroup>
                 @endif
         </select>
-        <button type="button" class="btn btn-info">Filter</button>
+        <input type="submit" class="btn btn-info" value="Go">
+        </form>
 </span>
 
 <br />

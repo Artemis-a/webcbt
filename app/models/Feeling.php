@@ -50,7 +50,7 @@ class Feeling extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name'];
+	protected $fillable = ['name', 'type'];
 
 	/**
 	 * The attributes that cannot be mass assigned

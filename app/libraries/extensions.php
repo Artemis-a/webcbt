@@ -32,6 +32,13 @@ Form::macro('rawLabel', function($name, $value = null, $options = array())
 	return '<label>' . $name . '</label>';
 });
 
+/* This function allows variable declarations in blade templates using @define */
 Blade::extend(function($value) {
     return preg_replace('/\@define(.+)/', '<?php ${1}; ?>', $value);
+});
+
+/* This function appends input query parameters to paginator links */
+View::composer(Paginator::getViewName(), function($view) {
+	$query = array_except(Input::query(), Paginator::getPageName());
+	$view->paginator->appends($query);
 });
