@@ -35,7 +35,7 @@ class TagsController extends BaseController {
 
                 if (!$tags)
                 {
-                        return Redirect::action('DashboardController@getIndex')
+                        return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Tags not found.');
                 }
 

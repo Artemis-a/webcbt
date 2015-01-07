@@ -35,7 +35,7 @@ class SymptomsController extends BaseController {
 
                 if (!$data)
                 {
-                        return Redirect::action('DashboardController@getIndex')
+                        return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Physical symptoms not found.');
                 }
 

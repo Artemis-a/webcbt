@@ -99,11 +99,6 @@ THE SOFTWARE.
 			<ul class="nav navbar-nav">
 		                <li>
 					{{ HTML::decode(HTML::linkAction(
-		                        'DashboardController@getIndex',
-		                        '<i class="fa fa-fw fa-dashboard"></i> Dashboard')) }}
-				</li>
-		                <li>
-					{{ HTML::decode(HTML::linkAction(
 		                        'CbtsController@getIndex',
 		                        '<i class="fa fa-fw fa-list"></i> CBT Exercises')) }}
 				</li>

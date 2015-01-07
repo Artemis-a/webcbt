@@ -53,7 +53,7 @@ class UsersController extends BaseController {
 			$user->reset_password_date = NULL;
 			$user->save();
 
-			return Redirect::intended('dashboard')
+			return Redirect::intended('cbts')
 				->with('alert-success', 'Hi ' . Auth::user()->fullname . ', welcome back !');
 		}
 
@@ -260,6 +260,11 @@ class UsersController extends BaseController {
 		$cur_user = $users->first();
 
                 $reset_date = date_create_from_format('Y-m-d H:i:s', $cur_user->reset_password_date);
+		if (!$reset_date)
+		{
+			return Redirect::action('UsersController@getForgot')
+				->with('alert-danger', 'Internal error has occured. Please restart the forgot password process again.');
+		}
                 $todays_date = date_create('now');
 		$diff_ts = $todays_date->getTimestamp() - $reset_date->getTimestamp();
 
@@ -325,6 +330,11 @@ class UsersController extends BaseController {
 		$cur_user = $users->first();
 
                 $reset_date = date_create_from_format('Y-m-d H:i:s', $cur_user->reset_password_date);
+		if (!$reset_date)
+		{
+			return Redirect::action('UsersController@getForgot')
+				->with('alert-danger', 'Internal error has occured. Please restart the forgot password process again.');
+		}
                 $todays_date = date_create('now');
 		$diff_ts = $todays_date->getTimestamp() - $reset_date->getTimestamp();
 

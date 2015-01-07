@@ -39,7 +39,7 @@
 */
 
 Route::group(array('before' => 'auth'), function() {
-        Route::get('/', 'DashboardController@getIndex');
+        Route::get('/', 'CbtsController@getIndex');
         Route::controller('dashboard', 'DashboardController');
         Route::controller('cbts', 'CbtsController');
         Route::controller('thoughts', 'ThoughtsController');

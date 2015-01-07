@@ -86,8 +86,7 @@ class CbtsController extends BaseController {
                                 ->with('options_selected', $options_selected);
 		}
 
-		return Redirect::action('DashboardController@getIndex')
-			->with('alert-danger', 'No data.');
+		return View::make('cbts.first');
         }
 
         public function getCreate()
@@ -125,6 +124,11 @@ class CbtsController extends BaseController {
                         explode('|', $this->dateformat)[0] . ' h:i A',
                         $input['date']
                 );
+                if (!$temp)
+                {
+                        return Redirect::back()->withInput()
+                                ->with('alert-danger', 'Invalid date.');
+                }
                 $date = date_format($temp, 'Y-m-d H:i:s');
 
                 $rules = array(
@@ -488,6 +492,10 @@ class CbtsController extends BaseController {
                 }
 
                 $temp = date_create_from_format('Y-m-d H:i:s', $cbt->date);
+                if (!$temp)
+                {
+                        $date = '';
+                }
                 $date = date_format($temp, explode('|', $this->dateformat)[0] . ' h:i A');
 
                 $feelings_list = array(0 => 'Please select...') +
@@ -538,6 +546,11 @@ class CbtsController extends BaseController {
                         explode('|', $this->dateformat)[0] . ' h:i A',
                         $input['date']
                 );
+                if (!$temp)
+                {
+                        return Redirect::back()->withInput()
+                                ->with('alert-danger', 'Invalid date.');
+                }
 
                 $date = date_format($temp, 'Y-m-d H:i:s');
 
@@ -773,9 +786,6 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Invalid access.');
                 }
 
-                $temp = date_create_from_format('Y-m-d H:i:s', $cbt->date);
-                $date = date_format($temp, explode('|', $this->dateformat)[0] . ' h:i A');
-
                 $feelings_list = array(0 => 'Please select...') +
                         Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
@@ -783,7 +793,6 @@ class CbtsController extends BaseController {
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.analysis')
-                        ->with('date', $date)
                         ->with('dateformat', $this->dateformat)
                         ->with('cbt', $cbt)
                         ->with('feelings_list', $feelings_list)

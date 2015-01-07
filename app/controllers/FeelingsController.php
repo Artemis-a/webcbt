@@ -35,7 +35,7 @@ class FeelingsController extends BaseController {
 
                 if (!$data)
                 {
-                        return Redirect::action('DashboardController@getIndex')
+                        return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Feelings not found.');
                 }
 
