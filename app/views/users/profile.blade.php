@@ -98,7 +98,10 @@ $(document).ready(function() {
         <td>Timezone</td><td>:</td><td>{{ $timezone_options[$user->timezone] }}</td>
 </tr>
 <tr>
-        <td>Created</td><td>:</td><td>{{ $user->created_at }}</td>
+        <td>Last Login</td><td>:</td><td>{{ date_format(date_create_from_format('Y-m-d H:i:s', $user->last_login), explode('|', $user->dateformat)[0] . ' h:i A') }}</td>
+</tr>
+<tr>
+        <td>Created On</td><td>:</td><td>{{ date_format(date_create_from_format('Y-m-d H:i:s', $user->created_at), explode('|', $user->dateformat)[0]) }}</td>
 </tr>
 </table>
 

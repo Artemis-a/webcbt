@@ -88,7 +88,10 @@ $(document).ready(function() {
                                 {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), 'h:i A') }}
                         </td>
                         <td>
-                                {{ $cbt->situation }}
+                                {{ $cbt->situation }}<br />
+                                <span class="small-text">
+                                created on {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->created_at), explode('|', $dateformat)[0]) }}
+                                </span>
                         </td>
                         <td>
                                 @define $tag = $cbt->tag

@@ -15,6 +15,11 @@ body {
         font-size: 23px;
 }
 
+.small-text {
+        color: #888;
+        font-size:12px;
+}
+
 /* Page layout */
 #page-wrapper {
         padding-left: 20px;
