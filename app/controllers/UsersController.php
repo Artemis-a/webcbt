@@ -90,7 +90,9 @@ class UsersController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+		else
+		{
 
                         /* Create a symptom */
                         $user_data = array(
@@ -126,7 +128,9 @@ class UsersController extends BaseController {
 							' - Your account has been created'
 						);
 				});
-			} catch (Exception $e) {
+			}
+			catch (Exception $e)
+			{
 	                        return Redirect::action('UsersController@getLogin')
 					->with('alert-success', 'User created. Please login below.')
 					->with('alert-danger', 'Error sending email.');
@@ -154,7 +158,9 @@ class UsersController extends BaseController {
 			if ($user)
 			{
 				$reset_password = true;
-			} else {
+			}
+			else
+			{
 				$user = User::where('email', '=', $input['userinput'])->first();
 				if ($user)
 				{
@@ -183,7 +189,9 @@ class UsersController extends BaseController {
 								->to($user->email, $user->username)
 								->subject('Reset password');
 						});
-					} catch (Exception $e) {
+					}
+					catch (Exception $e)
+					{
 						/* Reset everything */
 						$user->reset_password_key = NULL;
 						$user->reset_password_date = NULL;
@@ -339,7 +347,9 @@ class UsersController extends BaseController {
 		if ($cur_user->save()) {
 			return Redirect::action('UsersController@getLogin')
 				->with('alert-success', 'Password updated. Please login again.');
-		} else {
+		}
+		else
+		{
 			return Redirect::action('UsersController@getLogin')
 				->with('alert-danger', 'Failed to update password.');
 		}
@@ -365,12 +375,16 @@ class UsersController extends BaseController {
 			{
 				return Redirect::to('users/login')
 					->with('alert-success', 'User verification successful. Please login below.');
-			} else {
+			}
+			else
+			{
 				return Redirect::to('users/login')
 					->with('alert-danger', 'User verification failed.');
 			}
 
-		} else {
+		}
+		else
+		{
 		        return Redirect::to('users/login')
                                 ->with('alert-danger', 'User verification failed.');
 		}
@@ -466,7 +480,9 @@ class UsersController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+		else
+		{
 
                         /* Update user */
                         $user->fullname = $input['fullname'];

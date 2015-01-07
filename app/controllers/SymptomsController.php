@@ -63,7 +63,9 @@ class SymptomsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Create a symptom */
                         $symptom_data = array(
@@ -118,7 +120,9 @@ class SymptomsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Update a symptom */
                         $data->name = $input['name'];
@@ -157,7 +161,9 @@ class SymptomsController extends BaseController {
 		{
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-success', 'Physical symptom deleted successfully.');
-                } else {
+                }
+                else
+                {
 		        return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete physical symptom.');
 		}

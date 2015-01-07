@@ -53,10 +53,13 @@ class CbtsController extends BaseController {
                                 if ($option == 'R')
                                 {
                                         $types[] = '1';
-                                } else if ($option == 'U')
+                                }
+                                else if ($option == 'U')
                                 {
                                         $types[] = '0';
-                                } else {
+                                }
+                                else
+                                {
                                         $tags[] = $option;
                                 }
                         }
@@ -112,7 +115,9 @@ class CbtsController extends BaseController {
                 if ($input['tag'] <= 0)
                 {
                         $tag_id = null;
-                } else {
+                }
+                else
+                {
                         $tag_id = $input['tag'];
                 }
 
@@ -132,7 +137,9 @@ class CbtsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Create a CBT entry */
                         $cbt_data = array(
@@ -311,7 +318,9 @@ class CbtsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Delete old and then add feelings */
                         CbtFeeling::where('cbt_id', '=', $id)
@@ -426,7 +435,9 @@ class CbtsController extends BaseController {
                 {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'CBT exercise marked as resolved.');
-                } else {
+                }
+                else
+                {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to mark CBT exercise as resolved.');
                 }
@@ -453,7 +464,9 @@ class CbtsController extends BaseController {
                 {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'CBT exercise marked as unresolved.');
-                } else {
+                }
+                else
+                {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to mark CBT exercise as unresolved.');
                 }
@@ -515,7 +528,9 @@ class CbtsController extends BaseController {
                 if ($input['tag'] <= 0)
                 {
                         $tag_id = null;
-                } else {
+                }
+                else
+                {
                         $tag_id = $input['tag'];
                 }
 
@@ -536,7 +551,9 @@ class CbtsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Update CBT exercise */
                         $cbt->tag_id = $tag_id;
@@ -565,7 +582,9 @@ class CbtsController extends BaseController {
                                                         'balanced_thoughts' => '',
                                                 );
                                         }
-                                } else {
+                                }
+                                else
+                                {
                                         /* if index >= 100 then its a old thought */
                                         $thought = CbtThought::find($index);
 
@@ -588,7 +607,9 @@ class CbtsController extends BaseController {
                                                         return Redirect::back()->withInput()
                                                                 ->with('alert-danger', 'Failed to delete old thoughts.');
                                                 }
-                                        } else {
+                                        }
+                                        else
+                                        {
                                                 /* If changed, update thought */
                                                 if ($thought->thought == ucfirst($row))
                                                 {
@@ -729,7 +750,9 @@ class CbtsController extends BaseController {
                 {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'CBT exercise deleted successfully.');
-                } else {
+                }
+                else
+                {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete CBT exercise.');
                 }

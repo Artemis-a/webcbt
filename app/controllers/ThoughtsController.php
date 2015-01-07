@@ -78,7 +78,9 @@ class ThoughtsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Delete old and then add distortions */
                         CbtThoughtDistortion::where('cbt_thought_id', '=', $id)->delete();

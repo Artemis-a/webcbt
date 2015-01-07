@@ -63,7 +63,9 @@ class FeelingsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Create a feeling */
                         $feeling_data = array(
@@ -118,7 +120,9 @@ class FeelingsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Update a feeling */
                         $data->name = $input['name'];
@@ -157,7 +161,9 @@ class FeelingsController extends BaseController {
                 {
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-success', 'Feeling deleted successfully.');
-                } else {
+                }
+                else
+                {
 		        return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete feeling.');
 		}

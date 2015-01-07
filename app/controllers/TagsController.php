@@ -64,7 +64,9 @@ class TagsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Create a tag */
                         $tag_data = array(
@@ -120,7 +122,9 @@ class TagsController extends BaseController {
                 if ($validator->fails())
                 {
                         return Redirect::back()->withInput()->withErrors($validator);
-                } else {
+                }
+                else
+                {
 
                         /* Update a tag */
                         $tag->name = $input['name'];
@@ -160,7 +164,9 @@ class TagsController extends BaseController {
 		{
                         return Redirect::action('TagsController@getIndex')
                                 ->with('alert-success', 'Tag deleted successfully.');
-                } else {
+                }
+                else
+                {
 		        return Redirect::action('TagsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete tag.');
 		}

@@ -130,7 +130,9 @@ class StatisticsController extends BaseController {
 
                         if ($feelings_before_rows[$feeling->id] <= 0) {
                                 $average_value = 0;
-                        } else {
+                        }
+                        else
+                        {
                                 $average_value = (int)($result / $feelings_before_rows[$feeling->id]);
                         }
 
@@ -150,7 +152,9 @@ class StatisticsController extends BaseController {
 
                         if ($feelings_after_rows[$feeling->id] <= 0) {
                                 $average_value = 0;
-                        } else {
+                        }
+                        else
+                        {
                                 $average_value = (int)($result / $feelings_after_rows[$feeling->id]);
                         }
 
@@ -208,7 +212,9 @@ class StatisticsController extends BaseController {
 
                         if ($symptoms_before_rows[$symptom->id] <= 0) {
                                 $average_value = 0;
-                        } else {
+                        }
+                        else
+                        {
                                 $average_value = (int)($result / $symptoms_before_rows[$symptom->id]);
                         }
 
@@ -228,7 +234,9 @@ class StatisticsController extends BaseController {
 
                         if ($symptoms_after_rows[$symptom->id] <= 0) {
                                 $average_value = 0;
-                        } else {
+                        }
+                        else
+                        {
                                 $average_value = (int)($result / $symptoms_after_rows[$symptom->id]);
                         }
 
