@@ -70,25 +70,25 @@ li.list-pad {
 
 a.link-pending {
         color: red;
-        text-decoration:none;
+        text-decoration:underline;
 }
 
 a.link-completed {
         color: green;
-        text-decoration:none;
-}
-
-a.link-edit {
-        text-decoration:none;
+        text-decoration:underline;
 }
 
 a.link-pending:hover {
         color: red;
-        text-decoration:none;
+        text-decoration:underline;
 }
 
 a.link-completed:hover {
         color: green;
+        text-decoration:underline;
+}
+
+a.link-edit {
         text-decoration:none;
 }
 

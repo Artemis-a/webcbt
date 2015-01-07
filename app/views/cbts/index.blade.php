@@ -162,7 +162,7 @@ $(document).ready(function() {
                         <td>
                                 <!-- Split button -->
                                 <div class="btn-group">
-                                <button type="button" class="btn btn-primary">Actions</button>
+                                <button type="button" class="btn btn-primary" data-toggle="dropdown">Actions</button>
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
