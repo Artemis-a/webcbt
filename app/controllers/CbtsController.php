@@ -263,7 +263,6 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Everything ok */
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'CBT exercise added successfully.');
                 }
@@ -278,7 +277,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -306,7 +305,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -412,7 +411,6 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Everything ok */
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'CBT exercise completed successfully.');
                 }
@@ -427,7 +425,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -435,16 +433,14 @@ class CbtsController extends BaseController {
 
                 $cbt->is_resolved = 1;
 
-                if ($cbt->save())
-                {
-	                return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-success', 'CBT exercise marked as resolved.');
-                }
-                else
+                if (!$cbt->save())
                 {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to mark CBT exercise as resolved.');
                 }
+
+                return Redirect::action('CbtsController@getIndex')
+                        ->with('alert-success', 'CBT exercise marked as resolved.');
         }
 
         public function putUnresolved($id)
@@ -456,7 +452,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -464,16 +460,14 @@ class CbtsController extends BaseController {
 
                 $cbt->is_resolved = 0;
 
-                if ($cbt->save())
-                {
-	                return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-success', 'CBT exercise marked as unresolved.');
-                }
-                else
+                if (!$cbt->save())
                 {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to mark CBT exercise as unresolved.');
                 }
+
+                return Redirect::action('CbtsController@getIndex')
+                        ->with('alert-success', 'CBT exercise marked as unresolved.');
         }
 
         public function getEdit($id)
@@ -485,7 +479,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -525,7 +519,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -737,7 +731,6 @@ class CbtsController extends BaseController {
                                 }
                         }
 
-                        /* Everything ok */
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'CBT exercise updated successfully.');
                 }
@@ -753,22 +746,20 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
                 }
 
-                if ($cbt->delete())
-                {
-	                return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-success', 'CBT exercise deleted successfully.');
-                }
-                else
+                if (!$cbt->delete())
                 {
 	                return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete CBT exercise.');
                 }
+
+                return Redirect::action('CbtsController@getIndex')
+                        ->with('alert-success', 'CBT exercise deleted successfully.');
         }
 
         public function getAnalysis($id)
@@ -780,7 +771,7 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Cbt exercise not found.');
                 }
 
-                if ($cbt['user_id'] != Auth::id())
+                if ($cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
