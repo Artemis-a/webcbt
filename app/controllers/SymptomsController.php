@@ -31,16 +31,15 @@ class SymptomsController extends BaseController {
 
         public function getIndex()
         {
-		$data = Symptom::curuser()->orderBy('name', 'ASC')->get();
+		$symptom = Symptom::curuser()->orderBy('name', 'ASC')->get();
 
-                if (!$data)
+                if (!$symptom)
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Physical symptoms not found.');
                 }
 
-                /* Everything ok */
-                return View::make('symptoms.index')->with('symptoms', $data);
+                return View::make('symptoms.index')->with('symptoms', $symptom);
         }
 
         public function getCreate()
@@ -78,7 +77,6 @@ class SymptomsController extends BaseController {
                                         ->with('alert-danger', 'Failed to create physical symptom.');
 			}
 
-                        /* Everything ok */
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-success', 'Physical symptom successfully created.');
                 }
@@ -86,22 +84,22 @@ class SymptomsController extends BaseController {
 
         public function getEdit($id)
         {
-		$data = Symptom::curuser()->find($id);
+		$symptom = Symptom::curuser()->find($id);
 
-                if (!$data)
+                if (!$symptom)
                 {
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Physical symptom not found.');
                 }
 
-                return View::make('symptoms.edit')->with('symptom', $data);
+                return View::make('symptoms.edit')->with('symptom', $symptom);
         }
 
         public function postEdit($id)
         {
-                $data = Symptom::curuser()->find($id);
+                $symptom = Symptom::curuser()->find($id);
 
-                if (!$data)
+                if (!$symptom)
                 {
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Physical symptom not found.');
@@ -123,16 +121,14 @@ class SymptomsController extends BaseController {
                 }
                 else
                 {
-
                         /* Update a symptom */
-                        $data->name = $input['name'];
-			if (!$data->save())
+                        $symptom->name = $input['name'];
+			if (!$symptom->save())
 			{
 			        return Redirect::back()->withInput()
                                         ->with('alert-danger', 'Failed to udpate physical symptom.');
 			}
 
-                        /* Everything ok */
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-success', 'Physical symptom successfully udpated.');
                 }
@@ -140,16 +136,16 @@ class SymptomsController extends BaseController {
 
         public function deleteDestroy($id)
         {
-                $data = Symptom::curuser()->find($id);
+                $symptom = Symptom::curuser()->find($id);
 
-                if (!$data)
+                if (!$symptom)
                 {
                         return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Physical symptom not found.');
                 }
 
                 /* Check if symptom is already in use */
-                $count = CbtSymptom::where('symptom_id', '=', $id)->count() > 0;
+                $count = CbtSymptom::where('symptom_id', '=', $id)->count();
                 if ($count > 0)
                 {
                         return Redirect::action('SymptomsController@getIndex')
@@ -157,16 +153,14 @@ class SymptomsController extends BaseController {
                 }
 
                 /* Delete a symptom */
-		if ($data->delete())
+		if (!$symptom->delete())
 		{
-                        return Redirect::action('SymptomsController@getIndex')
-                                ->with('alert-success', 'Physical symptom deleted successfully.');
-                }
-                else
-                {
 		        return Redirect::action('SymptomsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete physical symptom.');
-		}
+                }
+
+                return Redirect::action('SymptomsController@getIndex')
+                        ->with('alert-success', 'Physical symptom deleted successfully.');
         }
 
         public function getStats($id)

@@ -31,16 +31,15 @@ class FeelingsController extends BaseController {
 
         public function getIndex()
         {
-		$data = Feeling::curuser()->orderBy('name', 'ASC')->get();
+		$feelings = Feeling::curuser()->orderBy('name', 'ASC')->get();
 
-                if (!$data)
+                if (!$feelings)
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Feelings not found.');
                 }
 
-                /* Everything ok */
-                return View::make('feelings.index')->with('feelings', $data);
+                return View::make('feelings.index')->with('feelings', $feelings);
         }
 
         public function getCreate()
@@ -78,7 +77,6 @@ class FeelingsController extends BaseController {
                                         ->with('alert-danger', 'Failed to create feeling.');
 			}
 
-                        /* Everything ok */
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-success', 'Feeling successfully created.');
                 }
@@ -86,22 +84,22 @@ class FeelingsController extends BaseController {
 
         public function getEdit($id)
         {
-		$data = Feeling::curuser()->find($id);
+		$feeling = Feeling::curuser()->find($id);
 
-                if (!$data)
+                if (!$feeling)
                 {
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Feeling not found.');
                 }
 
-                return View::make('feelings.edit')->with('feeling', $data);
+                return View::make('feelings.edit')->with('feeling', $feeling);
         }
 
         public function postEdit($id)
         {
-                $data = Feeling::curuser()->find($id);
+                $feeling = Feeling::curuser()->find($id);
 
-                if (!$data)
+                if (!$feeling)
                 {
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Feeling not found.');
@@ -125,14 +123,13 @@ class FeelingsController extends BaseController {
                 {
 
                         /* Update a feeling */
-                        $data->name = $input['name'];
-			if (!$data->save())
+                        $feeling->name = $input['name'];
+			if (!$feeling->save())
 			{
 			        return Redirect::back()->withInput()
                                         ->with('alert-danger', 'Failed to udpate feeling.');
 			}
 
-                        /* Everything ok */
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-success', 'Feeling successfully udpated.');
                 }
@@ -140,16 +137,16 @@ class FeelingsController extends BaseController {
 
         public function deleteDestroy($id)
         {
-                $data = Feeling::curuser()->find($id);
+                $feeling = Feeling::curuser()->find($id);
 
-                if (!$data)
+                if (!$feeling)
                 {
                         return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Feeling not found.');
                 }
 
                 /* Check if feeling is already in use */
-                $count = CbtFeeling::where('feeling_id', '=', $id)->count() > 0;
+                $count = CbtFeeling::where('feeling_id', '=', $id)->count();
                 if ($count > 0)
                 {
                         return Redirect::action('FeelingsController@getIndex')
@@ -157,16 +154,14 @@ class FeelingsController extends BaseController {
                 }
 
                 /* Delete a feeling */
-		if ($data->delete())
-                {
-                        return Redirect::action('FeelingsController@getIndex')
-                                ->with('alert-success', 'Feeling deleted successfully.');
-                }
-                else
+		if (!$feeling->delete())
                 {
 		        return Redirect::action('FeelingsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete feeling.');
-		}
+                }
+
+                return Redirect::action('FeelingsController@getIndex')
+                        ->with('alert-success', 'Feeling deleted successfully.');
         }
 
         public function getStats($id)
