@@ -193,11 +193,14 @@ class CbtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $feelings[] = array(
-                                                'feeling_id' => $row,
-                                                'intensity' => $feelingsintensity[$row_id],
-                                                'status' => 'B',
-                                        );
+                                        if (Feeling::curuser()->find($row))
+                                        {
+                                                $feelings[] = array(
+                                                        'feeling_id' => $row,
+                                                        'intensity' => $feelingsintensity[$row_id],
+                                                        'status' => 'B',
+                                                );
+                                        }
                                 }
                         }
 
@@ -219,11 +222,14 @@ class CbtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $symptoms[] = array(
-                                                'symptom_id' => $row,
-                                                'intensity' => $symptomsintensity[$row_id],
-                                                'status' => 'B',
-                                        );
+                                        if (Symptom::curuser()->find($row))
+                                        {
+                                                $symptoms[] = array(
+                                                        'symptom_id' => $row,
+                                                        'intensity' => $symptomsintensity[$row_id],
+                                                        'status' => 'B',
+                                                );
+                                        }
                                 }
                         }
 
@@ -335,11 +341,14 @@ class CbtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $feelings[] = array(
-                                                'feeling_id' => $row,
-                                                'intensity' => $feelingsintensity[$row_id],
-                                                'status' => 'A',
-                                        );
+                                        if (Feeling::curuser()->find($row))
+                                        {
+                                                $feelings[] = array(
+                                                        'feeling_id' => $row,
+                                                        'intensity' => $feelingsintensity[$row_id],
+                                                        'status' => 'A',
+                                                );
+                                        }
                                 }
                         }
 
@@ -364,11 +373,14 @@ class CbtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $symptoms[] = array(
-                                                'symptom_id' => $row,
-                                                'intensity' => $symptomsintensity[$row_id],
-                                                'status' => 'A',
-                                        );
+                                        if (Symptom::curuser()->find($row))
+                                        {
+                                                $symptoms[] = array(
+                                                        'symptom_id' => $row,
+                                                        'intensity' => $symptomsintensity[$row_id],
+                                                        'status' => 'A',
+                                                );
+                                        }
                                 }
                         }
 
@@ -655,11 +667,14 @@ class CbtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $feelings[] = array(
-                                                'feeling_id' => $row,
-                                                'intensity' => $feelingsintensity[$row_id],
-                                                'status' => 'B',
-                                        );
+                                        if (Feeling::curuser()->find($row))
+                                        {
+                                                $feelings[] = array(
+                                                        'feeling_id' => $row,
+                                                        'intensity' => $feelingsintensity[$row_id],
+                                                        'status' => 'B',
+                                                );
+                                        }
                                 }
                         }
 
@@ -684,11 +699,14 @@ class CbtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $symptoms[] = array(
-                                                'symptom_id' => $row,
-                                                'intensity' => $symptomsintensity[$row_id],
-                                                'status' => 'B',
-                                        );
+                                        if (Symptom::curuser()->find($row))
+                                        {
+                                                $symptoms[] = array(
+                                                        'symptom_id' => $row,
+                                                        'intensity' => $symptomsintensity[$row_id],
+                                                        'status' => 'B',
+                                                );
+                                        }
                                 }
                         }
 
