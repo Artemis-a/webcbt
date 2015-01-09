@@ -508,7 +508,6 @@ class UsersController extends BaseController {
                                         ->with('alert-danger', 'Failed to update profile.');
                         }
 
-                        /* Everything ok */
                         return Redirect::action('UsersController@getProfile')
                                 ->with('alert-success', 'Profile updated.');
 
@@ -546,7 +545,6 @@ class UsersController extends BaseController {
                                 ->with('alert-danger', 'Failed to update password.');
                 }
 
-                /* Everything ok */
                 return Redirect::action('UsersController@getProfile')
                         ->with('alert-success', 'Password updated.');
 	}

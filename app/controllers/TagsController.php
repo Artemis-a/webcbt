@@ -160,15 +160,13 @@ class TagsController extends BaseController {
                 }
 
                 /* Delete a tag */
-		if ($tag->delete())
+		if (!$tag->delete())
 		{
-                        return Redirect::action('TagsController@getIndex')
-                                ->with('alert-success', 'Tag deleted successfully.');
-                }
-                else
-                {
 		        return Redirect::action('TagsController@getIndex')
                                 ->with('alert-danger', 'Failed to delete tag.');
-		}
+                }
+
+                return Redirect::action('TagsController@getIndex')
+                        ->with('alert-success', 'Tag deleted successfully.');
         }
 }
