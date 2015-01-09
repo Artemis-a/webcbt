@@ -621,6 +621,7 @@ class CbtsController extends BaseController {
                                         if (strlen($row) <= 0)
                                         {
                                                 /* If empty string, delete thought */
+                                                $thought->cbtThoughtDistortions()->delete();
                                                 if (!$thought->delete())
                                                 {
                                                         return Redirect::back()->withInput()
@@ -770,6 +771,15 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Invalid access.');
                 }
 
+                /* Delete CBT */
+                $cbt->cbtBehaviours()->delete();
+                $cbt->cbtSymptoms()->delete();
+                $cbt->cbtFeelings()->delete();
+                foreach ($cbt->cbtThoughts() as $thought)
+                {
+                        $thought->cbtThoughtDistortions()->delete();
+                }
+                $cbt->cbtThoughts()->delete();
                 if (!$cbt->delete())
                 {
 	                return Redirect::action('CbtsController@getIndex')
