@@ -38,7 +38,7 @@ class ThoughtsController extends BaseController {
                                 ->with('alert-danger', 'Thought not found.');
                 }
 
-                if ($thought->cbt['user_id'] != Auth::id())
+                if ($thought->cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -47,7 +47,6 @@ class ThoughtsController extends BaseController {
                 $distortions_list = array(0 => 'Please select...') +
                         Distortion::orderBy('id', 'ASC')->lists('name', 'id');
 
-                /* Everything ok */
                 return View::make('thoughts.dispute')
                         ->with('thought', $thought)
                         ->with('distortions_list', $distortions_list);
@@ -62,7 +61,7 @@ class ThoughtsController extends BaseController {
                                 ->with('alert-danger', 'Thought not found.');
                 }
 
-                if ($thought->cbt['user_id'] != Auth::id())
+                if ($thought->cbt->user_id != Auth::id())
                 {
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-danger', 'Invalid access.');
@@ -241,7 +240,6 @@ class ThoughtsController extends BaseController {
                                         ->with('alert-danger', 'Failed to dispute thought.');
                         }
 
-                        /* Everything ok */
                         return Redirect::action('CbtsController@getIndex')
                                 ->with('alert-success', 'Thought successfully disputed.');
                 }
