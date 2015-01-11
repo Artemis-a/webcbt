@@ -30,4 +30,9 @@
 return array(
 	'SITE_NAME' => 'WebCBT',
 	'SITE_URL' => 'http://127.0.0.1:8080/webcbt/public/',
+
+	'FEELING_1' => 'Positive Feelings',	/* Positive feelings */
+	'FEELING_2' => 'Negative Feelings',
+	'SYMPTOM_1' => 'Positive Symptoms',	/* Positive symptoms */
+	'SYMPTOM_2' => 'Negative Symptoms',
 );

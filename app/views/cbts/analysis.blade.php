@@ -45,6 +45,11 @@ $(document).ready(function() {
 
 @section('content')
 
+{{ HTML::linkAction('CbtsController@getIndex', 'Back', array(), array('class' => 'btn btn-primary')) }}
+
+<br />
+<br />
+
 &nbsp;&nbsp;{{ Form::label('Date :') }}
         {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), explode('|', $dateformat)[0] . ' h:i A') }}
 
@@ -124,7 +129,15 @@ $(document).ready(function() {
                         @if ($feeling->status == 'B')
                                 <div>
                                         {{ $feeling->feeling->name }}
-                                        <span class="badge">{{ $feeling->intensity }}</span>
+                                        @if ($feeling->feeling->type == 1)
+                                                <span class="badge alert-success">
+                                        @elseif ($feeling->feeling->type == 2)
+                                                <span class="badge alert-danger">
+                                        @else
+                                                <span class="badge">
+                                        @endif
+                                                {{ $feeling->intensity }}
+                                        </span>
                                 </div>
                         @endif
                 @endforeach
@@ -137,7 +150,15 @@ $(document).ready(function() {
                         @if ($feeling->status == 'A')
                                 <div>
                                         {{ $feeling->feeling->name }}
-                                        <span class="badge">{{ $feeling->intensity }}</span>
+                                        @if ($feeling->feeling->type == 1)
+                                                <span class="badge alert-success">
+                                        @elseif ($feeling->feeling->type == 2)
+                                                <span class="badge alert-danger">
+                                        @else
+                                                <span class="badge">
+                                        @endif
+                                                {{ $feeling->intensity }}
+                                        </span>
                                 </div>
                         @endif
                 @endforeach
@@ -163,7 +184,15 @@ $(document).ready(function() {
                         @if ($symptom->status == 'B')
                                 <div>
                                         {{ $symptom->symptom->name }}
-                                        <span class="badge">{{ $symptom->intensity }}</span>
+                                        @if ($symptom->symptom->type == 1)
+                                                <span class="badge alert-success">
+                                        @elseif ($symptom->symptom->type == 2)
+                                                <span class="badge alert-danger">
+                                        @else
+                                                <span class="badge">
+                                        @endif
+                                                {{ $symptom->intensity }}
+                                        </span>
                                 </div>
                         @endif
                 @endforeach
@@ -176,7 +205,15 @@ $(document).ready(function() {
                         @if ($symptom->status == 'A')
                                 <div>
                                         {{ $symptom->symptom->name }}
-                                        <span class="badge">{{ $symptom->intensity }}</span>
+                                        @if ($symptom->symptom->type == 1)
+                                                <span class="badge alert-success">
+                                        @elseif ($symptom->symptom->type == 2)
+                                                <span class="badge alert-danger">
+                                        @else
+                                                <span class="badge">
+                                        @endif
+                                                {{ $symptom->intensity }}
+                                        </span>
                                 </div>
                         @endif
                 @endforeach
@@ -217,9 +254,5 @@ $(document).ready(function() {
         </tr>
         </tbody>
 </table>
-
-<br />
-
-{{ HTML::linkAction('CbtsController@getIndex', 'Back', array(), array('class' => 'btn btn-primary')) }}
 
 @stop

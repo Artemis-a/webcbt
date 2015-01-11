@@ -91,11 +91,21 @@ class CbtsController extends BaseController {
 
         public function getCreate()
         {
-                $feelings_list = array(0 => 'Please select...') +
-                        Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $feelings_list[0] = 'Please select...';
+                $feelings_list[Config::get('webcbt.FEELING_2')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->lists('name', 'id');
+                $feelings_list[Config::get('webcbt.FEELING_1')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->lists('name', 'id');
 
-                $symptoms_list = array(0 => 'Please select...') +
-                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $symptoms_list[0] = 'Please select...';
+                $symptoms_list[Config::get('webcbt.SYMPTOM_2')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->lists('name', 'id');
+                $symptoms_list[Config::get('webcbt.SYMPTOM_1')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->lists('name', 'id');
 
                 $tags_list = array(0 => '(None)') +
                         Tag::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
@@ -289,11 +299,21 @@ class CbtsController extends BaseController {
                                 ->with('alert-danger', 'Invalid access.');
                 }
 
-                $feelings_list = array(0 => 'Please select...') +
-                        Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $feelings_list[0] = 'Please select...';
+                $feelings_list[Config::get('webcbt.FEELING_2')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->lists('name', 'id');
+                $feelings_list[Config::get('webcbt.FEELING_1')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->lists('name', 'id');
 
-                $symptoms_list = array(0 => 'Please select...') +
-                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $symptoms_list[0] = 'Please select...';
+                $symptoms_list[Config::get('webcbt.SYMPTOM_2')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->lists('name', 'id');
+                $symptoms_list[Config::get('webcbt.SYMPTOM_1')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->lists('name', 'id');
 
                 return View::make('cbts.postdispute')
                         ->with('cbt', $cbt)
@@ -504,11 +524,21 @@ class CbtsController extends BaseController {
                 }
                 $date = date_format($temp, explode('|', $this->dateformat)[0] . ' h:i A');
 
-                $feelings_list = array(0 => 'Please select...') +
-                        Feeling::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $feelings_list[0] = 'Please select...';
+                $feelings_list[Config::get('webcbt.FEELING_2')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->lists('name', 'id');
+                $feelings_list[Config::get('webcbt.FEELING_1')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->lists('name', 'id');
 
-                $symptoms_list = array(0 => 'Please select...') +
-                        Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
+                $symptoms_list[0] = 'Please select...';
+                $symptoms_list[Config::get('webcbt.SYMPTOM_2')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->lists('name', 'id');
+                $symptoms_list[Config::get('webcbt.SYMPTOM_1')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->lists('name', 'id');
 
                 $tags_list = array(0 => '(None)') +
                         Tag::curuser()->orderBy('name', 'ASC')->lists('name', 'id');

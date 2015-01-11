@@ -132,7 +132,15 @@ $(document).ready(function() {
                                         @if ($feeling->status == 'B')
                                                 <li>
                                                         {{ $feeling->feeling->name }}
-                                                        <span class="badge">{{ $feeling->intensity }}</span>
+                                                        @if ($feeling->feeling->type == 1)
+                                                                <span class="badge alert-success">
+                                                        @elseif ($feeling->feeling->type == 2)
+                                                                <span class="badge alert-danger">
+                                                        @else
+                                                                <span class="badge">
+                                                        @endif
+                                                                {{ $feeling->intensity }}
+                                                        </span>
                                                 </li>
                                         @endif
                                 @endforeach
@@ -144,7 +152,15 @@ $(document).ready(function() {
                                         @if ($symptom->status == 'B')
                                                 <li>
                                                         {{ $symptom->symptom->name }}
-                                                        <span class="badge">{{ $symptom->intensity }}</span>
+                                                        @if ($symptom->symptom->type == 1)
+                                                                <span class="badge alert-success">
+                                                        @elseif ($symptom->symptom->type == 2)
+                                                                <span class="badge alert-danger">
+                                                        @else
+                                                                <span class="badge">
+                                                        @endif
+                                                                {{ $symptom->intensity }}
+                                                        </span>
                                                 </li>
                                         @endif
                                 @endforeach
