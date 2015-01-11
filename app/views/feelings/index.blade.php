@@ -51,17 +51,16 @@ $(document).ready(function() {
 <br />
 
 <table class="table table-hover">
-        <thead>
+@foreach ($feelings_list as $type => $feelings)
+        <tbody>
                 <tr>
-                        <th>Feelings</th>
+                        <th>{{ $type }}</th>
                         <th>Added On</th>
                         <th>Actions</th>
                 </tr>
-        </thead>
-        <tbody>
                 @foreach ($feelings as $feeling)
                 <tr>
-                        <td>{{ $feeling->name }}</td>
+                        <td><span class="type-name"></span>{{ $feeling->name }}</td>
                         <td>{{ $feeling->created_at }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
@@ -93,6 +92,7 @@ $(document).ready(function() {
                 </tr>
                 @endforeach
         </tbody>
+@endforeach
 </table>
 
 @stop

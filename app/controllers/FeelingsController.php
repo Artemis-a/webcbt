@@ -31,15 +31,16 @@ class FeelingsController extends BaseController {
 
         public function getIndex()
         {
-		$feelings = Feeling::curuser()->orderBy('name', 'ASC')->get();
+                $feelings_list[Config::get('webcbt.FEELING_1')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->get();
 
-                if (!$feelings)
-                {
-                        return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-danger', 'Feelings not found.');
-                }
+                $feelings_list[Config::get('webcbt.FEELING_2')] =
+                        Feeling::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->get();
 
-                return View::make('feelings.index')->with('feelings', $feelings);
+                return View::make('feelings.index')
+                        ->with('feelings_list', $feelings_list);
         }
 
         public function getCreate()
@@ -55,6 +56,7 @@ class FeelingsController extends BaseController {
 
                 $rules = array(
                         'name' => 'required|unique:feelings,name',
+                        'type' => 'required|in:1,2',
                 );
 
                 $validator = Validator::make($input, $rules);
@@ -69,6 +71,7 @@ class FeelingsController extends BaseController {
                         /* Create a feeling */
                         $feeling_data = array(
                                 'name' => $input['name'],
+                                'type' => $input['type'],
                         );
                         $feeling = Feeling::create($feeling_data);
 			if (!$feeling)
@@ -111,6 +114,7 @@ class FeelingsController extends BaseController {
 
                 $rules = array(
                         'name' => 'required|unique:feelings,name,'.$id,
+                        'type' => 'required|in:1,2',
                 );
 
                 $validator = Validator::make($input, $rules);
@@ -124,6 +128,7 @@ class FeelingsController extends BaseController {
 
                         /* Update a feeling */
                         $feeling->name = $input['name'];
+                        $feeling->type = $input['type'];
 			if (!$feeling->save())
 			{
 			        return Redirect::back()->withInput()

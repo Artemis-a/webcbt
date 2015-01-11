@@ -55,6 +55,14 @@ $(document).ready(function() {
         {{ Form::text('name') }}
 {{ Form::closeGroup() }}
 
+{{ Form::openGroup('type', 'Type') }}
+        {{ Form::select('type', array(
+                '0' => 'Please select...',
+                '1' => Config::get('webcbt.FEELING_1'),
+                '2' => Config::get('webcbt.FEELING_2'),
+        )) }}
+{{ Form::closeGroup() }}
+
 {{ Form::submit('Submit') }}
 {{ HTML::linkAction('FeelingsController@getIndex', 'Cancel') }}
 

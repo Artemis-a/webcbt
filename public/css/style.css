@@ -52,6 +52,10 @@ body {
         padding: 5px;
 }
 
+.type-name {
+        margin-left: 20px;
+}
+
 .slider-pad {
         margin-top: 10px;
 }
