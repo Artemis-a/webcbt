@@ -83,8 +83,8 @@ THE SOFTWARE.
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="{{ Config::get('webcbt.site_url') }}" target="_blank"><i class="fa fa-random"></i>
- {{ Config::get('webcbt.site_name') }}</a>
+			<a class="navbar-brand" href="{{ Config::get('webcbt.SITE_URL') }}" target="_blank"><i class="fa fa-random"></i>
+ {{ Config::get('webcbt.SITE_NAME') }}</a>
 		</div>
 
 		<div id="navbar" class="navbar-collapse collapse">

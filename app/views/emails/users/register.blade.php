@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 Hello {{ $username }},<br /><br />
 
-Welcome to {{ Config::get('webcbt.site_name') }} !<br /><br />
+Welcome to {{ Config::get('webcbt.SITE_NAME') }} !<br /><br />
 
 Your registration is successful.<br /><br />
 
@@ -40,6 +40,6 @@ Please do update your profile after you login for the first time.<br /><br />
 
 Enjoy !<br /><br />
 
-{{ Config::get('webcbt.site_name') }} Team.<br /><br />
+{{ Config::get('webcbt.SITE_NAME') }} Team.<br /><br />
 
-{{ Config::get('webcbt.site_url') }}
+{{ Config::get('webcbt.SITE_URL') }}

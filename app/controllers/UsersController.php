@@ -124,7 +124,7 @@ class UsersController extends BaseController {
 				Mail::send('emails.users.register', Input::all(), function($message) {
 					$message
 						->to(Input::get('email'), Input::get('username'))
-						->subject('Welcome to ' . Config::get('webcbt.site_name') .
+						->subject('Welcome to ' . Config::get('webcbt.SITE_NAME') .
 							' - Your account has been created'
 						);
 				});

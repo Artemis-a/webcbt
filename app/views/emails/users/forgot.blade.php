@@ -38,6 +38,6 @@ If you cannot open the above link, please copy and paste the below link in your 
 
 The above link is valid only for the next 24 hours. Please reset your password before that.<br /><br />
 
-{{ Config::get('webcbt.site_name') }} Team.<br /><br />
+{{ Config::get('webcbt.SITE_NAME') }} Team.<br /><br />
 
-{{ Config::get('webcbt.site_url') }}
+{{ Config::get('webcbt.SITE_URL') }}

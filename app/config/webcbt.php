@@ -28,6 +28,6 @@
  */
 
 return array(
-	'site_name' => 'WebCBT',
-	'site_url' => 'http://127.0.0.1:8080/webcbt/public/',
+	'SITE_NAME' => 'WebCBT',
+	'SITE_URL' => 'http://127.0.0.1:8080/webcbt/public/',
 );
