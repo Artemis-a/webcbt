@@ -51,17 +51,16 @@ $(document).ready(function() {
 <br />
 
 <table class="table table-hover">
-        <thead>
+@foreach ($symptoms_list as $type => $symptoms)
+        <tbody>
                 <tr>
-                        <th>Physical Symptom</th>
+                        <th>{{ $type }}</th>
                         <th>Added On</th>
                         <th>Actions</th>
                 </tr>
-        </thead>
-        <tbody>
                 @foreach ($symptoms as $symptom)
                 <tr>
-                        <td>{{ $symptom->name }}</td>
+                        <td><span class="type-name"></span>{{ $symptom->name }}</td>
                         <td>{{ $symptom->created_at }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
@@ -93,6 +92,7 @@ $(document).ready(function() {
                 </tr>
                 @endforeach
         </tbody>
+@endforeach
 </table>
 
 @stop

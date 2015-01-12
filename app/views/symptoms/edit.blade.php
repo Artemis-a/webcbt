@@ -55,6 +55,14 @@ $(document).ready(function() {
         {{ Form::text('name') }}
 {{ Form::closeGroup() }}
 
+{{ Form::openGroup('type', 'Type') }}
+        {{ Form::select('type', array(
+                '0' => 'Please select...',
+                '1' => Config::get('webcbt.SYMPTOM_1'),
+                '2' => Config::get('webcbt.SYMPTOM_2'),
+        )) }}
+{{ Form::closeGroup() }}
+
 {{ Form::submit('Submit') }}
 {{ HTML::linkAction('SymptomsController@getIndex', 'Cancel') }}
 

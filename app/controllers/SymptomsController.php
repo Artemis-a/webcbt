@@ -31,15 +31,16 @@ class SymptomsController extends BaseController {
 
         public function getIndex()
         {
-		$symptom = Symptom::curuser()->orderBy('name', 'ASC')->get();
+                $symptoms_list[Config::get('webcbt.SYMPTOM_1')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 1)->get();
 
-                if (!$symptom)
-                {
-                        return Redirect::action('CbtsController@getIndex')
-                                ->with('alert-danger', 'Physical symptoms not found.');
-                }
+                $symptoms_list[Config::get('webcbt.SYMPTOM_2')] =
+                        Symptom::curuser()->orderBy('name', 'ASC')
+                        ->where('type', '=', 2)->get();
 
-                return View::make('symptoms.index')->with('symptoms', $symptom);
+                return View::make('symptoms.index')
+                        ->with('symptoms_list', $symptoms_list);
         }
 
         public function getCreate()
