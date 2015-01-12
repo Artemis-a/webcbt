@@ -89,10 +89,13 @@ class ThoughtsController extends BaseController {
                         {
                                 if (!empty($row))
                                 {
-                                        $distortions[] = array(
-                                                'cbt_thought_id' => $id,
-                                                'distortion_id' => $row,
-                                        );
+                                        if (Distortion::find($row))
+                                        {
+                                                $distortions[] = array(
+                                                        'cbt_thought_id' => $id,
+                                                        'distortion_id' => $row,
+                                                );
+                                        }
                                 }
                         }
 
