@@ -53,7 +53,7 @@ $(document).ready(function() {
 <table class="table table-hover">
         <thead>
                 <tr>
-                        <th>Tag</th>
+                        <th>Tags</th>
                         <th></th>
                         <th>Added On</th>
                         <th>Actions</th>
@@ -62,7 +62,7 @@ $(document).ready(function() {
         <tbody>
                 @foreach ($tags as $tag)
                 <tr>
-                        <td>{{ $tag->name }}</td>
+                        <td><span class="pad-name"></span>{{ $tag->name }}</td>
                         <td>
                                 <span style="color:#{{ $tag->color }}; background:#{{ $tag->background }};" class="tag">
                                         {{ $tag->name }}

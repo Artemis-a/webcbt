@@ -60,7 +60,7 @@ $(document).ready(function() {
                 </tr>
                 @foreach ($feelings as $feeling)
                 <tr>
-                        <td><span class="type-name"></span>{{ $feeling->name }}</td>
+                        <td><span class="pad-name"></span>{{ $feeling->name }}</td>
                         <td>{{ date_format(date_create_from_format('Y-m-d H:i:s', $feeling->created_at), explode('|', $dateformat)[0]) }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
