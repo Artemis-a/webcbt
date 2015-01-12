@@ -118,6 +118,8 @@ class UsersController extends BaseController {
                                         ->with('alert-danger', 'Failed to create user.');
 			}
 
+			$this->initDB($user->id);
+
 			/* Send email on successful registration */
 			try
 			{
@@ -547,5 +549,82 @@ class UsersController extends BaseController {
 
                 return Redirect::action('UsersController@getProfile')
                         ->with('alert-success', 'Password updated.');
+	}
+
+	/**
+	 * This function initializes data for each user
+	 */
+	private function initDB($user_id)
+	{
+		$feelings_data = array(
+			/* Positive feelings */
+			array('name' => 'Calm', 'type' => '1'),
+			array('name' => 'Confident', 'type' => '1'),
+			array('name' => 'Content', 'type' => '1'),
+			array('name' => 'Delighted', 'type' => '1'),
+			array('name' => 'Encouraged', 'type' => '1'),
+			array('name' => 'Energetic', 'type' => '1'),
+			array('name' => 'Excited', 'type' => '1'),
+			array('name' => 'Happy', 'type' => '1'),
+			array('name' => 'Important', 'type' => '1'),
+			array('name' => 'Loved', 'type' => '1'),
+			array('name' => 'Peaceful', 'type' => '1'),
+			array('name' => 'Pleased', 'type' => '1'),
+			array('name' => 'Relaxed', 'type' => '1'),
+			array('name' => 'Secure', 'type' => '1'),
+			array('name' => 'Special', 'type' => '1'),
+			array('name' => 'Strong', 'type' => '1'),
+
+			/* Negative feelings */
+			array('name' => 'Afraid', 'type' => '2'),
+			array('name' => 'Alone', 'type' => '2'),
+			array('name' => 'Angry', 'type' => '2'),
+			array('name' => 'Ashamed', 'type' => '2'),
+			array('name' => 'Bored', 'type' => '2'),
+			array('name' => 'Confused', 'type' => '2'),
+			array('name' => 'Disappointed', 'type' => '2'),
+			array('name' => 'Empty', 'type' => '2'),
+			array('name' => 'Frustrated', 'type' => '2'),
+			array('name' => 'Guilty', 'type' => '2'),
+			array('name' => 'Hurt', 'type' => '2'),
+			array('name' => 'Lonely', 'type' => '2'),
+			array('name' => 'Nervous', 'type' => '2'),
+			array('name' => 'Powerless', 'type' => '2'),
+			array('name' => 'Restless', 'type' => '2'),
+			array('name' => 'Sad', 'type' => '2'),
+			array('name' => 'Tensed', 'type' => '2'),
+			array('name' => 'Tired', 'type' => '2'),
+			array('name' => 'Trapped', 'type' => '2'),
+		);
+
+		$symptoms_data = array(
+			/* Negative symptoms */
+			array('name' => 'Chest pain or discomfort', 'type' => '2'),
+			array('name' => 'Chills or hot flashes', 'type' => '2'),
+			array('name' => 'Dizzy', 'type' => '2'),
+			array('name' => 'Fear of dying', 'type' => '2'),
+			array('name' => 'Feeling of choking', 'type' => '2'),
+			array('name' => 'Heart Palpitation', 'type' => '2'),
+			array('name' => 'Losing control/going crazy', 'type' => '2'),
+			array('name' => 'Nausea', 'type' => '2'),
+			array('name' => 'Numbness', 'type' => '2'),
+			array('name' => 'Shortness of breath', 'type' => '2'),
+			array('name' => 'Stomach cramps', 'type' => '2'),
+			array('name' => 'Sweating', 'type' => '2'),
+			array('name' => 'Tingling sensation', 'type' => '2'),
+			array('name' => 'Trembling', 'type' => '2'),
+		);
+
+		foreach ($feelings_data as $feeling)
+		{
+			DB::insert('INSERT INTO feelings (user_id, name, type) values (?, ?, ?)',
+				array($user_id, $feeling['name'], $feeling['type']));
+		}
+
+		foreach ($symptoms_data as $symptom)
+		{
+			DB::insert('INSERT INTO symptoms (user_id, name, type) values (?, ?, ?)',
+				array($user_id, $symptom['name'], $symptom['type']));
+		}
 	}
 }
