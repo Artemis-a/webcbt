@@ -90,7 +90,7 @@ class UsersController extends BaseController {
                 $input = Input::all();
 
                 $rules = array(
-                        'username' => 'required|unique:users,username',
+                        'username' => 'required|min:3|max:100|unique:users,username',
 			'email' => 'required|email|unique:users,email',
 			'password' => 'required|min:3',
                 );
@@ -298,6 +298,8 @@ class UsersController extends BaseController {
 
 	public function postResetpass()
 	{
+                $input = Input::all();
+
 		/* Initial code same as getResetpass() */
 
 		$key = Input::get('k');
@@ -361,19 +363,33 @@ class UsersController extends BaseController {
 				->with('alert-danger', 'Verification time expired. Please restart the forgot password process again.');
 		}
 
-		/* Reset password */
-		$cur_user->password = Hash::make(Input::get('newpassword'));
-		$cur_user->reset_password_key = NULL;
-		$cur_user->reset_password_date = NULL;
+                $rules = array(
+			'password' => 'required|min:3',
+                );
 
-		if ($cur_user->save()) {
-			return Redirect::action('UsersController@getLogin')
-				->with('alert-success', 'Password updated. Please login again.');
-		}
+                $validator = Validator::make($input, $rules);
+
+                if ($validator->fails())
+                {
+                        return Redirect::back()->withInput()->withErrors($validator);
+                }
 		else
 		{
-			return Redirect::action('UsersController@getLogin')
-				->with('alert-danger', 'Failed to update password.');
+
+			/* Reset password */
+			$cur_user->password = Hash::make(Input::get('password'));
+			$cur_user->reset_password_key = NULL;
+			$cur_user->reset_password_date = NULL;
+
+			if ($cur_user->save()) {
+				return Redirect::action('UsersController@getLogin')
+					->with('alert-success', 'Password updated. Please login again.');
+			}
+			else
+			{
+				return Redirect::action('UsersController@getLogin')
+					->with('alert-danger', 'Failed to update password.');
+			}
 		}
 	}
 
@@ -489,7 +505,7 @@ class UsersController extends BaseController {
 		}
 
                 $rules = array(
-			'fullname' => 'required',
+			'fullname' => 'required|min:1|max:255',
 			'email' => 'required|email|unique:users,email,'.Auth::user()->id,
 			'dob' => 'required|date',
 			'gender' => 'required|in:M,F,U',
@@ -549,16 +565,29 @@ class UsersController extends BaseController {
                                 ->with('alert-danger', 'Old password does not match.');
 		}
 
-		$user->password = Hash::make($input['newpassword']);
+                $rules = array(
+			'password' => 'required|min:3',
+                );
 
-                if (!$user->save())
+                $validator = Validator::make($input, $rules);
+
+                if ($validator->fails())
                 {
-	                return Redirect::back()->withInput()
-                                ->with('alert-danger', 'Failed to update password.');
+                        return Redirect::back()->withInput()->withErrors($validator);
                 }
+		else
+		{
+			$user->password = Hash::make($input['password']);
 
-                return Redirect::action('UsersController@getProfile')
-                        ->with('alert-success', 'Password updated.');
+	                if (!$user->save())
+	                {
+		                return Redirect::back()->withInput()
+	                                ->with('alert-danger', 'Failed to update password.');
+	                }
+
+	                return Redirect::action('UsersController@getProfile')
+	                        ->with('alert-success', 'Password updated.');
+		}
 	}
 
 	/**

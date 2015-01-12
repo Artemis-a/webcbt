@@ -52,8 +52,8 @@ $(document).ready(function() {
 
 {{ Form::open() }}
 
-{{ Form::openGroup('newpassword', 'New Password') }}
-        {{ Form::password('newpassword') }}
+{{ Form::openGroup('password', 'New Password') }}
+        {{ Form::password('password') }}
 {{ Form::closeGroup() }}
 
 {{ Form::hidden('u', $u) }}
