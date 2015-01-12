@@ -59,6 +59,7 @@ class SymptomsController extends BaseController {
 
                 $rules = array(
                         'name' => 'required|unique:symptoms,name',
+                        'type' => 'required|in:1,2',
                 );
 
                 $validator = Validator::make($input, $rules);
@@ -73,6 +74,7 @@ class SymptomsController extends BaseController {
                         /* Create a symptom */
                         $symptom_data = array(
                                 'name' => $input['name'],
+                                'type' => $input['type'],
                         );
                         $symptom = Symptom::create($symptom_data);
 			if (!$symptom)
@@ -115,6 +117,7 @@ class SymptomsController extends BaseController {
 
                 $rules = array(
                         'name' => 'required|unique:symptoms,name,'.$id,
+                        'type' => 'required|in:1,2',
                 );
 
                 $validator = Validator::make($input, $rules);
@@ -127,6 +130,7 @@ class SymptomsController extends BaseController {
                 {
                         /* Update a symptom */
                         $symptom->name = $input['name'];
+                        $symptom->type = $input['type'];
 			if (!$symptom->save())
 			{
 			        return Redirect::back()->withInput()
