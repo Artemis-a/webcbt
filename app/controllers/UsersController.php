@@ -53,8 +53,18 @@ class UsersController extends BaseController {
 			$user->reset_password_date = NULL;
 			$user->save();
 
+			$user_info = '';
+			if (strlen(Auth::user()->fullname) > 0)
+			{
+				$user_info = Auth::user()->fullname;
+			}
+			else
+			{
+				$user_info = Auth::user()->username;
+			}
+
 			return Redirect::intended('cbts')
-				->with('alert-success', 'Hi ' . Auth::user()->fullname . ', welcome back !');
+				->with('alert-success', 'Hi ' . $user_info . ', welcome back !');
 		}
 
 		return Redirect::action('UsersController@getLogin')
