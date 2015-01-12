@@ -31,6 +31,8 @@ class TagsController extends BaseController {
 
         public function getIndex()
         {
+                $user = User::find(Auth::id());
+
 		$tags = Tag::curuser()->orderBy('name', 'ASC')->get();
 
                 if (!$tags)
@@ -39,7 +41,9 @@ class TagsController extends BaseController {
                                 ->with('alert-danger', 'Tags not found.');
                 }
 
-                return View::make('tags.index')->with('tags', $tags);
+                return View::make('tags.index')
+                        ->with('tags', $tags)
+                        ->with('dateformat', $user->dateformat);
         }
 
         public function getCreate()

@@ -31,6 +31,8 @@ class FeelingsController extends BaseController {
 
         public function getIndex()
         {
+                $user = User::find(Auth::id());
+
                 $feelings_list[Config::get('webcbt.FEELING_1')] =
                         Feeling::curuser()->orderBy('name', 'ASC')
                         ->where('type', '=', 1)->get();
@@ -40,7 +42,8 @@ class FeelingsController extends BaseController {
                         ->where('type', '=', 2)->get();
 
                 return View::make('feelings.index')
-                        ->with('feelings_list', $feelings_list);
+                        ->with('feelings_list', $feelings_list)
+                        ->with('dateformat', $user->dateformat);
         }
 
         public function getCreate()

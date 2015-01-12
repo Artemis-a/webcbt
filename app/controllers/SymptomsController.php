@@ -31,6 +31,8 @@ class SymptomsController extends BaseController {
 
         public function getIndex()
         {
+                $user = User::find(Auth::id());
+
                 $symptoms_list[Config::get('webcbt.SYMPTOM_1')] =
                         Symptom::curuser()->orderBy('name', 'ASC')
                         ->where('type', '=', 1)->get();
@@ -40,7 +42,8 @@ class SymptomsController extends BaseController {
                         ->where('type', '=', 2)->get();
 
                 return View::make('symptoms.index')
-                        ->with('symptoms_list', $symptoms_list);
+                        ->with('symptoms_list', $symptoms_list)
+                        ->with('dateformat', $user->dateformat);
         }
 
         public function getCreate()
