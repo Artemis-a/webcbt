@@ -45,3 +45,18 @@ View::composer(Paginator::getViewName(), function($view)
 	$query = array_except(Input::query(), Paginator::getPageName());
 	$view->paginator->appends($query);
 });
+
+/* Hex validation */
+Validator::extend('hexcolor', function($attribute, $value, $parameters)
+{
+	if(preg_match("/^#?([a-f0-9]{6}|[a-f0-9]{3})$/", $value))
+	{
+		return true;
+	}
+	return false;
+});
+
+Validator::replacer('hexcolor', function($message, $attribute, $rule, $parameters)
+{
+	return sprintf('The %s must be a valid color', $attribute);
+});

@@ -59,8 +59,8 @@ class TagsController extends BaseController {
 
                 $rules = array(
                         'name' => 'required|unique:tags,name',
-                        'color' => 'required',
-                        'background' => 'required',
+                        'color' => 'required|size:6|hexcolor',
+                        'background' => 'required|size:6|hexcolor',
                 );
 
                 $validator = Validator::make($input, $rules);
@@ -119,6 +119,8 @@ class TagsController extends BaseController {
 
                 $rules = array(
                         'name' => 'required|unique:tags,name,'.$id,
+                        'color' => 'required|size:6|hexcolor',
+                        'background' => 'required|size:6|hexcolor',
                 );
 
                 $validator = Validator::make($input, $rules);
