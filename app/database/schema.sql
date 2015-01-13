@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 CREATE TABLE IF NOT EXISTS `distortions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -92,8 +92,8 @@ INSERT INTO `distortions` (`id`, `name`, `description`, `created_at`, `updated_a
 --
 
 CREATE TABLE IF NOT EXISTS `feelings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(18) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `type` int(2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `feelings` (
 --
 
 CREATE TABLE IF NOT EXISTS `symptoms` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(18) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `type` int(2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `symptoms` (
 --
 
 CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(18) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `color` char(6) NOT NULL,
   `background` char(6) NOT NULL,
@@ -147,9 +147,9 @@ CREATE TABLE IF NOT EXISTS `tags` (
 --
 
 CREATE TABLE IF NOT EXISTS `cbts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `tag_id` int(11) DEFAULT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(18) NOT NULL,
+  `tag_id` bigint(18) DEFAULT NULL,
   `date` datetime NOT NULL,
   `situation` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `is_resolved` int(1) NOT NULL,
@@ -168,8 +168,8 @@ CREATE TABLE IF NOT EXISTS `cbts` (
 --
 
 CREATE TABLE IF NOT EXISTS `cbt_thoughts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cbt_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `cbt_id` bigint(18) NOT NULL,
   `thought` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `is_disputed` int(1) NOT NULL,
   `dispute` varchar(2000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -188,9 +188,9 @@ CREATE TABLE IF NOT EXISTS `cbt_thoughts` (
 --
 
 CREATE TABLE IF NOT EXISTS `cbt_feelings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cbt_id` int(11) NOT NULL,
-  `feeling_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `cbt_id` bigint(18) NOT NULL,
+  `feeling_id` bigint(18) NOT NULL,
   `intensity` int(3) NOT NULL,
   `status` char(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -208,9 +208,9 @@ CREATE TABLE IF NOT EXISTS `cbt_feelings` (
 --
 
 CREATE TABLE IF NOT EXISTS `cbt_symptoms` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cbt_id` int(11) NOT NULL,
-  `symptom_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `cbt_id` bigint(18) NOT NULL,
+  `symptom_id` bigint(18) NOT NULL,
   `intensity` int(3) NOT NULL,
   `status` char(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -228,8 +228,8 @@ CREATE TABLE IF NOT EXISTS `cbt_symptoms` (
 --
 
 CREATE TABLE IF NOT EXISTS `cbt_behaviours` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cbt_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `cbt_id` bigint(18) NOT NULL,
   `behaviour` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `status` char(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -246,9 +246,9 @@ CREATE TABLE IF NOT EXISTS `cbt_behaviours` (
 --
 
 CREATE TABLE IF NOT EXISTS `cbt_thought_distortions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cbt_thought_id` int(11) NOT NULL,
-  `distortion_id` int(11) NOT NULL,
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `cbt_thought_id` bigint(18) NOT NULL,
+  `distortion_id` bigint(18) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,

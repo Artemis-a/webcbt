@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"manavo/laravel-bootstrap-forms": "~0.0",
-		"barryvdh/laravel-debugbar": "~1.8"
+		"barryvdh/laravel-debugbar": "~1.8",
+		"xethron/migrations-generator": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
