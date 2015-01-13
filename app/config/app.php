@@ -123,8 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Manavo\BootstrapForms\BootstrapFormsServiceProvider',
 		// 'Barryvdh\Debugbar\ServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider',
-		'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
+		// 'Way\Generators\GeneratorsServiceProvider',
+		// 'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
 
 	),
 
