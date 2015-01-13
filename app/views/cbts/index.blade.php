@@ -74,7 +74,6 @@ $(document).ready(function() {
                 <tr>
                         <th class="col-width-1">Date</th>
                         <th>Situation</th>
-                        <th>Tags</th>
                         <th>Thoughts</th>
                         <th>Feelings</th>
                         <th>Physical Symptoms</th>
@@ -96,8 +95,7 @@ $(document).ready(function() {
                                 <span class="small-text">
                                 created on {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->created_at), explode('|', $dateformat)[0]) }}
                                 </span>
-                        </td>
-                        <td>
+                                <br />
                                 @define $tag = $cbt->tag
                                 @if (isset($tag))
                                 <span style="color:#{{ $tag['color'] }}; background:#{{ $tag['background'] }};" class="tag">
