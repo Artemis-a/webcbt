@@ -29,10 +29,10 @@
 
 return array(
 	'SITE_NAME' => 'WebCBT',
-	'SITE_URL' => 'http://127.0.0.1:8080/webcbt/public/',
+	'SITE_URL' => 'http://webcbt.github.io',
 
 	'FEELING_1' => 'Positive Feelings',	/* Positive feelings */
-	'FEELING_2' => 'Negative Feelings',
+	'FEELING_2' => 'Negative Feelings',	/* Negative feelings */
 	'SYMPTOM_1' => 'Positive Symptoms',	/* Positive symptoms */
-	'SYMPTOM_2' => 'Negative Symptoms',
+	'SYMPTOM_2' => 'Negative Symptoms',	/* Negative symptoms */
 );
