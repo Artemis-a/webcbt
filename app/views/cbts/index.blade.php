@@ -35,6 +35,7 @@ THE SOFTWARE.
 <script type="text/javascript">
 
 $(document).ready(function() {
+        $('[data-toggle="popover"]').popover('show');
 });
 
 </script>
@@ -68,6 +69,13 @@ $(document).ready(function() {
 
 <br />
 <br />
+
+@if ($show_help)
+<div class="alert alert-warning" role="alert">
+<b><i class="fa fa-exclamation-triangle"></i> Instructions :</b> Click on each thought to dispute it. Once you have disputed all thoughts, next step is to complete the Post-dispute section of the CBT exercise by clicking on the "Actions" button. Finally once you are sataisfied with the results of the doing the CBT exercise you can mark it as resolved by clicking on the same "Actions" button.
+</div>
+@endif
+
 
 <table class="table table-hover">
         <thead>
@@ -123,6 +131,9 @@ $(document).ready(function() {
                                         </li>
                                 @endforeach
                                 </ul>
+                                @if ($show_help)
+                                        <i data-toggle="popover" data-content="Click on the above thoughts to dispute it. If the color is red then the thought needs to be disputed, if its green then the thought is disputed." data-placement="bottom"></i>
+                                @endif
                         </td>
                         <td>
                                 <ul class="list-unstyled">

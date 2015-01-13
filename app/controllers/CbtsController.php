@@ -73,6 +73,12 @@ class CbtsController extends BaseController {
                         }
                 }
 
+                $show_help = FALSE;
+                if ($query->count() == 1)
+                {
+                        $show_help = TRUE;
+                }
+
 		$cbts = $query->paginate(10);
 
                 $tags = Tag::curuser()->orderBy('name', 'ASC')->get();
@@ -83,7 +89,8 @@ class CbtsController extends BaseController {
                                 ->with('dateformat', $this->dateformat)
                                 ->with('tags', $tags)
                                 ->with('cbts', $cbts)
-                                ->with('options_selected', $options_selected);
+                                ->with('options_selected', $options_selected)
+                                ->with('show_help', $show_help);
 		}
 
 		return View::make('cbts.first');
