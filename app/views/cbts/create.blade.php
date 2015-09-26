@@ -45,7 +45,7 @@ $(document).ready(function() {
         /* Date and time picker */
         $('#date').datetimepicker({
                 timeFormat: "hh:mm TT",
-                dateFormat: "{{ explode('|', $dateformat)[1] }}"
+                dateFormat: "{{ $dateformat_cal }}"
         });
 
         /************ Hide extra rows ************/

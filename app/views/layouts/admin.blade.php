@@ -162,12 +162,13 @@ THE SOFTWARE.
 	</div>
         <!-- /.row -->
 
-	<div class="admin-footer-padding"></div>
 </div><!-- /page-wrapper -->
 
 </div><!-- /container-fluid -->
 
 </div><!-- /wrapper -->
+
+<div class="footer"></div>
 
 </body>
 

@@ -149,7 +149,7 @@ $(document).ready(function() {
 @section('content')
 
 {{ Form::label('Date :') }}
-{{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), explode('|', $dateformat)[0] . ' h:i A') }}
+{{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), $dateformat_php . ' h:i A') }}
 
 <br />
 

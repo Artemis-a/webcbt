@@ -94,14 +94,14 @@ $(document).ready(function() {
                 @foreach ($cbts as $cbt)
                 <tr>
                         <td>
-                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), explode('|', $dateformat)[0]) }}
+                                {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), $dateformat_php) }}
                                 <br />
                                 {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->date), 'h:i A') }}
                         </td>
                         <td>
                                 {{ $cbt->situation }}<br />
                                 <span class="small-text">
-                                created on {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->created_at), explode('|', $dateformat)[0]) }}
+                                created on {{ date_format(date_create_from_format('Y-m-d H:i:s', $cbt->created_at), $dateformat_php) }}
                                 </span>
                                 <br />
                                 @define $tag = $cbt->tag

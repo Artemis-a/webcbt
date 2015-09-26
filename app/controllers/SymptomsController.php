@@ -43,7 +43,7 @@ class SymptomsController extends BaseController {
 
                 return View::make('symptoms.index')
                         ->with('symptoms_list', $symptoms_list)
-                        ->with('dateformat', $user->dateformat);
+                        ->with('dateformat_php', $user->dateformat_php);
         }
 
         public function getCreate()
@@ -226,7 +226,7 @@ class SymptomsController extends BaseController {
                                 $labelset .= '"' .
                                         date_format(
                                                 date_create_from_format('Y-m-d H:i:s', $cbt_date),
-                                                explode('|', $user->dateformat)[0]
+                                                $user->dateformat_php
                                         ) .
                                         '",';
 
@@ -267,7 +267,6 @@ class SymptomsController extends BaseController {
                 }
 
                 return View::make('symptoms.stats')
-                        ->with('dateformat', $user->dateformat)
                         ->with('symptom', $symptom)
                         ->with('chart_type', $chart_type)
                         ->with('labelset', $labelset)

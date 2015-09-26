@@ -135,7 +135,7 @@ $(document).ready(function() {
 </div>
 <!-- /.row -->
 
-Last Login On : {{ date_format(date_create_from_format('Y-m-d H:i:s', Auth::user()->last_login), explode('|', $dateformat)[0] . ' h:i A') }}
+Last Login On : {{ date_format(date_create_from_format('Y-m-d H:i:s', Auth::user()->last_login), $dateformat_php . ' h:i A') }}
 
 
 @stop

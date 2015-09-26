@@ -55,7 +55,7 @@ class DashboardController extends BaseController {
                         ->with('unresolved_count', $unresolved_count)
                         ->with('undisputed_count', $undisputed_count)
                         ->with('diff_days', $diff_days)
-                        ->with('dateformat', $user->dateformat);
+                        ->with('dateformat_php', $user->dateformat_php);
         }
 
 }

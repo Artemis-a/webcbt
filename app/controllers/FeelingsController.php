@@ -43,7 +43,7 @@ class FeelingsController extends BaseController {
 
                 return View::make('feelings.index')
                         ->with('feelings_list', $feelings_list)
-                        ->with('dateformat', $user->dateformat);
+                        ->with('dateformat_php', $user->dateformat_php);
         }
 
         public function getCreate()
@@ -226,9 +226,9 @@ class FeelingsController extends BaseController {
                         {
                                 $labelset .= '"' .
                                         date_format(
-                                                date_create_from_format('Y-m-d H:i:s', $cbt_date),
-                                                explode('|', $user->dateformat)[0]
-                                        ) .
+						date_create_from_format('Y-m-d H:i:s', $cbt_date),
+						$user->dateformat_php
+					) .
                                         '",';
 
                                 if (isset($cbt_data['B']))
@@ -268,7 +268,6 @@ class FeelingsController extends BaseController {
                 }
 
                 return View::make('feelings.stats')
-                        ->with('dateformat', $user->dateformat)
                         ->with('feeling', $feeling)
                         ->with('chart_type', $chart_type)
                         ->with('labelset', $labelset)

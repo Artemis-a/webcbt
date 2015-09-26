@@ -68,7 +68,7 @@ $(document).ready(function() {
                                         {{ $tag->name }}
                                 </span>
                         </td>
-                        <td>{{ date_format(date_create_from_format('Y-m-d H:i:s', $tag->created_at), explode('|', $dateformat)[0]) }}</td>
+                        <td>{{ date_format(date_create_from_format('Y-m-d H:i:s', $tag->created_at), $dateformat_php) }}</td>
                         <td>
                                 {{ HTML::decode(HTML::linkAction(
                                         'TagsController@getEdit',

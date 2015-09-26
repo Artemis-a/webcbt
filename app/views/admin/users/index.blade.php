@@ -127,7 +127,7 @@ $(document).ready(function() {
 				@endif
                         </td>
 			<td class="text-left">
-				{{ date_format(date_create_from_format('Y-m-d H:i:s', $user->created_at), explode('|', $user->dateformat)[0] . ' h:i A') }}
+				{{ date_format(date_create_from_format('Y-m-d H:i:s', $user->created_at), $user->dateformat_php . ' h:i A') }}
                         </td>
 			<td class="text-left">
                                 {{ HTML::decode(HTML::linkAction('AdminUsersController@getEdit',

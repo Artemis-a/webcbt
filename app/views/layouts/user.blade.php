@@ -153,5 +153,7 @@ THE SOFTWARE.
 
 </div><!-- /#wrapper -->
 
+<div class="footer"></div>
+
 </body>
 </html>

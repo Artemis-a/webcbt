@@ -43,7 +43,7 @@ class TagsController extends BaseController {
 
                 return View::make('tags.index')
                         ->with('tags', $tags)
-                        ->with('dateformat', $user->dateformat);
+                        ->with('dateformat_php', $user->dateformat_php);
         }
 
         public function getCreate()

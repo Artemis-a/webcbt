@@ -32,7 +32,9 @@ class CbtsController extends BaseController {
         public function __construct()
         {
                 $user = User::find(Auth::id());
-                $this->dateformat = $user->dateformat;
+                $this->dateformat_php = $user->dateformat_php;
+                $this->dateformat_cal = $user->dateformat_cal;
+                $this->dateformat_js = $user->dateformat_js;
         }
 
         public function getIndex()
@@ -86,7 +88,7 @@ class CbtsController extends BaseController {
 		if ($cbts)
 		{
                         return View::make('cbts.index')
-                                ->with('dateformat', $this->dateformat)
+                                ->with('dateformat_php', $this->dateformat_php)
                                 ->with('tags', $tags)
                                 ->with('cbts', $cbts)
                                 ->with('options_selected', $options_selected)
@@ -118,7 +120,7 @@ class CbtsController extends BaseController {
                         Tag::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.create')
-                        ->with('dateformat', $this->dateformat)
+                        ->with('dateformat_cal', $this->dateformat_cal)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list)
                         ->with('tags_list', $tags_list);
@@ -137,10 +139,7 @@ class CbtsController extends BaseController {
                         $tag_id = $input['tag'];
                 }
 
-                $temp = date_create_from_format(
-                        explode('|', $this->dateformat)[0] . ' h:i A',
-                        $input['date']
-                );
+                $temp = date_create_from_format($this->dateformat_php . ' h:i A', $input['date']);
                 if (!$temp)
                 {
                         return Redirect::back()->withInput()
@@ -324,7 +323,7 @@ class CbtsController extends BaseController {
 
                 return View::make('cbts.postdispute')
                         ->with('cbt', $cbt)
-                        ->with('dateformat', $this->dateformat)
+                        ->with('dateformat_php', $this->dateformat_php)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list);
         }
@@ -529,7 +528,7 @@ class CbtsController extends BaseController {
                 {
                         $date = '';
                 }
-                $date = date_format($temp, explode('|', $this->dateformat)[0] . ' h:i A');
+                $date = date_format($temp, $this->dateformat_php . ' h:i A');
 
                 $feelings_list[0] = 'Please select...';
                 $feelings_list[Config::get('webcbt.FEELING_2')] =
@@ -552,7 +551,7 @@ class CbtsController extends BaseController {
 
                 return View::make('cbts.edit')
                         ->with('date', $date)
-                        ->with('dateformat', $this->dateformat)
+                        ->with('dateformat_cal', $this->dateformat_cal)
                         ->with('cbt', $cbt)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list)
@@ -585,10 +584,7 @@ class CbtsController extends BaseController {
                         $tag_id = $input['tag'];
                 }
 
-                $temp = date_create_from_format(
-                        explode('|', $this->dateformat)[0] . ' h:i A',
-                        $input['date']
-                );
+                $temp = date_create_from_format($this->dateformat_php . ' h:i A', $input['date']);
                 if (!$temp)
                 {
                         return Redirect::back()->withInput()
@@ -849,7 +845,7 @@ class CbtsController extends BaseController {
                         Symptom::curuser()->orderBy('name', 'ASC')->lists('name', 'id');
 
                 return View::make('cbts.analysis')
-                        ->with('dateformat', $this->dateformat)
+                        ->with('dateformat_php', $this->dateformat_php)
                         ->with('cbt', $cbt)
                         ->with('feelings_list', $feelings_list)
                         ->with('symptoms_list', $symptoms_list);

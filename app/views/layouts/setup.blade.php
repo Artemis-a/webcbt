@@ -81,6 +81,9 @@ THE SOFTWARE.
 		@yield('content')
 	</div>
 
+	<div class="footer">
+	</div>
+
 </body>
 
 </html>
