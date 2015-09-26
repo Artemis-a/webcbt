@@ -29,8 +29,25 @@
 
 class UsersController extends BaseController {
 
+	public function __construct()
+	{
+		$this->beforeFilter('auth', array('only' => array('getProfile', 'getEditprofile',
+			'postEditprofile', 'getChangepass', 'postChangepass')));
+	}
+
+	public function getIndex()
+	{
+		return Redirect::action('UsersController@getLogin');
+	}
+
 	public function getLogin()
 	{
+		/* If database name is set in database config, need to install application */
+		if (Config::get('database.connections.mysql.database') == '')
+		{
+			return Redirect::action('SetupController@getInstall');
+		}
+
 		return View::make('users.login');
 	}
 
@@ -104,20 +121,25 @@ class UsersController extends BaseController {
 		else
 		{
 
-                        /* Create a symptom */
+                        /* Create user */
                         $user_data = array(
                                 'username' => $input['username'],
 				'password' => Hash::make($input['password']),
 				'fullname' => '',
 				'email' => $input['email'],
-				'dateformat' => 'd-M-Y|dd-M-yy',
+				'gender' => 'U',
+				'dob' => '2000-01-01',
+				'is_admin' => 0,
 				'timezone' => 'UTC',
-				'status' => 1,
+				'dateformat_php' => 'd-M-Y',
+				'dateformat_cal' => 'dd-M-yy',
+				'dateformat_js' => 'dd-MM-yyyy',
+				'admin_verified' => 0,
+				'email_verified' => 0,
 				'verification_key' =>
 					substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 20),
-				'email_verified' => 0,
-				'admin_verified' => 0,
-				'retry_count' => 0,
+				'status' => 1,
+				'last_login' => NULL,
 				'reset_password_key' => NULL,
 				'reset_password_date' => NULL,
                         );
@@ -440,9 +462,7 @@ class UsersController extends BaseController {
 		);
 		if ($temp)
 		{
-			$dob = date_format(
-				$temp, explode('|', $user->dateformat)[0]
-			);
+			$dob = date_format($temp, $user->dateformat_php);
 		}
 
 		return View::make('users.profile')
@@ -466,10 +486,12 @@ class UsersController extends BaseController {
 
 		$dateformat_options = array(
 	                '' => 'Please select...',
-	                'd-M-Y|dd-M-yy' => 'Day-Month-Year',
-	                'M-d-Y|M-dd-yy' => 'Month-Day-Year',
-	                'Y-M-d|yy-M-dd' => 'Year-Month-Day',
+			'd-M-Y|dd-M-yy|dd-MM-yyyy' => 'Day-Month-Year',
+			'M-d-Y|M-dd-yy|MM-dd-yyyy' => 'Month-Day-Year',
+			'Y-M-d|yy-M-dd|yyyy-MM-dd' => 'Year-Month-Day',
 		);
+
+		$dateformat = $user->dateformat_php . '|' . $user->dateformat_cal . '|' . $user->dateformat_js;
 
 		$dob = '';
                 $temp = date_create_from_format(
@@ -477,9 +499,7 @@ class UsersController extends BaseController {
 		);
 		if ($temp)
 		{
-			$dob = date_format(
-				$temp, explode('|', $user->dateformat)[0]
-			);
+			$dob = date_format($temp, $user->dateformat_php);
 		}
 
 		return View::make('users.editprofile')
@@ -487,6 +507,7 @@ class UsersController extends BaseController {
 			->with('timezone_options', $timezone_options)
 			->with('gender_options', $gender_options)
 			->with('dateformat_options', $dateformat_options)
+			->with('dateformat', $dateformat)
 			->with('user', $user);
 	}
 
@@ -496,8 +517,11 @@ class UsersController extends BaseController {
 
                 $input = Input::all();
 
-		$php_dateformat = explode('|', $input['dateformat'])[0];
-                $temp = date_create_from_format($php_dateformat, $input['dob']);
+		$dateformat_php = explode('|', $input['dateformat'])[0];
+		$dateformat_cal = explode('|', $input['dateformat'])[1];
+		$dateformat_js = explode('|', $input['dateformat'])[2];
+
+                $temp = date_create_from_format($dateformat_php, $input['dob']);
 		if (!$temp)
 		{
 	                return Redirect::back()->withInput()
@@ -527,7 +551,9 @@ class UsersController extends BaseController {
                         $user->email = $input['email'];
 			$user->dob = date_format($temp, 'Y-m-d');
                         $user->gender = $input['gender'];
-			$user->dateformat = $input['dateformat'];
+			$user->dateformat_php = $dateformat_php;
+			$user->dateformat_cal = $dateformat_cal;
+			$user->dateformat_js = $dateformat_js;
 			$user->timezone = $input['timezone'];
 
                         if (!$user->save())
