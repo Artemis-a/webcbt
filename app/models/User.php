@@ -48,22 +48,22 @@ class User extends Eloquent implements UserInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('remember_token');
 
 	/**
 	 * The attributes that can be mass assigned
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['username', 'password', 'fullname', 'email',
-		'gender', 'dob', 'dateformat', 'timezone', 'status'];
+	protected $fillable = array('username', 'password', 'fullname', 'email', 'gender', 'dob', 'timezone',
+		'dateformat_php', 'dateformat_cal', 'dateformat_js');
 
 	/**
 	 * The attributes that cannot be mass assigned
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id', 'status', 'created_at', 'updated_at', 'deleted_at'];
+	protected $guarded = array('id', 'is_admin', 'admin_verified', 'email_verified', 'status');
 
 	/**
 	 * Disable remember token
