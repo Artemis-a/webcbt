@@ -44,6 +44,7 @@ THE SOFTWARE.
         {{ HTML::style('css/jquery-ui.min.css') }}
         {{ HTML::style('css/jquery-ui.structure.min.css') }}
         {{ HTML::style('css/jquery-ui.theme.min.css') }}
+	{{ HTML::style('css/jquery-ui-timepicker-addon.css') }}
         {{ HTML::script('js/jquery-1.11.1.min.js') }}
         {{ HTML::script('js/jquery-ui.min.js') }}
 
@@ -56,8 +57,15 @@ THE SOFTWARE.
         {{ HTML::style('css/bootstrap-theme.min.css') }}
         {{ HTML::script('js/bootstrap.min.js') }}
 
+        <!-- Bootstrap Select -->
+        {{ HTML::style('css/bootstrap-select.min.css') }}
+        {{ HTML::script('js/bootstrap-select.min.js') }}
+
 	<!-- Chart.js -->
         {{ HTML::script('js/Chart.min.js') }}
+
+	<!-- jQuery scripting adapter for links -->
+        {{ HTML::script('js/rails.js') }}
 
         <!-- Custom CSS -->
         @define $time = rand(0, 1000)

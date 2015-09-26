@@ -130,6 +130,13 @@ THE SOFTWARE.
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
+				@if (Auth::user()->is_admin == 1)
+				<li>
+					{{ HTML::decode(HTML::linkAction(
+					'AdminUsersController@getIndex',
+					'<i class="fa fa-wrench fa-fw"></i> Administration')) }}
+				</li>
+				@endif
 		                <li>
 					{{ HTML::decode(HTML::linkAction(
 		                        'UsersController@getProfile',
