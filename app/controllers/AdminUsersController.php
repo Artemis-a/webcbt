@@ -164,6 +164,8 @@ class AdminUsersController extends BaseController
                                         ->with('alert-danger', 'Failed to update user profile.');
                         }
 
+			User::initDB($user->id);
+
 			/* Send email on successful registration */
 			try
 			{
@@ -343,5 +345,4 @@ class AdminUsersController extends BaseController
 		return Redirect::action('AdminUsersController@getIndex')
 			->with('alert-success', 'User deleted.');
 	}
-
 }
