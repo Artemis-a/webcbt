@@ -252,3 +252,12 @@ div.tab-content-title {
 .paginator-padding {
         margin-top: 100px;
 }
+
+.setup-body {
+	padding-top: 20px;
+}
+
+.setup-content {
+	margin-left: 20px;
+	margin-right: 20px;
+}

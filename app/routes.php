@@ -50,4 +50,10 @@ Route::group(array('before' => 'auth'), function() {
         Route::controller('help', 'HelpController');
 });
 
+Route::group(['prefix' => 'admin', 'before' => 'admin'], function()
+{
+	Route::controller('users', 'AdminUsersController');
+});
+
 Route::controller('users', 'UsersController');
+Route::controller('setup', 'SetupController');
