@@ -80,7 +80,7 @@ class UsersController extends BaseController {
 				$user_info = Auth::user()->username;
 			}
 
-			return Redirect::intended('cbts')
+			return Redirect::intended('dashboard')
 				->with('alert-success', 'Hi ' . $user_info . ', welcome back !');
 		}
 

@@ -158,6 +158,8 @@ FILEDATA;
 				->with('alert-danger', 'Failed to create database config file. Kindly create the app/config/database.php file manually.');
 		}
 
+		User::initDB(1);
+
 		return Redirect::action('UsersController@getLogin')
 			->with('alert-success', 'Setup completed.');
 	}
